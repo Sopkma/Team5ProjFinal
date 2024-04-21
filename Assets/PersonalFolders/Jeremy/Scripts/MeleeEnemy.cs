@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class EnemyMovement : MonoBehaviour
+public class MeleeEnemy : MonoBehaviour
 {
     private Rigidbody2D rb;
 
@@ -55,16 +55,15 @@ public class EnemyMovement : MonoBehaviour
         // if moving left
         if (distance.x < 0)
         {
-            // if sprite facing left
+            // if sprite facing Right
             if (transform.localScale.x > 0)
             {
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
             }
-            
         }
         else
         {
-            // if sprite facing right
+            // if sprite facing Left
             if (transform.localScale.x < 0)
             {
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
