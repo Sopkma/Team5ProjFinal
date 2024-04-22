@@ -133,3 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0814de35394c8504894eb138bfb02893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTracking: 0
+  lifeTimer: 5
+  projectileSpeed: 7
