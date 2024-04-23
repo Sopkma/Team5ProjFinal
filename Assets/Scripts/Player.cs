@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    // drag the Sword Hitbox object with the SwordAttack script attached here
+    public SwordAttack swordAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,8 @@ public class Player : MonoBehaviour
     {
         var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
         // transform.rotation = Quaternion.LookRotation(direction);
+        // performs attack from swordAttack making collision box enabled then disabled
+        swordAttack.AttackRight();
         print("Swing");
     }
 }

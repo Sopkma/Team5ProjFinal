@@ -8,11 +8,30 @@ public class MeleeEnemy : MonoBehaviour
     private Rigidbody2D rb;
 
     public Rigidbody2D player;
+
     public float enemySpeed = .2f;
 
     // distances where enemy movement begins or stops
     public float minDist = 2f;
     public float maxDist = 5f;
+
+    // enemy health
+    public float health = 1;
+
+    // allows for checking if the enemy is defeated once they are hit
+    public float Health
+    {
+        set {
+            print(value);
+            health = value;
+            
+            if (health <= 0)
+            {
+                Defeated();
+            }
+        }
+        get { return health; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,5 +88,12 @@ public class MeleeEnemy : MonoBehaviour
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
             }
         }
+    }
+
+
+    // defeated enemy gameobject is deleted
+    public void Defeated()
+    {
+        Destroy(gameObject);
     }
 }
