@@ -17,10 +17,13 @@ public class SwordAttack : MonoBehaviour
         rightAttackOffset = transform.position;
     }
 
+    // edited this to enable/disable the gameobject as a whole since the box for me was starting off disabled
     public void AttackRight()
     {
-        swordCollider.enabled = true;
-        transform.localPosition = rightAttackOffset;
+        gameObject.SetActive(true);
+
+        // swordCollider.enabled = true;
+        //transform.localPosition = rightAttackOffset;
         print("attack right");
         Invoke ("StopAttack", 0.5f);
     }
@@ -36,7 +39,8 @@ public class SwordAttack : MonoBehaviour
 
     public void StopAttack()
     {
-        swordCollider.enabled = false; 
+        gameObject.SetActive(false); 
+        // swordCollider.enabled = false;
     }
 
     // deals damage to object with Enemy tag
@@ -45,7 +49,7 @@ public class SwordAttack : MonoBehaviour
         if (other.tag == "Enemy")
         {
             // deal damage to enemy
-            MeleeEnemy enemy = other.GetComponent<MeleeEnemy>();
+            HealthManager enemy = other.GetComponent<HealthManager>();
 
             if (enemy != null)
             {

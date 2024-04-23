@@ -15,6 +15,7 @@ public class MeleeEnemy : MonoBehaviour
     public float minDist = 2f;
     public float maxDist = 5f;
 
+    /*
     // enemy health
     public float health = 1;
 
@@ -32,6 +33,7 @@ public class MeleeEnemy : MonoBehaviour
         }
         get { return health; }
     }
+    */
 
     // Start is called before the first frame update
     void Start()
@@ -90,10 +92,11 @@ public class MeleeEnemy : MonoBehaviour
         }
     }
 
-
+    /*
     // defeated enemy gameobject is deleted
     public void Defeated()
     {
         Destroy(gameObject);
     }
+    */
 }
