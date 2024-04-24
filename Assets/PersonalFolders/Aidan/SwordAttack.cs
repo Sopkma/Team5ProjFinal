@@ -25,7 +25,7 @@ public class SwordAttack : MonoBehaviour
         // swordCollider.enabled = true;
         //transform.localPosition = rightAttackOffset;
         print("attack right");
-        Invoke ("StopAttack", 0.5f);
+        Invoke ("StopAttack", 0.3f);
     }
 
     // isnt used yet, want to try to make attack hitbox solely where the player is facing

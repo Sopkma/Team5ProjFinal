@@ -4141,6 +4141,7 @@ GameObject:
   - component: {fileID: 1668302236}
   - component: {fileID: 1668302235}
   - component: {fileID: 1668302239}
+  - component: {fileID: 1668302240}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -4293,6 +4294,18 @@ MonoBehaviour:
   enemySpeed: 0.2
   minDist: 2
   maxDist: 5
+--- !u!114 &1668302240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668302234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c61f8dde28121543a316b2b8f19895d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   health: 1
 --- !u!1 &1812503195
 GameObject:
@@ -4311,7 +4324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1812503196
 Transform:
   m_ObjectHideFlags: 0
@@ -4334,7 +4347,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812503195}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
