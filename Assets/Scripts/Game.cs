@@ -8,7 +8,7 @@ public class Game : MonoBehaviour
 {
     [HideInInspector] public Controls controls;
     public Player player;
-
+    public playerShop shop;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,10 @@ public class Game : MonoBehaviour
         if (controls.Player.ResetLevel.WasPerformedThisFrame())
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (controls.Player.Interact.WasPerformedThisFrame())
+        {
+            shop.shopManager();
         }
     }
 }

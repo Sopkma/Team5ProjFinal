@@ -299,9 +299,10 @@ GameObject:
   - component: {fileID: 6020666432837094957}
   - component: {fileID: 640138708842028481}
   - component: {fileID: 2707744185536547460}
+  - component: {fileID: 4925252450765262637}
   m_Layer: 0
   m_Name: RangedEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,3 +455,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4925252450765262637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854140046419412158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c61f8dde28121543a316b2b8f19895d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
