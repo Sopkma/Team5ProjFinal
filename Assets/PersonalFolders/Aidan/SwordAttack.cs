@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
@@ -11,6 +12,8 @@ public class SwordAttack : MonoBehaviour
 
     // drag collider 2D from the sword collider into here
     public Collider2D swordCollider;
+
+    private List<HealthManager> hitEnemies = new ();
 
     private void Start()
     {
@@ -39,8 +42,10 @@ public class SwordAttack : MonoBehaviour
 
     public void StopAttack()
     {
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
         // swordCollider.enabled = false;
+
+        hitEnemies = new();
     }
 
     // deals damage to object with Enemy tag
@@ -53,7 +58,21 @@ public class SwordAttack : MonoBehaviour
 
             if (enemy != null)
             {
-                enemy.Health -= damage;
+
+                //print(hitEnemies.Contains<HealthManager>(enemy));
+
+                if (hitEnemies.Contains<HealthManager>(enemy))
+                {
+                    // enemy has been hit already this attack, skip.
+                    //print("enemy already hit this attack!");
+                }
+                else
+                {
+                    enemy.Health -= damage;
+                    hitEnemies.Add(enemy);
+
+                    //print(hitEnemies);
+                }
             }
         }
     }

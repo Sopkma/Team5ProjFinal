@@ -56,7 +56,9 @@ public class SpawnEnemies : MonoBehaviour
             newEnemy.GetComponent<RangedEnemy>().player = player;
         }
 
-        enemy.transform.position = transform.position;
+        var randx = Random.Range(-2f, 2f);
+        var randy = Random.Range(-2f, 2f);
+        enemy.transform.position = transform.position + new Vector3(randx, randy, 0);
 
     }
 }
