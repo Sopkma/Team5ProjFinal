@@ -10,7 +10,7 @@ public class playerShop : MonoBehaviour{
     bool isShopOpen = false;
     bool playerIn = false;
     public Player player;
-
+    public GameObject shopUI;
     void Start(){
       //makes sure that the menues are set to disabled   
     }
@@ -47,9 +47,11 @@ public class playerShop : MonoBehaviour{
     public void shopManager(){
         if (isShopOpen && playerIn){
             closeShop();
+            shopUI.SetActive(false);
         }
         else if(!isShopOpen && playerIn){
             openShop();
+            shopUI.SetActive(true);
         }
     }
 }
