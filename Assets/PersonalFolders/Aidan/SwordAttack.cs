@@ -76,4 +76,29 @@ public class SwordAttack : MonoBehaviour
             }
         }
     }
+
+    private void FixedUpdate()
+    {
+        /*var mousePos = Input.mousePosition;
+        var mouseCord = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        gameObject.transform.LookAt(new Vector3(transform.position.x, transform.position.y, mouseCord.z), Vector3.up);
+        */
+
+        // I'm be honest, i got this off the internet...
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mouseWorldPosition - transform.position;
+        direction.Normalize();
+
+        float angleRadians = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angleRadians * Mathf.Rad2Deg;
+
+        // Apply rotation (adjust the -90 offset as needed)
+        transform.rotation = Quaternion.Euler(0f, 0f, angleDegrees -270);
+
+        // transform.position = new Vector3(0f,-0.63f,0f);
+    }
+
 }
+
