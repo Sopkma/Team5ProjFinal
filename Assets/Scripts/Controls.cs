@@ -80,6 +80,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5f65ed17-9195-46e6-a3e8-38680a8178b6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dcba5e50-330e-4ff4-9232-a76da1c9f197"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",

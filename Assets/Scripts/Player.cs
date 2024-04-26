@@ -17,14 +17,19 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        coinUI.GetComponent<TextMeshProUGUI>();
+        //coinUI.GetComponent<TextMeshProUGUI>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        coinUI.text = coinCounter.ToString();
+
+        if (coinUI != null)
+        {
+            coinUI.text = coinCounter.ToString();
+        }
+        
         var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
 
         if (direction.magnitude > 1.0f)

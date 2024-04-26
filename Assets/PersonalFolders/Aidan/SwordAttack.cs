@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class SwordAttack : MonoBehaviour
 {
@@ -79,25 +80,33 @@ public class SwordAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*var mousePos = Input.mousePosition;
+        AimHitbox();
+        
+    }
+
+    private void OnEnable()
+    {
+        // moves the hitbox to face the player on the same frame it is active otherwise
+        // the hitbox is where it ended last time for a frame and will cause unintended hits.
+        AimHitbox();
+    }
+
+    private void AimHitbox()
+    {
+        // I had to relearn geometry fro this lmao
         var mouseCord = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var deltaX = mouseCord.x - transform.position.x;
+        var deltaY = mouseCord.y - transform.position.y;
+        var rad = Mathf.Atan2(deltaY, deltaX); // In radians
+        var temp = rad * (180 / Mathf.PI);
+        int deg = 90 + (int)temp;
 
-        gameObject.transform.LookAt(new Vector3(transform.position.x, transform.position.y, mouseCord.z), Vector3.up);
-        */
-
-        // I'm be honest, i got this off the internet...
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mouseWorldPosition - transform.position;
-        direction.Normalize();
-
-        float angleRadians = Mathf.Atan2(direction.y, direction.x);
-        float angleDegrees = angleRadians * Mathf.Rad2Deg;
-
-        // Apply rotation (adjust the -90 offset as needed)
-        transform.rotation = Quaternion.Euler(0f, 0f, angleDegrees -270);
-
-        // transform.position = new Vector3(0f,-0.63f,0f);
+        // changes the hitbox's angle and then the position so that the tip of the triangle is
+        // always in the center of the player.
+        transform.eulerAngles = new Vector3(0, 0, deg);
+        var y = Mathf.Cos(deg * Mathf.PI / 180) * -1 * 1.15f;
+        var x = Mathf.Sin(deg * Mathf.PI / 180) * 1.15f;
+        transform.localPosition = new Vector3(x, y, 0);
     }
 
 }
