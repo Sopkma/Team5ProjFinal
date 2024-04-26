@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
         // transform.rotation = Quaternion.LookRotation(direction);
         // performs attack from swordAttack making collision box enabled then disabled
-        swordAttack.AttackRight();
+        swordAttack.Attack();
         print("Swing");
     }
 }
