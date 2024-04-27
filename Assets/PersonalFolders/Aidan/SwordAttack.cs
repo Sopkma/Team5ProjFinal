@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class SwordAttack : MonoBehaviour
 {
     // adjust damage here
     public float damage = 3;
 
-    Vector2 rightAttackOffset;
+    public float swingSpeed = .3f;
+    private bool isAttacking = false;
+
+    public PlaySwordSwing swordAnim;
+
 
     // drag collider 2D from the sword collider into here
     public Collider2D swordCollider;
@@ -17,34 +22,34 @@ public class SwordAttack : MonoBehaviour
 
     private void Start()
     {
-        rightAttackOffset = transform.position;
+        
     }
 
     // edited this to enable/disable the gameobject as a whole since the box for me was starting off disabled
-    public void AttackRight()
+    public void Attack()
     {
-        gameObject.SetActive(true);
+        // not currently doing an attack
+        if (!isAttacking)
+        {
+            gameObject.SetActive(true);
+            print("attacking.");
+            Invoke("StopAttack", swingSpeed);
+            isAttacking = true;
 
-        // swordCollider.enabled = true;
-        //transform.localPosition = rightAttackOffset;
-        print("attack right");
-        Invoke ("StopAttack", 0.3f);
+
+            swordAnim.SwingSword();
+            
+
+        }
+        
     }
 
-    // isnt used yet, want to try to make attack hitbox solely where the player is facing
-    public void AttackLeft() 
-    {
-        swordCollider.enabled = true;
-        transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
-        print("attack left");
-        StopAttack();
-    }
-
+    
     public void StopAttack()
     {
-        gameObject.SetActive(false);
-        // swordCollider.enabled = false;
+        isAttacking = false;
 
+        gameObject.SetActive(false);
         hitEnemies = new();
     }
 
@@ -53,13 +58,11 @@ public class SwordAttack : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            // deal damage to enemy
+            // get access to enemy Health 
             HealthManager enemy = other.GetComponent<HealthManager>();
 
             if (enemy != null)
             {
-
-                //print(hitEnemies.Contains<HealthManager>(enemy));
 
                 if (hitEnemies.Contains<HealthManager>(enemy))
                 {
@@ -68,10 +71,9 @@ public class SwordAttack : MonoBehaviour
                 }
                 else
                 {
+                    // enemy is being hit for the first time this attack, do damage and add to list
                     enemy.Health -= damage;
                     hitEnemies.Add(enemy);
-
-                    //print(hitEnemies);
                 }
             }
         }
@@ -79,25 +81,32 @@ public class SwordAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*var mousePos = Input.mousePosition;
+        //AimHitbox();
+        
+    }
+
+    private void OnEnable()
+    {
+        // moves the hitbox to face the player on the same frame it is activated
+        AimHitbox();
+    }
+
+    private void AimHitbox()
+    {
+        // I had to relearn geometry fro this lmao
         var mouseCord = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var deltaX = mouseCord.x - transform.position.x;
+        var deltaY = mouseCord.y - transform.position.y;
+        var rad = Mathf.Atan2(deltaY, deltaX); // In radians
+        var temp = rad * (180 / Mathf.PI);
+        int deg = 90 + (int)temp;
 
-        gameObject.transform.LookAt(new Vector3(transform.position.x, transform.position.y, mouseCord.z), Vector3.up);
-        */
-
-        // I'm be honest, i got this off the internet...
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mouseWorldPosition - transform.position;
-        direction.Normalize();
-
-        float angleRadians = Mathf.Atan2(direction.y, direction.x);
-        float angleDegrees = angleRadians * Mathf.Rad2Deg;
-
-        // Apply rotation (adjust the -90 offset as needed)
-        transform.rotation = Quaternion.Euler(0f, 0f, angleDegrees -270);
-
-        // transform.position = new Vector3(0f,-0.63f,0f);
+        // changes the hitbox's angle and then the position so that the tip of the triangle is
+        // always in the center of the player.
+        transform.eulerAngles = new Vector3(0, 0, deg);
+        var y = Mathf.Cos(deg * Mathf.PI / 180) * -1 * 1.15f;
+        var x = Mathf.Sin(deg * Mathf.PI / 180) * 1.15f;
+        transform.localPosition = new Vector3(x, y, 0);
     }
 
 }
