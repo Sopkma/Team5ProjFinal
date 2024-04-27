@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
+
+
         rb = GetComponent<Rigidbody2D>();
 
     }
@@ -23,12 +25,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if (coinUI != null)
-        {
-            coinUI.text = coinCounter.ToString();
-        }
-        
         var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
 
         if (direction.magnitude > 1.0f){
