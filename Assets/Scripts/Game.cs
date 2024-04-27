@@ -10,15 +10,13 @@ public class Game : MonoBehaviour
     public Player player;
     public playerShop shop;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         controls = new Controls();
         controls.Enable();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if (controls.Player.Attack.WasPerformedThisFrame())
         {
             player.Attack();
