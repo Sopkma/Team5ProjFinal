@@ -29,5 +29,9 @@ public class Game : MonoBehaviour
         {
             shop.shopManager();
         }
+        if (controls.Player.Dodge.WasPerformedThisFrame()) 
+        {
+            player.DodgeRoll();
+        }
     }
 }
