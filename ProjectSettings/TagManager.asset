@@ -9,6 +9,7 @@ TagManager:
   - Event
   - Projectile
   - MazeStart
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
