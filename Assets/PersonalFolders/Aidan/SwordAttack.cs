@@ -14,6 +14,7 @@ public class SwordAttack : MonoBehaviour
     public bool isAttacking { get; private set; }
 
     public PlaySwordSwing swordAnim;
+    public GameObject parent;
 
 
     // drag collider 2D from the sword collider into here
@@ -34,13 +35,12 @@ public class SwordAttack : MonoBehaviour
         {
             //gameObject.SetActive(true);
             gameObject.GetComponent<Collider2D>().enabled = true;
-            print("attacking.");
+            //print("attacking.");
             //Invoke("StopAttack", swingSpeed);
             isAttacking = true;
 
             swordAnim.SwingSword(swingSpeed);
             
-
         }
         
     }
@@ -48,7 +48,7 @@ public class SwordAttack : MonoBehaviour
     
     public void StopAttack()
     {
-        print("attack stop");
+        //print("attack stop");
         isAttacking = false;
 
         //gameObject.SetActive(false);
@@ -59,32 +59,57 @@ public class SwordAttack : MonoBehaviour
     // deals damage to object with Enemy tag
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+
+        if (parent.CompareTag("Player"))
         {
-            // get access to enemy Health 
-            HealthManager enemy = other.GetComponent<HealthManager>();
-
-            if (enemy != null)
+            if (other.tag == "Enemy")
             {
+                // get access to enemy Health 
+                HealthManager enemy = other.GetComponent<HealthManager>();
 
-                if (hitEnemies.Contains<HealthManager>(enemy))
+                if (enemy != null)
                 {
-                    // enemy has been hit already this attack, skip.
-                    //print("enemy already hit this attack!");
-                }
-                else
-                {
-                    // enemy is being hit for the first time this attack, do damage and add to list
-                    enemy.Health -= damage;
-                    hitEnemies.Add(enemy);
+
+                    if (hitEnemies.Contains<HealthManager>(enemy))
+                    {
+                        // enemy has been hit already this attack, skip.
+                        //print("enemy already hit this attack!");
+                    }
+                    else
+                    {
+                        // enemy is being hit for the first time this attack, do damage and add to list
+                        enemy.Health -= damage;
+                        hitEnemies.Add(enemy);
+                    }
                 }
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        //AimHitbox();
+        else if (parent.CompareTag("Enemy"))
+        {
+            if (other.tag == "Player")
+            {
+                // get access to enemy Health 
+                HealthManager enemy = other.GetComponent<HealthManager>();
+
+                if (enemy != null)
+                {
+
+                    if (hitEnemies.Contains<HealthManager>(enemy))
+                    {
+                        // enemy has been hit already this attack, skip.
+                        //print("enemy already hit this attack!");
+                    }
+                    else
+                    {
+                        // enemy is being hit for the first time this attack, do damage and add to list
+                        enemy.Health -= damage;
+                        hitEnemies.Add(enemy);
+                    }
+                }
+            }
+        }
+
         
     }
 
