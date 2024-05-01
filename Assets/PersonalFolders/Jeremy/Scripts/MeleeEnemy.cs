@@ -9,36 +9,22 @@ public class MeleeEnemy : MonoBehaviour
 
     public Rigidbody2D player;
 
+    public SwordAttack sword;
+
     public float enemySpeed = .2f;
+    public float timeBetweenAttacks = 1f;
+    private float timeBeforeNextAttack;
 
     // distances where enemy movement begins or stops
     public float minDist = 2f;
     public float maxDist = 5f;
 
-    /*
-    // enemy health
-    public float health = 1;
-
-    // allows for checking if the enemy is defeated once they are hit
-    public float Health
-    {
-        set {
-            print(value);
-            health = value;
-            
-            if (health <= 0)
-            {
-                Defeated();
-            }
-        }
-        get { return health; }
-    }
-    */
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        timeBeforeNextAttack = 0f;
     }
 
     // Update is called once per frame
@@ -56,11 +42,19 @@ public class MeleeEnemy : MonoBehaviour
         // if within maximum distance
         else if (Mathf.Abs(euclideanDistance) < maxDist)
         {
-            // if closer than minimum distance, stop moving
-            // possible melee here
+            // if closer than minimum distance, stop moving and melee
             if (Mathf.Abs(euclideanDistance) < minDist)
             {
-                //print("<color=green>Too close to player.</color>");
+
+                
+
+                if (timeBeforeNextAttack <= 0)
+                {
+                    // attack script here
+                    sword.Attack();
+                    timeBeforeNextAttack = timeBetweenAttacks;
+                }
+
             }
             else
             {
@@ -73,6 +67,12 @@ public class MeleeEnemy : MonoBehaviour
         // enemy still moves, this just prevents rigidbody shenanigans
         rb.velocity = Vector2.zero;
 
+        if (timeBeforeNextAttack > 0)
+        {
+            timeBeforeNextAttack -= Time.deltaTime;
+        }
+
+        /* handles flipping the sprite
         // if moving left
         if (distance.x < 0)
         {
@@ -90,13 +90,9 @@ public class MeleeEnemy : MonoBehaviour
                 transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
             }
         }
+        */
     }
 
-    /*
-    // defeated enemy gameobject is deleted
-    public void Defeated()
-    {
-        Destroy(gameObject);
-    }
-    */
+    
+
 }

@@ -9,6 +9,7 @@ public class RangedEnemy : MonoBehaviour
     public GameObject projectile;
     public Rigidbody2D player;
     public float enemySpeed = .2f;
+    public float damage = 2f;
 
     // distances where enemy movement begins or stops
     public float minDist = 6f;
@@ -88,6 +89,7 @@ public class RangedEnemy : MonoBehaviour
         else
         {
             var theProjectile = GameObject.Instantiate(projectile);
+            theProjectile.GetComponent<EnemyProjectile>().damage = damage;
             theProjectile.transform.position = transform.position;
             fireTimer = fireRate;
         }

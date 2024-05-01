@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 7854140046419412158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.47533, y: 4.5721846, z: 0}
+  m_LocalPosition: {x: 33.97307, y: 1.8011284, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -417,6 +417,7 @@ MonoBehaviour:
   projectile: {fileID: 7994856631924149056, guid: e0dd80a366fdc9d4e8ed8793b0b27a0a, type: 3}
   player: {fileID: 0}
   enemySpeed: 3
+  damage: 2
   minDist: 8
   maxDist: 15
   fireRate: 4
@@ -469,3 +470,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   points: 5
+  coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
