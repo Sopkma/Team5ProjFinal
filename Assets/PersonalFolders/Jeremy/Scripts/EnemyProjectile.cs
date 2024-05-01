@@ -11,6 +11,7 @@ public class EnemyProjectile : MonoBehaviour
     public float lifeTimer = 5f;
     private float timeLeft;
     public float projectileSpeed = 5f;
+    public float damage;
 
     private Vector3 player;
     private Vector3 travelVector;
@@ -52,7 +53,15 @@ public class EnemyProjectile : MonoBehaviour
         {
             print("Player Hit!");
             Destroy(projectile);
-        }
 
+            // get access to enemy Health 
+            HealthManager enemy = collision.GetComponent<HealthManager>();
+
+            if (enemy != null)
+            {
+                // player is hit, do damage
+                enemy.Health -= damage;
+            }
+        }
     }
 }
