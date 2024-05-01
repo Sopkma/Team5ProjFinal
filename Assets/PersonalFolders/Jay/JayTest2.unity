@@ -85165,7 +85165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &777196698
 Transform:
   m_ObjectHideFlags: 0
@@ -85213,7 +85213,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 791237653}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: bcdca1113acf27546becf71b07f3b5ab, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
