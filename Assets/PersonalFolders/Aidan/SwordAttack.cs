@@ -10,7 +10,8 @@ public class SwordAttack : MonoBehaviour
     public float damage = 3;
 
     public float swingSpeed = .3f;
-    private bool isAttacking = false;
+    [HideInInspector]
+    public bool isAttacking { get; private set; }
 
     public PlaySwordSwing swordAnim;
 
@@ -25,19 +26,19 @@ public class SwordAttack : MonoBehaviour
         
     }
 
-    // edited this to enable/disable the gameobject as a whole since the box for me was starting off disabled
+    // enables collider of sword on swing
     public void Attack()
     {
         // not currently doing an attack
         if (!isAttacking)
         {
-            gameObject.SetActive(true);
+            //gameObject.SetActive(true);
+            gameObject.GetComponent<Collider2D>().enabled = true;
             print("attacking.");
-            Invoke("StopAttack", swingSpeed);
+            //Invoke("StopAttack", swingSpeed);
             isAttacking = true;
 
-
-            swordAnim.SwingSword();
+            swordAnim.SwingSword(swingSpeed);
             
 
         }
@@ -47,9 +48,11 @@ public class SwordAttack : MonoBehaviour
     
     public void StopAttack()
     {
+        print("attack stop");
         isAttacking = false;
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        gameObject.GetComponent<Collider2D>().enabled = false;
         hitEnemies = new();
     }
 
@@ -84,6 +87,7 @@ public class SwordAttack : MonoBehaviour
         //AimHitbox();
         
     }
+
 
     private void OnEnable()
     {
