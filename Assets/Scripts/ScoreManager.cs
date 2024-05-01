@@ -1,6 +1,7 @@
 using HighScore;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -11,6 +12,9 @@ public class ScoreManager : MonoBehaviour
     private int multiplier;
     public float timeToDecrament = 20f;
     private float timeSinceLastKill;
+    public TextMeshProUGUI scoreTxt;
+    public GameObject txtPrefab;
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +26,6 @@ public class ScoreManager : MonoBehaviour
         timeSinceLastKill = Time.time - 10;
     }
 
-    // Update is called once per frame
     public void addToScore(int points)
     {
         float calcTime = Time.time - timeSinceLastKill;
@@ -31,6 +34,7 @@ public class ScoreManager : MonoBehaviour
         if (calcTime < 0.2 )
         {
             print("MULTIKILL");
+            Instantiate(txtPrefab, parent: player.transform);
             score += (int)(points * multiplier * 1.5f);
         }
         else
@@ -38,12 +42,14 @@ public class ScoreManager : MonoBehaviour
             score += points * multiplier;
         }
         print("SCORE: " + score);
+        scoreTxt.text = "SCORE: " + score;
     }
 
     public void addStylePoints(int points)
     {
         score += points * multiplier;
         print("SCORE: " + score);
+        scoreTxt.text = "SCORE: " + score;
     }
 
     public IEnumerator DecramentScore()
@@ -57,9 +63,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void OnComplete(string playerName)
+    public void SendScore(string playerName)
     {
-        // send to to site;
+        // HS.Clear(this);
+        // send highscore to site
         HS.SubmitHighScore(this, playerName, score);
     }
 }

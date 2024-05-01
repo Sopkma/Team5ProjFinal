@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +8,7 @@ public class Game : MonoBehaviour
     [HideInInspector] public Controls controls;
     public Player player;
     public playerShop shop;
+    public ScoreManager scoreManager;
     // Start is called before the first frame update
     void Start(){
         controls = new Controls();
@@ -33,5 +33,10 @@ public class Game : MonoBehaviour
         {
             player.DodgeRoll();
         }
+    }
+
+    public void EndGame()
+    {
+        scoreManager.SendScore("Jay");
     }
 }
