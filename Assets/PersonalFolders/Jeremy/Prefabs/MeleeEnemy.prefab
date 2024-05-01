@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 2607440144935212571}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.402897, y: 17.40887, z: 0}
+  m_LocalPosition: {x: 27.07203, y: 13.968235, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   points: 5
+  coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
 --- !u!1 &7673680195671137239
 GameObject:
   m_ObjectHideFlags: 0
