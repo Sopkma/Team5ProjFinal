@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Event
   - Projectile
+  - MazeStart
   - ScoreManager
   layers:
   - Default

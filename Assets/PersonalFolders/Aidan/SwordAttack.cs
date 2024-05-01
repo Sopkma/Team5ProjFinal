@@ -10,9 +10,11 @@ public class SwordAttack : MonoBehaviour
     public float damage = 3;
 
     public float swingSpeed = .3f;
-    private bool isAttacking = false;
+    [HideInInspector]
+    public bool isAttacking { get; private set; }
 
     public PlaySwordSwing swordAnim;
+    public GameObject parent;
 
 
     // drag collider 2D from the sword collider into here
@@ -25,21 +27,20 @@ public class SwordAttack : MonoBehaviour
         
     }
 
-    // edited this to enable/disable the gameobject as a whole since the box for me was starting off disabled
+    // enables collider of sword on swing
     public void Attack()
     {
         // not currently doing an attack
         if (!isAttacking)
         {
-            gameObject.SetActive(true);
-            print("attacking.");
-            Invoke("StopAttack", swingSpeed);
+            //gameObject.SetActive(true);
+            gameObject.GetComponent<Collider2D>().enabled = true;
+            //print("attacking.");
+            //Invoke("StopAttack", swingSpeed);
             isAttacking = true;
 
-
-            swordAnim.SwingSword();
+            swordAnim.SwingSword(swingSpeed);
             
-
         }
         
     }
@@ -47,43 +48,71 @@ public class SwordAttack : MonoBehaviour
     
     public void StopAttack()
     {
+        //print("attack stop");
         isAttacking = false;
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        gameObject.GetComponent<Collider2D>().enabled = false;
         hitEnemies = new();
     }
 
     // deals damage to object with Enemy tag
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
+
+        if (parent.CompareTag("Player"))
         {
-            // get access to enemy Health 
-            HealthManager enemy = other.GetComponent<HealthManager>();
-
-            if (enemy != null)
+            if (other.tag == "Enemy")
             {
+                // get access to enemy Health 
+                HealthManager enemy = other.GetComponent<HealthManager>();
 
-                if (hitEnemies.Contains<HealthManager>(enemy))
+                if (enemy != null)
                 {
-                    // enemy has been hit already this attack, skip.
-                    //print("enemy already hit this attack!");
-                }
-                else
-                {
-                    // enemy is being hit for the first time this attack, do damage and add to list
-                    enemy.Health -= damage;
-                    hitEnemies.Add(enemy);
+
+                    if (hitEnemies.Contains<HealthManager>(enemy))
+                    {
+                        // enemy has been hit already this attack, skip.
+                        //print("enemy already hit this attack!");
+                    }
+                    else
+                    {
+                        // enemy is being hit for the first time this attack, do damage and add to list
+                        enemy.Health -= damage;
+                        hitEnemies.Add(enemy);
+                    }
                 }
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        //AimHitbox();
+        else if (parent.CompareTag("Enemy"))
+        {
+            if (other.tag == "Player")
+            {
+                // get access to enemy Health 
+                HealthManager enemy = other.GetComponent<HealthManager>();
+
+                if (enemy != null)
+                {
+
+                    if (hitEnemies.Contains<HealthManager>(enemy))
+                    {
+                        // enemy has been hit already this attack, skip.
+                        //print("enemy already hit this attack!");
+                    }
+                    else
+                    {
+                        // enemy is being hit for the first time this attack, do damage and add to list
+                        enemy.Health -= damage;
+                        hitEnemies.Add(enemy);
+                    }
+                }
+            }
+        }
+
         
     }
+
 
     private void OnEnable()
     {

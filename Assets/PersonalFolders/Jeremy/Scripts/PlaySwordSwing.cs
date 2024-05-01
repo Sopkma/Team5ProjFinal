@@ -19,8 +19,9 @@ public class PlaySwordSwing : MonoBehaviour
         
     }
 
-    public void SwingSword()
+    public void SwingSword(float speed)
     {
+        anim.speed = speed;
         anim.Play("SwordSwing");
     }
 }

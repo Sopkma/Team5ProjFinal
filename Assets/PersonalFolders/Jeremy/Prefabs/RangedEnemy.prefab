@@ -469,3 +469,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   points: 5
+  coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
