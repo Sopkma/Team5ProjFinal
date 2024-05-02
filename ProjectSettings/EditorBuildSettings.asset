@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/PersonalFolders/Jay/JayTest2.unity
-    guid: 2be3485e74519f84f9d3097cbbdadce2
+    path: Assets/Scenes/MainMenu.unity
+    guid: a006d3818967c8241a0bf8aae735922c
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 003a2d8c6ce03054ba45839fc1f19247
   m_configObjects: {}
