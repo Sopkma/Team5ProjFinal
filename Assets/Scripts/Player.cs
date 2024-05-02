@@ -77,14 +77,35 @@ public class Player : MonoBehaviour
     public void DodgeRoll() {
         switch (state) {
             case State.Rolling:
+                print("Rolling State");
                 float rollSpdDropMultiplier = 50f;
                 rollSpd -= rollSpd * rollSpdDropMultiplier * Time.deltaTime;
 
                 float rollSpdMin = 1f;
                 if (rollSpd < rollSpdMin) {
+                    print("swapping state"); 
                     state = State.Normal;
                 }
                 break;
+        }
+    }
+
+
+
+
+    //funny rotation,  if you want to use do this StartCoroutine(Rotate(1))
+    private IEnumerator Rotate(float duration)
+    {
+        
+        float startRotation = transform.eulerAngles.z;
+        float endRotation = startRotation + 360.0f;
+        float t = 0.0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float zRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zRotation);
+            yield return null;
         }
     }
 }
