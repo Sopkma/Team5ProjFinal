@@ -12,6 +12,7 @@ TagManager:
   - ScoreManager
   - SoundManager
   - Door
+  - Boss
   layers:
   - Default
   - TransparentFX
