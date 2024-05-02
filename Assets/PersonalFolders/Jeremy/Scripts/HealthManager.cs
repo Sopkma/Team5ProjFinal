@@ -10,6 +10,7 @@ public class HealthManager : MonoBehaviour
     public int points = 5;
     private ScoreManager scoreManager;
     public GameObject coinPrefab;
+    public Game game;
     // allows for checking if the enemy is defeated once they are hit
     public float Health
     {
@@ -41,18 +42,24 @@ public class HealthManager : MonoBehaviour
     // defeated enemy gameobject is deleted
     public void Defeated(){
         scoreManager.addToScore(points);
-        Destroy(gameObject);
 
-
-
-
-        int CoinCount = Random.Range(1, 3);
-        for (int i = 0; i < CoinCount; i++){
-            var position = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
-            Instantiate(coinPrefab, transform.position + position, transform.rotation);
-            coinPrefab.GetComponent<coinCounter>().player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if (!gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            int CoinCount = Random.Range(1, 3);
+            for (int i = 0; i < CoinCount; i++)
+            {
+                var position = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+                Instantiate(coinPrefab, transform.position + position, transform.rotation);
+                coinPrefab.GetComponent<coinCounter>().player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            }
         }
-
+        else
+        {
+            Player temp = this.GetComponent<Player>();
+            temp.speed = 0;
+            game.EndGame();
+        }
         
     }
 }
