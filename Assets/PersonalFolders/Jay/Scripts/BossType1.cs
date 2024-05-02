@@ -35,8 +35,13 @@ public class BossType1 : MonoBehaviour
 
     public GameObject endTrigger;
 
+    private AudioSource audioSource;
+    public AudioClip growl;
+    public AudioClip crash;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         state = MinotaurState.WALKING;
     }
@@ -111,6 +116,7 @@ public class BossType1 : MonoBehaviour
 
     private IEnumerator Windup()
     {
+        audioSource.PlayOneShot(growl);
         yield return new WaitForSeconds(chargeUpTime);
         state = MinotaurState.CHARGING;
         // savedPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
@@ -134,6 +140,7 @@ public class BossType1 : MonoBehaviour
     {
         if (state == MinotaurState.CHARGING && !collision.gameObject.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(crash);
             state = MinotaurState.DAZED;
             StartCoroutine(DazeStop());
         }
