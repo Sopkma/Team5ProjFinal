@@ -6,12 +6,25 @@ public class coinCounter : MonoBehaviour
 {
     public GameObject cointSelf;
     public Player player;
-    
+
+    AudioSource coinSound;
+
+
+
+    private void Start()
+    {
+        coinSound = GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter2D(Collider2D collision){
         if (collision.CompareTag("Player")){
             print("collision detected");
             player.coinCounter += 1;
-            Destroy(cointSelf);
+
+            coinSound.Play();
+
+            Destroy(cointSelf,1f);
+
+            
         }
     }
 }

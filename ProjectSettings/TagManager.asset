@@ -10,6 +10,7 @@ TagManager:
   - Projectile
   - MazeStart
   - ScoreManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX
