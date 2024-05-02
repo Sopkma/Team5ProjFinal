@@ -78,27 +78,42 @@ public class ChargerEnemy : MonoBehaviour
     // used to make enemies not stack on top of eachother
     private void OnTriggerStay2D(Collider2D collision)
     {
-        float X = 0;
-        float Y = 0;
+        
         if (collision.CompareTag("Enemy"))
         {
-            if (collision.transform.position.x > transform.position.x)
-            {
-                X = -0.5f;
-            }
-            else
-            {
-                X = 0.5f;
-            }
-            if (collision.transform.position.y > transform.position.y)
-            {
-                Y = -0.5f;
-            }
-            else
-            {
-                Y = 0.5f;
-            }
-            rb.position += (new Vector2(X, Y) * enemySpeed * Time.deltaTime);
+            WallRebound(collision);
         }
+        else if (collision.CompareTag("Player"))
+        {
+            // nothing
+        }
+        else
+        {
+            // if it hits a wall
+            WallRebound(collision);
+        }
+    }
+
+    private void WallRebound(Collider2D collision)
+    {
+        float X = 0;
+        float Y = 0;
+        if (collision.transform.position.x > transform.position.x)
+        {
+            X = -0.5f;
+        }
+        else
+        {
+            X = 0.5f;
+        }
+        if (collision.transform.position.y > transform.position.y)
+        {
+            Y = -0.5f;
+        }
+        else
+        {
+            Y = 0.5f;
+        }
+        rb.position += (new Vector2(X, Y) * enemySpeed * Time.deltaTime);
     }
 }
