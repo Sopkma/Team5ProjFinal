@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1229870009757465724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4989195536756448970}
+  - component: {fileID: 4133285800094000834}
+  m_Layer: 0
+  m_Name: Score Manager
+  m_TagString: ScoreManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4989195536756448970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229870009757465724}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.3632473, y: 2.9413323, z: 5.8236804}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8531664204304702293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4133285800094000834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229870009757465724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799a59bbceff51e4e9a5f9016bb1ea0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMultiplier: 10
+  minMultiplier: 1
+  timeToDecrament: 20
+  scoreTxt: {fileID: 0}
+  txtPrefab: {fileID: 3132872448314900742, guid: 9246b26f879e14e48aa40e2a37fb3df4, type: 3}
+  player: {fileID: 0}
 --- !u!1 &1304559168875878626
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +196,7 @@ Transform:
   - {fileID: 8221261766142235360}
   - {fileID: 1575257273344497943}
   - {fileID: 4385481492904249067}
+  - {fileID: 4989195536756448970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8901638028247199446
@@ -194,3 +245,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   shop: {fileID: 0}
+  scoreManager: {fileID: 0}
