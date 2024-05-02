@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum MinotaurState
@@ -15,6 +16,9 @@ public class BossType1 : MonoBehaviour
     private Rigidbody2D rb;
 
     public Rigidbody2D player;
+
+    public float damage = 3;
+    private List<HealthManager> hitEnemies = new();
 
     public float enemySpeed = .2f;
     public float enemyChargeSpeed = 0.9f;
@@ -65,13 +69,7 @@ public class BossType1 : MonoBehaviour
         // if within maximum distance
         else if (absEuclideanDistance < maxDist)
         {
-            // if closer than minimum distance, stop moving
-            // possible melee here
-            if (absEuclideanDistance < minDist)
-            {
-                // print("<color=green>Too close to player.</color>");
-            }
-            else if (absEuclideanDistance < agroDist)
+            if (absEuclideanDistance < agroDist)
             {
                 state = MinotaurState.WINDUP;
                 StartCoroutine(Windup());
@@ -124,6 +122,7 @@ public class BossType1 : MonoBehaviour
     private IEnumerator ChargeStop()
     {
         yield return new WaitForSeconds(chargeTime);
+        hitEnemies = new();
         if (state != MinotaurState.DAZED)
         {
             print("<color=red>Times Up</color>");
@@ -141,6 +140,24 @@ public class BossType1 : MonoBehaviour
         if (state == MinotaurState.CHARGING && collision.gameObject.CompareTag("Player"))
         {
             // Damage player
+            // get access to enemy Health 
+            HealthManager enemy = collision.gameObject.GetComponent<HealthManager>();
+
+            if (enemy != null)
+            {
+
+                if (hitEnemies.Contains<HealthManager>(enemy))
+                {
+                    // enemy has been hit already this attack, skip.
+                    //print("enemy already hit this attack!");
+                }
+                else
+                {
+                    // enemy is being hit for the first time this attack, do damage and add to list
+                    enemy.Health -= damage;
+                    hitEnemies.Add(enemy);
+                }
+            }
         }
         
     }

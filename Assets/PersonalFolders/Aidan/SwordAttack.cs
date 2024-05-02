@@ -40,7 +40,7 @@ public class SwordAttack : MonoBehaviour
             isAttacking = true;
 
             swordAnim.SwingSword(swingSpeed);
-            
+            StartCoroutine(ForceStop());
         }
         
     }
@@ -109,8 +109,6 @@ public class SwordAttack : MonoBehaviour
                 }
             }
         }
-
-        
     }
 
 
@@ -136,6 +134,16 @@ public class SwordAttack : MonoBehaviour
         var y = Mathf.Cos(deg * Mathf.PI / 180) * -1 * 1.15f;
         var x = Mathf.Sin(deg * Mathf.PI / 180) * 1.15f;
         transform.localPosition = new Vector3(x, y, 0);
+    }
+
+    private IEnumerator ForceStop()
+    {
+        yield return new WaitForSeconds(4);
+
+        if (isAttacking)
+        {
+            isAttacking = false;
+        }
     }
 
 }

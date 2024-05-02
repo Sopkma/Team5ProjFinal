@@ -21,6 +21,10 @@ public class RotateSword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (parentObject.CompareTag("Player"))
+        {
+            // print($"<color=blue>{sword.isAttacking}</color>");
+        }
         //if entity is not currently swinging the sword
         if (!sword.isAttacking)
         {
