@@ -50,6 +50,7 @@ public class HealthManager : MonoBehaviour
         for (int i = 0; i < CoinCount; i++){
             var position = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
             Instantiate(coinPrefab, transform.position + position, transform.rotation);
+            coinPrefab.GetComponent<coinCounter>().player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         
