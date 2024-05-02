@@ -146,7 +146,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -201,7 +201,7 @@ MonoBehaviour:
   chargePath: {fileID: 7941536590616330757}
   rotatePoint: {fileID: 5388435986884705388}
   hitboxLength: 9
-  chargeTime: 1.25
+  chargeTime: 0.5
 --- !u!114 &3694867312951039415
 MonoBehaviour:
   m_ObjectHideFlags: 0

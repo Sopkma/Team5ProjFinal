@@ -13,7 +13,7 @@ public class ChargerPathLogic : MonoBehaviour
     public GameObject rotatePoint;
     public float hitboxLength = 15f;
     public float chargeTime = 2f;
-    private float damage;
+    private float damage, staticDamageTimer;
     private float chargeBuildup;
     private float currentHitboxLength;
     private float timeBetweenAttacks, timeBeforeNextAttack, dashSpeed, dashDist;
@@ -35,32 +35,51 @@ public class ChargerPathLogic : MonoBehaviour
         chargePath.transform.localPosition = Vector3.zero;
         chargePath.SetActive(false);
         chargeBuildup = hitboxLength / chargeTime;
-        dashSpeed = GetComponent<ChargerEnemy>().enemySpeed * 3;
+        dashSpeed = GetComponent<ChargerEnemy>().enemySpeed * 6;
         rb = GetComponent<Rigidbody2D>();
         damage = GetComponent<ChargerEnemy>().damage;
         dashDist = 0;
+        staticDamageTimer = 0;
     }
 
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider) 
     {
         if (dashing)
         {   
             // if it hits a wall or other enemy/object reset the dash
-            if (!collision.gameObject.CompareTag("Player"))
+            if (!collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Enemy"))
             {
                 dashing = false;
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
             }
-            else
+            else if (collider.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<HealthManager>().Health -= damage;
+                // do nothing, just pass through enemies muhahaha
+            }
+            else if (collider.gameObject.CompareTag("Player"))
+            {
+                collider.gameObject.GetComponent<HealthManager>().Health -= damage;
                 dashing = false;
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
             }
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        // if player touches the enemy, it will damage the player even if enemy is not charging.
+        if (!dashing && staticDamageTimer <= 0)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                staticDamageTimer = timeBetweenAttacks / 2;
+                collision.gameObject.GetComponent<HealthManager>().Health -= damage;
+            }
+        }
+        if (staticDamageTimer > 0) staticDamageTimer -= Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -71,7 +90,6 @@ public class ChargerPathLogic : MonoBehaviour
             // (playerPos.x > transform.position.x + 0.1f || playerPos.x < transform.position.x - 0.1f) && (playerPos.y > transform.position.y + 0.1f || playerPos.y < transform.position.y - 0.1f)
             if (dashDist < hitboxLength + 1.5f)
             {
-                
                 rb.position += (distance.normalized * dashSpeed * Time.deltaTime);
                 dashDist = Mathf.Abs(Vector3.Distance(transform.position, initialPos));
             }
@@ -81,7 +99,6 @@ public class ChargerPathLogic : MonoBehaviour
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
             }
-            
         }
 
         if (isCharging && !dashing)
@@ -93,7 +110,6 @@ public class ChargerPathLogic : MonoBehaviour
                 currentHitboxLength = 0.1f;
                 chargePath.SetActive(false);
                 dashing = true;
-
             }
             else
             {
@@ -123,7 +139,6 @@ public class ChargerPathLogic : MonoBehaviour
             isCharging = true;
             chargePath.SetActive(true);
 
-
             // make charge hitbox face the player
             var deltaX = player.transform.position.x - transform.position.x;
             var deltaY = player.transform.position.y - transform.position.y;
@@ -137,7 +152,6 @@ public class ChargerPathLogic : MonoBehaviour
             initialPos = new Vector3(transform.position.x, transform.position.y);
 
             distance = new Vector3(playerPos.x - rb.position.x, playerPos.y - rb.position.y);
-
         }
     }
 
