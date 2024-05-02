@@ -203,11 +203,7 @@ Transform:
   m_GameObject: {fileID: 2607440144935212571}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
   m_LocalPosition: {x: 26.335905, y: 13.91905, z: 0}
-=======
-  m_LocalPosition: {x: 25.09703, y: 17.459606, z: 0}
->>>>>>> 3714c724199a16b9db3b257344da8fa9d72d1f4b
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -341,11 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-<<<<<<< HEAD
-  sword: {fileID: 0}
-=======
   sword: {fileID: 4922652345332543083}
->>>>>>> 3714c724199a16b9db3b257344da8fa9d72d1f4b
   enemySpeed: 5
   timeBetweenAttacks: 1
   minDist: 2
@@ -364,13 +356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   points: 5
-<<<<<<< HEAD
-  coinPrefab: {fileID: 0}
---- !u!1 &7673680195671137239
-=======
   coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
 --- !u!1 &6409724656189420171
->>>>>>> 3714c724199a16b9db3b257344da8fa9d72d1f4b
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
