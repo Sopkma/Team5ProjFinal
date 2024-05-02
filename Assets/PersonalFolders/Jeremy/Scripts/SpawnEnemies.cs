@@ -8,7 +8,7 @@ public class SpawnEnemies : MonoBehaviour
     public GameObject enemy;
     public Rigidbody2D player;
 
-    private int totalSpawned = 0;
+    public int totalSpawned = 0;
     public int spawnLimit = 1;
     // time in seconds between each creation of an enemy
     public float spawnTimer = 5;
@@ -17,19 +17,18 @@ public class SpawnEnemies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MakeEnemy();
-        totalSpawned += 1;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timeLeft > 0)
-        {
-            timeLeft -= Time.deltaTime;
-        }
-        else
-        {
+        //if (timeLeft > 0)
+        //{
+        //    timeLeft -= Time.deltaTime;
+        //}
+        //else
+        //{
             if (totalSpawned >= spawnLimit)
             {
                 // enemy cap reached, shut down spawner.
@@ -40,11 +39,12 @@ public class SpawnEnemies : MonoBehaviour
                 MakeEnemy();
                 totalSpawned += 1;
                 timeLeft = spawnTimer;
+                print("EnemySpawned");
             }
-        }
+        //}
     }
 
-    private void MakeEnemy()
+    public void MakeEnemy()
     {
         var newEnemy = Instantiate(enemy);
 
@@ -62,4 +62,5 @@ public class SpawnEnemies : MonoBehaviour
         enemy.transform.position = transform.position + new Vector3(randx, randy, 0);
 
     }
+
 }

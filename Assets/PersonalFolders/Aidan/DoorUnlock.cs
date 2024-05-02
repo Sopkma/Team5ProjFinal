@@ -8,6 +8,7 @@ public class DoorUnlock : MonoBehaviour
     private enum State {
         Waiting,
         Entered,
+        Fighting,
         Finished,
     }
 
@@ -15,13 +16,14 @@ public class DoorUnlock : MonoBehaviour
 
     private BoxCollider2D triggerCollider;
 
-    private BoxCollider2D roomCollider;
-
     private SpriteRenderer sprite;
 
     public GameObject enemySpawn;
     private SpawnEnemies spawnEnemies;
-    private int enemyNum;
+    //private int enemyNum;
+    private int enemyLimit;
+
+    private bool hasRun = false;
 
 
     private State state;
@@ -31,11 +33,12 @@ public class DoorUnlock : MonoBehaviour
         triggerCollider = GetComponent<BoxCollider2D>();
         doorCollision = GetComponent<CapsuleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        roomCollider = GetComponentInChildren<BoxCollider2D>();
-
-        enemySpawn.SetActive(false);
+        spawnEnemies = enemySpawn.GetComponent<SpawnEnemies>();
+        spawnEnemies.enabled = false;
         sprite.enabled = false;
         doorCollision.enabled = false;
+
+        
         
         state = State.Waiting;
     }
@@ -48,19 +51,48 @@ public class DoorUnlock : MonoBehaviour
             case State.Entered:
                 print("current state is entered");
                 triggerCollider.enabled = false;
+
+                // locks door begind player
                 sprite.enabled = true;
                 doorCollision.enabled = true;
-                EnemiesInRoom(roomCollider);
-                enemySpawn.SetActive(true);
-                spawnEnemies = GetComponentInChildren<SpawnEnemies>();
-                enemyNum = spawnEnemies.spawnLimit;
+
+                if (hasRun == false)
+                {
+                    spawnEnemies.enabled = true;
+                    enemyLimit = spawnEnemies.spawnLimit;
+                    print(enemyLimit);
+                    hasRun = true;
+                } else {
+                    break;
+                }
+
+                state = State.Fighting;
+                break;
+
+            case State.Fighting:
+                print("current state is fighting");
+                int numEnemies = spawnEnemies.totalSpawned;
+                print($"spawned enemies is {numEnemies}");
+
+                if (numEnemies != enemyLimit)
+                {
+                    print("spawning enemies");
+                }
+                else
+                {
+                    print("enemies hit limit");
+                    if (!GameObject.FindWithTag("Enemy"))
+                    {
+                        state = State.Finished;
+                    }
+                }
                 break;
 
             case State.Finished:
                 print("current state is finished");
                 sprite.enabled = false;
                 doorCollision.enabled = false;
-                enemySpawn.SetActive(false);
+                //enemySpawn.SetActive(false);
                 break;
         }
     }
@@ -72,12 +104,12 @@ public class DoorUnlock : MonoBehaviour
         }
     }
 
-    public void EnemiesInRoom (BoxCollider2D roomCollider) {
-        if (enemyNum > 0 ) {
-            print("Enemies in room");
-        } else {
-            state = State.Finished;
-        }
-    }
+    //public void EnemiesInRoom () {
+    //    if (GameObject.FindWithTag("Enemy")) {
+    //        print("Enemies in room");
+    //    } else {
+    //        state = State.Finished;
+    //    }
+    //}
 
 }
