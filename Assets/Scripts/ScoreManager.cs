@@ -69,4 +69,9 @@ public class ScoreManager : MonoBehaviour
         // send highscore to site
         HS.SubmitHighScore(this, playerName, score);
     }
+
+    public int GetScore()
+    {
+        return score;
+    }
 }
