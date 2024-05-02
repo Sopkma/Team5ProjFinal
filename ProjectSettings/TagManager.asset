@@ -11,6 +11,7 @@ TagManager:
   - MazeStart
   - ScoreManager
   - SoundManager
+  - Door
   layers:
   - Default
   - TransparentFX
