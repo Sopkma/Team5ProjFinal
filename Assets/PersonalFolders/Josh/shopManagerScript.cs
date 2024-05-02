@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class shopManagerScript : MonoBehaviour{
 
+
+    //make seperate controle map for the interact so you can disable other controls but interact
+
+
     //initializes the shop item array
     public int[,] shopItem = new int[5, 5];
     public Player player;
@@ -33,10 +37,36 @@ public class shopManagerScript : MonoBehaviour{
     }
 
     //will ask the even system for the information on the button you just clicked and will find the information attached to it and reduce the coins you have for the ammount it cost
-    public void Buy(){
+    public void Buy()
+    {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         if (player.coinCounter >= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID])
+        {
             player.coinCounter -= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID];
             coinUI.text = "Coins:" + player.coinCounter.ToString();
+
+
+            //buys health
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 1)
+            {
+                print("added health");
+                player.GetComponent<HealthManager>().health += 1;
+            }
+
+            //buy speed up
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 2)
+            {
+                player.speed += (player.speed * .10f);
+
+                print("speed increase");
+            }
+
+            //buy attack up
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 3)
+            {
+                player.GetComponentInChildren<SwordAttack>().damage += 1;
+                print("incrase attack");
+            }
+        }
     }
-}
+    }

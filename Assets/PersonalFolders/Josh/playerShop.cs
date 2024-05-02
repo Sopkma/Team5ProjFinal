@@ -13,7 +13,7 @@ public class playerShop : MonoBehaviour{
     public GameObject shopUI;
     private float spe;
     void Start(){
-       spe = player.speed;
+       //spe = player.speed;
       //makes sure that the menues are set to disabled   
     }
     private void OnTriggerEnter2D(Collider2D collision){
@@ -35,14 +35,14 @@ public class playerShop : MonoBehaviour{
         //disables movment
         print("shop opened");
         isShopOpen = true;
-        player.speed = 0;
+        //player.speed = 0;
     }
     private void closeShop(){
         print("shopclose");
         //disables all the shop UI
         //re enables movement
         isShopOpen=false;
-        player.speed = spe;
+        //player.speed = spe;
     }
 
     //this one function is called from the Game.cs when the e key is pressed and it handles all the funcions in the playershop script
