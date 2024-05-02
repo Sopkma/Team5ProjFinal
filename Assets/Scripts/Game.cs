@@ -9,8 +9,12 @@ public class Game : MonoBehaviour
     public Player player;
     public playerShop shop;
     public ScoreManager scoreManager;
+    public GameObject UI;
+    public GameObject FinalScoreUI;
+
     // Start is called before the first frame update
     void Start(){
+        UI.SetActive(true);
         controls = new Controls();
         controls.Enable();
     }
@@ -37,6 +41,7 @@ public class Game : MonoBehaviour
 
     public void EndGame()
     {
-        scoreManager.SendScore("Jay");
+        // scoreManager.SendScore("Jay");
+        FinalScoreUI.SetActive(true);
     }
 }

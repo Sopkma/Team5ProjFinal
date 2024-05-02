@@ -22,7 +22,7 @@ public class coinCounter : MonoBehaviour
 
             coinSound.Play();
 
-            Destroy(cointSelf,1f);
+            Destroy(cointSelf,0.4f);
 
             
         }
