@@ -62,7 +62,7 @@ public class SwordAttack : MonoBehaviour
 
         if (parent.CompareTag("Player"))
         {
-            if (other.tag == "Enemy" || other.tag == "Boss")
+            if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
             {
                 // get access to enemy Health 
                 HealthManager enemy = other.GetComponent<HealthManager>();

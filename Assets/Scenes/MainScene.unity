@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: spawnLimit
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 951700969395582917, guid: b888f4bf3b5373d4e887d436bbf85614, type: 3}
+      propertyPath: totalSpawned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6229613494469953196, guid: b888f4bf3b5373d4e887d436bbf85614, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.1
@@ -2452,6 +2456,10 @@ PrefabInstance:
     - target: {fileID: 6460079377612716076, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
       propertyPath: maxDist
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075867388640687820, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
+      propertyPath: health
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
