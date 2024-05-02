@@ -87581,10 +87581,6 @@ PrefabInstance:
       value: '[[ Boss ]]'
       objectReference: {fileID: 0}
     - target: {fileID: 6460079377612716076, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
-      propertyPath: damage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6460079377612716076, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 411010578}
