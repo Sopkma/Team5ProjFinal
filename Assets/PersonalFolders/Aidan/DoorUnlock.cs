@@ -20,6 +20,8 @@ public class DoorUnlock : MonoBehaviour
     private SpriteRenderer sprite;
 
     public GameObject enemySpawn;
+    private SpawnEnemies spawnEnemies;
+    private int enemyNum;
 
 
     private State state;
@@ -30,10 +32,11 @@ public class DoorUnlock : MonoBehaviour
         doorCollision = GetComponent<CapsuleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         roomCollider = GetComponentInChildren<BoxCollider2D>();
-         
+
+        enemySpawn.SetActive(false);
         sprite.enabled = false;
         doorCollision.enabled = false;
-
+        
         state = State.Waiting;
     }
 
@@ -43,17 +46,21 @@ public class DoorUnlock : MonoBehaviour
                 break;
 
             case State.Entered:
+                print("current state is entered");
                 triggerCollider.enabled = false;
                 sprite.enabled = true;
                 doorCollision.enabled = true;
                 EnemiesInRoom(roomCollider);
-                //enemySpawn.SetActive(true);
+                enemySpawn.SetActive(true);
+                spawnEnemies = GetComponentInChildren<SpawnEnemies>();
+                enemyNum = spawnEnemies.spawnLimit;
                 break;
 
             case State.Finished:
+                print("current state is finished");
                 sprite.enabled = false;
                 doorCollision.enabled = false;
-                //enemySpawn.SetActive(false);
+                enemySpawn.SetActive(false);
                 break;
         }
     }
@@ -66,11 +73,11 @@ public class DoorUnlock : MonoBehaviour
     }
 
     public void EnemiesInRoom (BoxCollider2D roomCollider) {
-        if (roomCollider.CompareTag("Enemy")) {
+        if (enemyNum > 0 ) {
             print("Enemies in room");
-        } //else {
-            //state = State.Finished;
-        //}
+        } else {
+            state = State.Finished;
+        }
     }
 
 }

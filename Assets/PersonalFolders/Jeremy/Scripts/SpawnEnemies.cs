@@ -17,7 +17,8 @@ public class SpawnEnemies : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        MakeEnemy();
+        totalSpawned += 1;
     }
 
     // Update is called once per frame
