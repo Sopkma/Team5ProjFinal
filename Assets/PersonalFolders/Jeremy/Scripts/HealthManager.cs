@@ -11,6 +11,8 @@ public class HealthManager : MonoBehaviour
     private ScoreManager scoreManager;
     public GameObject coinPrefab;
     public Game game;
+    public GameObject healtUi; //used to get health bar
+
     // allows for checking if the enemy is defeated once they are hit
     public float Health
     {
@@ -36,7 +38,10 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.CompareTag("Player"))
+        {
+            healtUi.GetComponent<HealthbarScript>().updateHealth((int)health, 10);
+        }
     }
 
     // defeated enemy gameobject is deleted
