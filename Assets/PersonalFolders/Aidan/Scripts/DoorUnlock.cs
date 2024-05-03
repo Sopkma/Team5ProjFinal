@@ -103,13 +103,4 @@ public class DoorUnlock : MonoBehaviour
             state = State.Entered;
         }
     }
-
-    //public void EnemiesInRoom () {
-    //    if (GameObject.FindWithTag("Enemy")) {
-    //        print("Enemies in room");
-    //    } else {
-    //        state = State.Finished;
-    //    }
-    //}
-
 }
