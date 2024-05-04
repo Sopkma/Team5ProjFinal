@@ -35,34 +35,23 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
 
-    void FixedUpdate()
-    {
-        switch (state) {
-            case State.Normal:
-                var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
+    void FixedUpdate(){
+        var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
         
-                // debug
-                //print($"moving {direction}");
+        // debug
+        //print($"moving {direction}");
 
-                if (direction.magnitude > 1.0f){
-                    direction.Normalize();
-                }
+        if (direction.magnitude > 1.0f){
+            direction.Normalize();
+         }
         
 
-                if (canMove == true) {
-                    rb.MovePosition(transform.position + direction * speed);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space)) {
-                    rollDirection = direction;
-                    rollSpd = 30f;
-                    state = State.Rolling;
-                }
-                break;
-            case State.Rolling:
-                rb.velocity = rollDirection * rollSpd;
-                break;
+        if (canMove == true) {
+            rb.MovePosition(transform.position + direction * speed);
         }
+        Vector3 moveDir = new Vector3(direction.x, direction.y).normalized;
+        
+        HandleDash();
         
     }
     
@@ -74,38 +63,11 @@ public class Player : MonoBehaviour
         print("Swing");
     }
 
-    public void DodgeRoll() {
-        switch (state) {
-            case State.Rolling:
-                print("Rolling State");
-                float rollSpdDropMultiplier = 50f;
-                rollSpd -= rollSpd * rollSpdDropMultiplier * Time.deltaTime;
-
-                float rollSpdMin = 1f;
-                if (rollSpd < rollSpdMin) {
-                    print("swapping state"); 
-                    state = State.Normal;
-                }
-                break;
+    public void HandleDash() {
+        if (Input.GetKeyDown(KeyCode.Space)){
+            float dashDistance = 100f;
+            transform.position += 
         }
-    }
-
-
-
-
-    //funny rotation,  if you want to use do this StartCoroutine(Rotate(1))
-    private IEnumerator Rotate(float duration)
-    {
         
-        float startRotation = transform.eulerAngles.z;
-        float endRotation = startRotation + 360.0f;
-        float t = 0.0f;
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            float zRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zRotation);
-            yield return null;
-        }
     }
 }
