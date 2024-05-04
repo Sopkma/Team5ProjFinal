@@ -219,6 +219,7 @@ MonoBehaviour:
   swordAnim: {fileID: 6234033063217692607}
   parent: {fileID: 8101486208000203159}
   swordCollider: {fileID: 5999450234804506355}
+  knockbackDist: 0.5
 --- !u!1 &8101486208000203159
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,3 +401,4 @@ MonoBehaviour:
   health: 10
   points: 0
   coinPrefab: {fileID: 0}
+  game: {fileID: 0}

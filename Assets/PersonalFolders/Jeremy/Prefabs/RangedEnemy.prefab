@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 7854140046419412158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.999357, y: 4.7127438, z: 0}
+  m_LocalPosition: {x: -5.75012, y: 14.084144, z: -0.017956518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -471,3 +471,5 @@ MonoBehaviour:
   health: 3
   points: 5
   coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
+  game: {fileID: 0}
+  healtUi: {fileID: 0}

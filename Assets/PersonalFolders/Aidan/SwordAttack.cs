@@ -8,23 +8,24 @@ public class SwordAttack : MonoBehaviour
 {
     // adjust damage here
     public float damage = 3;
-
     public float swingSpeed = .3f;
-    [HideInInspector]
-    public bool isAttacking { get; private set; }
-
+    [HideInInspector] public bool isAttacking { get; private set; }
     public PlaySwordSwing swordAnim;
     public GameObject parent;
-
-
     // drag collider 2D from the sword collider into here
     public Collider2D swordCollider;
+
+    private bool isKnockedBack = false;
+    public float knockbackDist = 2f;
+    private float currentKnockbackDist;
+    private Vector3 knockbackDirection;
+    private GameObject knockbackTarget;
 
     private List<HealthManager> hitEnemies = new ();
 
     private void Start()
     {
-        
+        currentKnockbackDist = 0;
     }
 
     // enables collider of sword on swing
@@ -62,7 +63,7 @@ public class SwordAttack : MonoBehaviour
 
         if (parent.CompareTag("Player"))
         {
-            if (other.tag == "Enemy" || other.tag == "Boss")
+            if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
             {
                 // get access to enemy Health 
                 HealthManager enemy = other.GetComponent<HealthManager>();
@@ -81,6 +82,14 @@ public class SwordAttack : MonoBehaviour
                         enemy.Health -= damage;
                         hitEnemies.Add(enemy);
                     }
+                }
+
+                // handle knockback of only Enemy tags, not Boss
+                if (other.CompareTag("Enemy"))
+                {
+                    isKnockedBack = true;
+                    knockbackTarget = other.gameObject;
+                    knockbackDirection = (new Vector3(other.transform.position.x, other.transform.position.y) - new Vector3(transform.position.x, transform.position.y)).normalized;
                 }
             }
         }
@@ -111,6 +120,20 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (isKnockedBack && currentKnockbackDist < knockbackDist)
+        {
+            currentKnockbackDist += 5 * Time.deltaTime;
+            knockbackTarget.transform.position += knockbackDirection * Time.deltaTime * 6;
+
+        }
+        else
+        {
+            isKnockedBack = false;
+            currentKnockbackDist = 0;
+        }
+    }
 
     private void OnEnable()
     {
@@ -144,6 +167,29 @@ public class SwordAttack : MonoBehaviour
         {
             isAttacking = false;
         }
+    }
+
+    private void MeleeRebound(Collider2D collision)
+    {
+        float X = 0;
+        float Y = 0;
+        if (collision.transform.position.x > transform.position.x)
+        {
+            X = -0.5f;
+        }
+        else
+        {
+            X = 0.5f;
+        }
+        if (collision.transform.position.y > transform.position.y)
+        {
+            Y = -0.5f;
+        }
+        else
+        {
+            Y = 0.5f;
+        }
+        collision.transform.position += (new Vector3(X, Y) * 10 * Time.deltaTime);
     }
 
 }

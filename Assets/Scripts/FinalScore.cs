@@ -14,7 +14,12 @@ public class FinalScore : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        print("SCORE: " + scoreManager.GetScore());
+        scoreTxt.text = ("SCORE: " + scoreManager.GetScore());
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void ChangeName(TextMeshProUGUI name)
