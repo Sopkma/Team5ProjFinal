@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     public void HandleDash() {
         if (Input.GetKeyDown(KeyCode.Space)){
             float dashDistance = 100f;
-            transform.position += 
+            transform.position +=  new Vector3(1,1,1);
         }
         
     }
