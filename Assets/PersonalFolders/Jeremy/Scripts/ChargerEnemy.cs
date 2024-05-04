@@ -114,6 +114,6 @@ public class ChargerEnemy : MonoBehaviour
         {
             Y = 0.5f;
         }
-        rb.position += (new Vector2(X, Y) * enemySpeed * Time.deltaTime);
+        rb.position += (new Vector2(X, Y) * enemySpeed * 2 * Time.deltaTime);
     }
 }

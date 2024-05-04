@@ -35,7 +35,7 @@ public class Game : MonoBehaviour
         }
         if (controls.Player.Dodge.WasPerformedThisFrame()) 
         {
-            player.DodgeRoll();
+            player.HandleDash();
         }
     }
 
