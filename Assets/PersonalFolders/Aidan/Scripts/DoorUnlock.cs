@@ -49,7 +49,7 @@ public class DoorUnlock : MonoBehaviour
                 break;
 
             case State.Entered:
-                print("current state is entered");
+                //print("current state is entered");
                 triggerCollider.enabled = false;
 
                 // locks door begind player
@@ -70,17 +70,17 @@ public class DoorUnlock : MonoBehaviour
                 break;
 
             case State.Fighting:
-                print("current state is fighting");
+                //print("current state is fighting");
                 int numEnemies = spawnEnemies.totalSpawned;
-                print($"spawned enemies is {numEnemies}");
+                //print($"spawned enemies is {numEnemies}");
 
                 if (numEnemies != enemyLimit)
                 {
-                    print("spawning enemies");
+                    //print("spawning enemies");
                 }
                 else
                 {
-                    print("enemies hit limit");
+                    //print("enemies hit limit");
                     if (!GameObject.FindWithTag("Enemy"))
                     {
                         state = State.Finished;
@@ -89,7 +89,7 @@ public class DoorUnlock : MonoBehaviour
                 break;
 
             case State.Finished:
-                print("current state is finished");
+                //print("current state is finished");
                 sprite.enabled = false;
                 doorCollision.enabled = false;
                 //enemySpawn.SetActive(false);
@@ -99,7 +99,7 @@ public class DoorUnlock : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            print("collided");
+            //print("collided");
             state = State.Entered;
         }
     }

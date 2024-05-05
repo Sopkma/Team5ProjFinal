@@ -6,68 +6,60 @@ using UnityEngine.UIElements.Experimental;
 using static UnityEngine.GraphicsBuffer;
 
 
-public class Player : MonoBehaviour
-{
-
-    private enum State {
-        Normal,
-        Rolling,
-    }
-
-    public float speed = 0.35f;
+public class Player : MonoBehaviour{
+ 
+    public float speed = 10f;
     public int coinCounter = 0;
+    
     private Rigidbody2D rb;
+    private Vector3 moveDir;
+    private bool isDashButtonDown;
 
-    // boolean to tell the player if they can move or not
-    private bool canMove = true;
-    private Vector3 rollDirection;
-    private State state;
-    float rollSpd;
-
-    // drag the Sword Hitbox object with the SwordAttack script attached here
+    [Header( "drag the SwordHitbox object with the SwordAttack script")]
     public SwordAttack swordAttack;
 
-    // Start is called before the first frame update
-    void Start(){
-        rb = GetComponent<Rigidbody2D>();
-        state = State.Normal;
-    }
-
-    // Update is called once per frame
-
-    void FixedUpdate(){
-        var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
-        
-        // debug
-        //print($"moving {direction}");
-
-        if (direction.magnitude > 1.0f){
-            direction.Normalize();
-         }
-        
-
-        if (canMove == true) {
-            rb.MovePosition(transform.position + direction * speed);
-        }
-        Vector3 moveDir = new Vector3(direction.x, direction.y).normalized;
-        
-        HandleDash();
-        
-    }
     
+    void Awake(){
+        rb = GetComponent<Rigidbody2D>();
+        
+    }
+
+    
+    //this update will track directio of player, and check for space bar
+    private void Update(){
+        float moveX = 0f;
+        float moveY = 0f;
+        if (Input.GetKey(KeyCode.W)) { moveY = +1f; }
+        if (Input.GetKey(KeyCode.S)) { moveY = -1f; }
+        if (Input.GetKey(KeyCode.A)) { moveX = -1f; }
+        if (Input.GetKey(KeyCode.D)) { moveX = +1f; }
+        moveDir = new Vector3 (moveX, moveY).normalized;
+
+        if (Input.GetKeyDown(KeyCode.Space)){
+            isDashButtonDown = true;
+        }
+    }
+
+    //this update will calculate moving and if the dash button is clicked it will teleport the player a set distance
+    //if we want immunity frames we put it here, probably disable the rb/collider and then count down a certain number of seconds.
+    //also need to add a cd for the dash that also dose some sort of count down.
+    private void FixedUpdate(){
+        rb.velocity = moveDir * speed;
+        if (isDashButtonDown){
+            float dashAmmount = 5f;
+            Vector3 dashPosition = transform.position +moveDir * dashAmmount;
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position, moveDir, dashAmmount);
+            if(raycast.collider != null){dashPosition = raycast.point;}
+            rb.MovePosition(transform.position + moveDir*dashAmmount);
+            isDashButtonDown=false;
+        }
+    }
+
+
+    // performs attack from swordAttack making collision box enabled then disabled
     public void Attack(){
         var direction = transform.up * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal");
-        // transform.rotation = Quaternion.LookRotation(direction);
-        // performs attack from swordAttack making collision box enabled then disabled
-        swordAttack.Attack();
-        print("Swing");
+        swordAttack.Attack(); //print("Swing");
     }
 
-    public void HandleDash() {
-        if (Input.GetKeyDown(KeyCode.Space)){
-            float dashDistance = 100f;
-            transform.position +=  new Vector3(1,1,1);
-        }
-        
-    }
 }

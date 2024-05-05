@@ -13,11 +13,11 @@ public class coinCounter : MonoBehaviour
 
     private void Start()
     {
+      
         coinSound = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D collision){
         if (collision.CompareTag("Player")){
-            print("collision detected");
             player.coinCounter += 1;
 
             coinSound.Play();
