@@ -89,10 +89,16 @@ public class ChargerEnemy : Enemy
         {
             // nothing
         }
+        else if (collision.CompareTag("Projectile"))
+        {
+            // nothing
+        }
         else
         {
             // if it hits a wall
             WallRebound(collision);
+            gameObject.GetComponent<ChargerPathLogic>().EditCharging(false);
+            gameObject.GetComponent<ChargerPathLogic>().EditDashing(false);
         }
     }
 
@@ -116,6 +122,6 @@ public class ChargerEnemy : Enemy
         {
             Y = 0.5f;
         }
-        rb.position += (new Vector2(X, Y) * enemySpeed * 2 * Time.deltaTime);
+        rb.position += (new Vector2(X, Y) * enemySpeed * 7 * Time.deltaTime);
     }
 }

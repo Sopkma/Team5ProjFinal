@@ -52,6 +52,7 @@ public class ChargerPathLogic : MonoBehaviour
                 dashing = false;
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
+                rb.position += (distance.normalized * -1) * dashSpeed * Time.deltaTime;
             }
             else if (collider.gameObject.CompareTag("Enemy"))
             {
@@ -82,7 +83,7 @@ public class ChargerPathLogic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (dashing)
         {
@@ -134,7 +135,7 @@ public class ChargerPathLogic : MonoBehaviour
     {
         if (timeBeforeNextAttack <= 0 && !dashing)
         {
-            print("in charge function");
+            //print("in charge function");
             isCharging = true;
             chargePath.SetActive(true);
 
@@ -158,9 +159,18 @@ public class ChargerPathLogic : MonoBehaviour
     {
         return dashing;
     }
+    public void EditDashing(bool val)
+    {
+        dashing = val;
+    }
 
     public bool IsCharging()
     {
         return isCharging;
+    }
+
+    public void EditCharging(bool val)
+    {
+        isCharging = val;
     }
 }
