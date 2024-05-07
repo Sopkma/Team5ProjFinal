@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerEnemy : MonoBehaviour
+public class ChargerEnemy : Enemy
 {
 
     private Rigidbody2D rb;
@@ -28,50 +28,52 @@ public class ChargerEnemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
-        float euclideanDistance = Vector3.Distance(rb.position, player.position);
+        if (state == EnemyState.NORMAL)
+        {
+            Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
+            float euclideanDistance = Vector3.Distance(rb.position, player.position);
 
-        // if further than max distance, do nothing
-        if (Mathf.Abs(euclideanDistance) > maxDist)
-        {
-            
-        }
-        // if within maximum distance
-        else if (Mathf.Abs(euclideanDistance) < maxDist)
-        {
-            // if closer than minimum distance, stop moving and melee
-            if (Mathf.Abs(euclideanDistance) < minDist)
+            // if further than max distance, do nothing
+            if (Mathf.Abs(euclideanDistance) > maxDist)
             {
-                if (timeBeforeNextAttack <= 0)
-                {
-                    // attack script here
-                    GetComponent<ChargerPathLogic>().Charge();
-                    timeBeforeNextAttack = timeBetweenAttacks;
-                }
+
             }
-            else
+            // if within maximum distance
+            else if (Mathf.Abs(euclideanDistance) < maxDist)
             {
-                // if enemy is dashing or charging, don't move in this script
-                if (GetComponent<ChargerPathLogic>().IsDashing() || GetComponent<ChargerPathLogic>().IsCharging())
+                // if closer than minimum distance, stop moving and melee
+                if (Mathf.Abs(euclideanDistance) < minDist)
                 {
-
+                    if (timeBeforeNextAttack <= 0)
+                    {
+                        // attack script here
+                        GetComponent<ChargerPathLogic>().Charge();
+                        timeBeforeNextAttack = timeBetweenAttacks;
+                    }
                 }
                 else
                 {
-                    rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    // if enemy is dashing or charging, don't move in this script
+                    if (GetComponent<ChargerPathLogic>().IsDashing() || GetComponent<ChargerPathLogic>().IsCharging())
+                    {
+
+                    }
+                    else
+                    {
+                        rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    }
                 }
             }
+
+            // rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+            // enemy still moves, this just prevents rigidbody shenanigans
+            rb.velocity = Vector2.zero;
+
+            if (timeBeforeNextAttack > 0)
+            {
+                timeBeforeNextAttack -= Time.deltaTime;
+            }
         }
-
-        // rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
-        // enemy still moves, this just prevents rigidbody shenanigans
-        rb.velocity = Vector2.zero;
-
-        if (timeBeforeNextAttack > 0)
-        {
-            timeBeforeNextAttack -= Time.deltaTime;
-        }
-
 
     }
 

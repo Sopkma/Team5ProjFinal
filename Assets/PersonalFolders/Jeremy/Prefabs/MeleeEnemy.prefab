@@ -173,6 +173,7 @@ MonoBehaviour:
   swordAnim: {fileID: 6455134068279556420}
   parent: {fileID: 2607440144935212571}
   swordCollider: {fileID: 8484050405156153011}
+  knockbackDist: 2
 --- !u!1 &2607440144935212571
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +231,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

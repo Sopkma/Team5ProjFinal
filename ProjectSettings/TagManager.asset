@@ -13,6 +13,7 @@ TagManager:
   - SoundManager
   - Door
   - Boss
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
     public GameObject coinPrefab;
     public Game game;
     public GameObject healtUi; //used to get health bar
+    private LayerMask groundLayer;
 
     // allows for checking if the enemy is defeated once they are hit
     public float Health
@@ -31,7 +32,8 @@ public class HealthManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        groundLayer = LayerMask.GetMask("Ground");
         scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
@@ -50,11 +52,16 @@ public class HealthManager : MonoBehaviour
 
         if (!gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            if (gameObject.CompareTag("Enemy"))
+            {
+                Enemy enemy = game.GetComponent<Enemy>();
+                enemy.ChangeState(EnemyState.DEAD);
+            }
+            Destroy(gameObject, 0f); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
             int CoinCount = Random.Range(1, 3);
             for (int i = 0; i < CoinCount; i++)
             {
-                var position = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+                Vector3 position = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
                 Instantiate(coinPrefab, transform.position + position, transform.rotation);
                 coinPrefab.GetComponent<coinCounter>().player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             }

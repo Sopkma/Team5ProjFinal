@@ -56,7 +56,8 @@ public class shopManagerScript : MonoBehaviour{
             //buy speed up
             if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 2)
             {
-                player.speed += (player.speed * .10f);
+                // player.speed += (player.speed * .10f);
+                player.IncreaseSpeed(player.speed * .10f);
 
                 print("speed increase");
             }

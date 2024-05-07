@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -122,7 +123,11 @@ public class SwordAttack : MonoBehaviour
 
     private void Update()
     {
-        if (isKnockedBack && currentKnockbackDist < knockbackDist)
+        if (knockbackTarget.IsUnityNull())
+        {
+
+        }
+        else if (isKnockedBack && currentKnockbackDist < knockbackDist)
         {
             currentKnockbackDist += 5 * Time.deltaTime;
             knockbackTarget.transform.position += knockbackDirection * Time.deltaTime * 6;

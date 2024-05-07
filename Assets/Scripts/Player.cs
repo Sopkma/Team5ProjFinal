@@ -14,14 +14,19 @@ public class Player : MonoBehaviour{
     private Rigidbody2D rb;
     private Vector3 moveDir;
     private bool isDashButtonDown;
+    private float originalSpeed;
+    private float setSpeed;
 
     [Header( "drag the SwordHitbox object with the SwordAttack script")]
     public SwordAttack swordAttack;
 
-    
+    public TextMeshProUGUI coinsTxt;
+
+
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
-        
+        originalSpeed = speed;
+        setSpeed = speed;
     }
 
     
@@ -62,4 +67,25 @@ public class Player : MonoBehaviour{
         swordAttack.Attack(); //print("Swing");
     }
 
+    public void AddToCoins(int amount)
+    {
+        coinCounter += amount;
+        coinsTxt.text = "Coins: " + coinCounter;
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        speed += amount;
+        setSpeed = speed;
+    }
+
+    public void FreezePlayer()
+    {
+        speed = 0;
+    }
+
+    public void UnfreezePlayer()
+    {
+        speed = setSpeed;
+    }
 }

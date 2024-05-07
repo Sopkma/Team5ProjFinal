@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Test
+  m_Name: Vanish
   m_Shader: {fileID: -6465566751694194690, guid: 59d8386ed22d3d94eb2b541a9627211d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
