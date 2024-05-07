@@ -8,7 +8,8 @@ public enum MinotaurState
     WALKING,
     WINDUP,
     CHARGING,
-    DAZED
+    DAZED,
+    DEFEATED
 }
 
 public class BossType1 : MonoBehaviour

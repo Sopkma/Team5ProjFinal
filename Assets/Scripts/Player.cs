@@ -21,12 +21,15 @@ public class Player : MonoBehaviour{
     public SwordAttack swordAttack;
 
     public TextMeshProUGUI coinsTxt;
+    private HealthManager playerHealthManager;
+
 
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
         originalSpeed = speed;
         setSpeed = speed;
+        playerHealthManager = GetComponent<HealthManager>();
     }
 
     
@@ -87,5 +90,10 @@ public class Player : MonoBehaviour{
     public void UnfreezePlayer()
     {
         speed = setSpeed;
+    }
+
+    public void Damage(int amount)
+    {
+        playerHealthManager.health -= amount;
     }
 }

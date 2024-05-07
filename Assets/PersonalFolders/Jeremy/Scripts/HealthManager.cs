@@ -12,7 +12,6 @@ public class HealthManager : MonoBehaviour
     public GameObject coinPrefab;
     public Game game;
     public GameObject healtUi; //used to get health bar
-    private LayerMask groundLayer;
 
     // allows for checking if the enemy is defeated once they are hit
     public float Health
@@ -52,12 +51,13 @@ public class HealthManager : MonoBehaviour
 
         if (!gameObject.CompareTag("Player"))
         {
+            /*
             if (gameObject.CompareTag("Enemy"))
             {
                 Enemy enemy = game.GetComponent<Enemy>();
                 enemy.ChangeState(EnemyState.DEAD);
-            }
-            Destroy(gameObject, 0f); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
+            }*/
+            Destroy(gameObject); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
             int CoinCount = Random.Range(1, 3);
             for (int i = 0; i < CoinCount; i++)
             {
