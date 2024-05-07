@@ -111,7 +111,7 @@ public class Player : MonoBehaviour{
 
     public void Damage(int amount)
     {
-        playerHealthManager.health -= amount;
+        playerHealthManager.Health -= amount;
     }
     private void OnTriggerEnter2D(Collider2D collision){
         //this collision check will update upon entering a new area with the ground tag. and will update the players currnet bounding area
