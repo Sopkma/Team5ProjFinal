@@ -7,23 +7,24 @@ using static UnityEngine.GraphicsBuffer;
 
 
 public class Player : MonoBehaviour{
- 
+
     public float speed = 10f;
     public int coinCounter = 0;
-    
+
     private Rigidbody2D rb;
     private Vector3 moveDir;
     private bool isDashButtonDown;
     private float originalSpeed;
     private float setSpeed;
 
-    [Header( "drag the SwordHitbox object with the SwordAttack script")]
+    [Header("drag the SwordHitbox object with the SwordAttack script")]
     public SwordAttack swordAttack;
 
     public TextMeshProUGUI coinsTxt;
     private HealthManager playerHealthManager;
 
 
+    public Bounds spawningBounds;
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour{
         playerHealthManager = GetComponent<HealthManager>();
     }
 
-    
+
     //this update will track directio of player, and check for space bar
     private void Update(){
         float moveX = 0f;
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour{
         if (Input.GetKey(KeyCode.S)) { moveY = -1f; }
         if (Input.GetKey(KeyCode.A)) { moveX = -1f; }
         if (Input.GetKey(KeyCode.D)) { moveX = +1f; }
-        moveDir = new Vector3 (moveX, moveY).normalized;
+        moveDir = new Vector3(moveX, moveY).normalized;
 
         if (Input.GetKeyDown(KeyCode.Space)){
             isDashButtonDown = true;
@@ -55,11 +56,11 @@ public class Player : MonoBehaviour{
         rb.velocity = moveDir * speed;
         if (isDashButtonDown){
             float dashAmmount = 5f;
-            Vector3 dashPosition = transform.position +moveDir * dashAmmount;
+            Vector3 dashPosition = transform.position + moveDir * dashAmmount;
             RaycastHit2D raycast = Physics2D.Raycast(transform.position, moveDir, dashAmmount);
-            if(raycast.collider != null){dashPosition = raycast.point;}
-            rb.MovePosition(transform.position + moveDir*dashAmmount);
-            isDashButtonDown=false;
+            if (raycast.collider != null) { dashPosition = raycast.point; }
+            rb.MovePosition(transform.position + moveDir * dashAmmount);
+            isDashButtonDown = false;
         }
     }
 
@@ -96,4 +97,14 @@ public class Player : MonoBehaviour{
     {
         playerHealthManager.health -= amount;
     }
+    private void OnTriggerEnter2D(Collider2D collision){
+        //this collision check will update upon entering a new area with the ground tag. and will update the players currnet bounding area
+        if (collision.CompareTag("Ground") && CompareTag("Player")){
+            Bounds spawnarea = collision.bounds;
+            spawningBounds = spawnarea;
+
+        }
+    }
 }
+
+
