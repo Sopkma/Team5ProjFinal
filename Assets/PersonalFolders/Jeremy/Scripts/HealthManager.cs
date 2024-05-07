@@ -20,8 +20,11 @@ public class HealthManager : MonoBehaviour
     // allows for checking if the enemy is defeated once they are hit
     public float Health
     {
+
         set
         {
+            //immidiatly returns health if immunity is turned on for the player. might make enemrys immune for the duration as well?
+            if (player.isImmune) { return; }
             print(value);
             health = value;
 

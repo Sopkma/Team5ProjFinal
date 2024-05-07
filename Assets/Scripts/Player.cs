@@ -10,6 +10,12 @@ public class Player : MonoBehaviour{
 
     public float speed = 10f;
     public int coinCounter = 0;
+    public float dashCooldown;
+
+
+    public float imunityframeLength;
+
+    public bool isImmune;
 
     private Rigidbody2D rb;
     private Vector3 moveDir;
@@ -27,6 +33,7 @@ public class Player : MonoBehaviour{
     public Bounds spawningBounds;
 
     void Awake(){
+        isImmune = false;
         rb = GetComponent<Rigidbody2D>();
         originalSpeed = speed;
         setSpeed = speed;
@@ -54,14 +61,23 @@ public class Player : MonoBehaviour{
     //also need to add a cd for the dash that also dose some sort of count down.
     private void FixedUpdate(){
         rb.velocity = moveDir * speed;
-        if (isDashButtonDown){
-            float dashAmmount = 5f;
+        if (isDashButtonDown && dashCooldown <= 0.1f){
+            float dashAmmount = 2.5f;
             Vector3 dashPosition = transform.position + moveDir * dashAmmount;
             RaycastHit2D raycast = Physics2D.Raycast(transform.position, moveDir, dashAmmount);
             if (raycast.collider != null) { dashPosition = raycast.point; }
             rb.MovePosition(transform.position + moveDir * dashAmmount);
             isDashButtonDown = false;
+            isImmune = true;
+            imunityframeLength = .1f;
+            dashCooldown = 1f;
         }
+        //checks if the imunity frame length is over and sets it to false
+        if (imunityframeLength <=.01f){isImmune = false;}
+
+        //constantly reducing interal cooldowns;
+        imunityframeLength -= Time.deltaTime;
+        dashCooldown -= Time.deltaTime;
     }
 
 

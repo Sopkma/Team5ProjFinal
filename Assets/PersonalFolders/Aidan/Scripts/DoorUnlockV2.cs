@@ -55,7 +55,7 @@ public class DoorUnlockV2 : MonoBehaviour
                 break;
 
             case State.Entered:
-                print("current state is entered");
+                //print("current state is entered");
 
                 // deactivate trigger collider for doors
                 foreach (var trigger in triggerCollider)
@@ -94,7 +94,7 @@ public class DoorUnlockV2 : MonoBehaviour
                 break;
 
             case State.Fighting:
-                print("current state is fighting");
+                //print("current state is fighting");
 
                 /* state WILL NOT CHANGE until all objects with enemy tags are deleted
                  * (gonna try to make this associated with the children objects rather than ALL objects with enemy tag)
