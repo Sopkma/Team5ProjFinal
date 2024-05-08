@@ -10,6 +10,7 @@ public class SwordAttack : MonoBehaviour
     // adjust damage here
     public float damage = 3;
     public float swingSpeed = .3f;
+
     [HideInInspector] public bool isAttacking { get; private set; }
     public PlaySwordSwing swordAnim;
     public GameObject parent;
@@ -29,7 +30,7 @@ public class SwordAttack : MonoBehaviour
         currentKnockbackDist = 0;
     }
 
-    // enables collider of sword on swing
+    // enables collider of spear on attack
     public void Attack()
     {
         // not currently doing an attack
@@ -41,7 +42,11 @@ public class SwordAttack : MonoBehaviour
             //Invoke("StopAttack", swingSpeed);
             isAttacking = true;
 
-            swordAnim.SwingSword(swingSpeed);
+            if (!swordAnim.IsUnityNull())
+            {
+                swordAnim.SwingSword(swingSpeed);
+            }
+            
             StartCoroutine(ForceStop());
         }
         
@@ -97,7 +102,7 @@ public class SwordAttack : MonoBehaviour
 
         else if (parent.CompareTag("Enemy") || parent.CompareTag("Boss"))
         {
-            if (other.tag == "Player")
+            if (other.CompareTag("Player"))
             {
                 // get access to enemy Health 
                 HealthManager enemy = other.GetComponent<HealthManager>();
@@ -148,20 +153,48 @@ public class SwordAttack : MonoBehaviour
 
     private void AimHitbox()
     {
-        // I had to relearn geometry fro this lmao
+        // I had to relearn geometry for this lmao
         var mouseCord = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var deltaX = mouseCord.x - transform.position.x;
         var deltaY = mouseCord.y - transform.position.y;
         var rad = Mathf.Atan2(deltaY, deltaX); // In radians
         var temp = rad * (180 / Mathf.PI);
-        int deg = 90 + (int)temp;
+        float deg;
+
+        if (gameObject.name.Contains("Sword"))
+        {
+            deg = 90 + temp;
+        }
+        else if (gameObject.name.Contains("Spear"))
+        {
+            deg = -90;
+        }
+        // for other wepons besides spear/sword if we make any
+        else
+        {
+            deg = temp;
+        }
+
 
         // changes the hitbox's angle and then the position so that the tip of the triangle is
         // always in the center of the player.
         transform.eulerAngles = new Vector3(0, 0, deg);
-        var y = Mathf.Cos(deg * Mathf.PI / 180) * -1 * 1.15f;
-        var x = Mathf.Sin(deg * Mathf.PI / 180) * 1.15f;
-        transform.localPosition = new Vector3(x, y, 0);
+
+        if (gameObject.name.Contains("Spear"))
+        {
+
+        }
+        else if (gameObject.name.Contains("Sword"))
+        {
+            var y = Mathf.Cos(deg * Mathf.PI / 180) * -1 * 1.15f;
+            var x = Mathf.Sin(deg * Mathf.PI / 180) * 1.15f;
+            transform.localPosition = new Vector3(x, y, 0);
+        }
+        else
+        {
+
+        }
+        
     }
 
     private IEnumerator ForceStop()
@@ -174,28 +207,6 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
-    private void MeleeRebound(Collider2D collision)
-    {
-        float X = 0;
-        float Y = 0;
-        if (collision.transform.position.x > transform.position.x)
-        {
-            X = -0.5f;
-        }
-        else
-        {
-            X = 0.5f;
-        }
-        if (collision.transform.position.y > transform.position.y)
-        {
-            Y = -0.5f;
-        }
-        else
-        {
-            Y = 0.5f;
-        }
-        collision.transform.position += (new Vector3(X, Y) * 10 * Time.deltaTime);
-    }
 
 }
 
