@@ -86,6 +86,7 @@ public class SwordAttack : MonoBehaviour
                     {
                         // enemy is being hit for the first time this attack, do damage and add to list
                         enemy.Health -= damage;
+                        StartCoroutine(FlashRed(other));
                         hitEnemies.Add(enemy);
                     }
                 }
@@ -207,6 +208,12 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
-
+    public IEnumerator FlashRed(Collider2D other) {
+        SpriteRenderer sprite = other.GetComponent<SpriteRenderer>();
+        var spriteColor = sprite.color;
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = spriteColor;
+    }
 }
 
