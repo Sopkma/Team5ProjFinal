@@ -4,6 +4,8 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+[RequireComponent (typeof(AudioSource))]
 public class HealthManager : MonoBehaviour
 {
 
@@ -14,8 +16,9 @@ public class HealthManager : MonoBehaviour
     public GameObject coinPrefab;
     public Game game;
     public GameObject healtUi; //used to get health bar
-   
     private Player player;
+    public AudioClip damageSound;
+    private AudioSource audioSource;
 
     // allows for checking if the enemy is defeated once they are hit
     public float Health
@@ -26,6 +29,10 @@ public class HealthManager : MonoBehaviour
             //immidiatly returns health if immunity is turned on for the player. might make enemrys immune for the duration as well?
             if (player.isImmune) { return; }
             print(value);
+            if (health > value)
+            {
+                audioSource.PlayOneShot(damageSound);
+            }
             health = value;
 
             if (health <= 0)
@@ -41,6 +48,7 @@ public class HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         //groundLayer = LayerMask.GetMask("Ground");
         scoreManager = FindAnyObjectByType<ScoreManager>();
         player = FindAnyObjectByType<Player>();
@@ -62,13 +70,13 @@ public class HealthManager : MonoBehaviour
         print("defeated");
         if (!gameObject.CompareTag("Player"))
         {
-            /*
+            
             if (gameObject.CompareTag("Enemy"))
             {
-                Enemy enemy = game.GetComponent<Enemy>();
+                Enemy enemy = gameObject.GetComponent<Enemy>();
                 enemy.ChangeState(EnemyState.DEAD);
-            }*/
-            Destroy(gameObject); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
+            }
+            // Destroy(gameObject, 1f); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
 
             int CoinCount = Random.Range(1, 3);
             for (int i = 0; i < CoinCount; i++) {
