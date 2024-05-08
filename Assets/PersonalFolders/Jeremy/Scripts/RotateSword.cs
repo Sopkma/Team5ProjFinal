@@ -14,7 +14,8 @@ public class RotateSword : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sword = GetComponentInChildren<SwordAttack>();
+        // gets active weapon
+        sword = GetComponentInChildren<SwordAttack>(false);
         player = GameObject.FindWithTag("Player");
     }
 
@@ -37,28 +38,37 @@ public class RotateSword : MonoBehaviour
                 var temp = rad * (180 / Mathf.PI);      // degrees
                 int deg = (int)temp;
 
-                // clamp rotation at greater than 90 degress and less than -90 degrees
-                if (deg > 90 || deg < -90)
+                if (sword.name.Contains("Spear"))
                 {
-                    // if sprite facing Right
-                    if (transform.localScale.y > 0)
+                    // don't flip based on angle
+                }
+                else if (sword.name.Contains("Sword"))
+                {
+                    // clamp rotation at greater than 90 degress and less than -90 degrees
+                    if (deg > 90 || deg < -90)
                     {
-                        transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        // if sprite facing Right
+                        if (transform.localScale.y > 0)
+                        {
+                            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        }
+                    }
+                    else
+                    {
+                        // if sprite facing Left
+                        if (transform.localScale.y < 0)
+                        {
+                            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        }
                     }
                 }
-                else
-                {
-                    // if sprite facing Left
-                    if (transform.localScale.y < 0)
-                    {
-                        transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
-                    }
-                }
+                
                 // changes the hitbox's angle and then the position so that the tip of the triangle is
                 // always in the center of the player.
                 
                 transform.eulerAngles = new Vector3(0, 0, deg);
             }
+            // player using the sword
             else
             {
                 // I had to relearn geometry for this lmao
@@ -69,23 +79,31 @@ public class RotateSword : MonoBehaviour
                 var temp = rad * (180 / Mathf.PI);
                 int deg = (int)temp;
 
-                // clamp rotation at greater than 90 degress and less than -90 degrees
-                if (deg > 90 || deg < -90)
+                if (sword.name.Contains("Spear"))
                 {
-                    // if sprite facing Right
-                    if (transform.localScale.y > 0)
+                    // don't flip based on angle
+                }
+                else if (sword.name.Contains("Sword"))
+                {
+                    // clamp rotation at greater than 90 degress and less than -90 degrees
+                    if (deg > 90 || deg < -90)
                     {
-                        transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        // if sprite facing Right
+                        if (transform.localScale.y > 0)
+                        {
+                            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        }
+                    }
+                    else
+                    {
+                        // if sprite facing Left
+                        if (transform.localScale.y < 0)
+                        {
+                            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+                        }
                     }
                 }
-                else
-                {
-                    // if sprite facing Left
-                    if (transform.localScale.y < 0)
-                    {
-                        transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
-                    }
-                }
+
                 // changes the hitbox's angle and then the position so that the tip of the triangle is
                 // always in the center of the player.
                 transform.eulerAngles = new Vector3(0, 0, deg);
