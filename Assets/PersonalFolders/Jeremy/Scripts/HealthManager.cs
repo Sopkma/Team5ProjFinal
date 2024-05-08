@@ -73,6 +73,8 @@ public class HealthManager : MonoBehaviour
             
             if (gameObject.CompareTag("Enemy"))
             {
+                Collider2D eColl = gameObject.GetComponent<Collider2D>();
+                eColl.enabled = false;
                 Enemy enemy = gameObject.GetComponent<Enemy>();
                 enemy.ChangeState(EnemyState.DEAD);
             }

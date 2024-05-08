@@ -415,7 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30b413b59779d9468a033e5d53d7ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeRate: 0.01
+  fadeRate: 0.4
+  vanishMaterial: {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
   projectile: {fileID: 7994856631924149056, guid: e0dd80a366fdc9d4e8ed8793b0b27a0a, type: 3}
   player: {fileID: 0}
   enemySpeed: 3
