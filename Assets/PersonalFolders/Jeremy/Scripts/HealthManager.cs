@@ -104,7 +104,7 @@ public class HealthManager : MonoBehaviour
                 float ranX = Random.Range(-.5f, .5f);
                 float ranY = Random.Range(-.5f, .5f);
                 Vector2 force = new Vector2(ranX,ranY);
-                var instance = Instantiate(coinPrefab, spawnPosition, transform.rotation);
+                var instance = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
                 instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 
                 //this line is not neccicary becasue we are spawning in coins with the player already assinged to the prefabs, will keep here tho
