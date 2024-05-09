@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
                     item.material = vanishMaterial;
                 }
             }
-            if (fade > 0)
+            if (fade > 0.1)
             {
                 // print("FADE: " + fade);
                 // change fade value on shader material

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 using static UnityEngine.GraphicsBuffer;
 
-
+[RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour{
 
     public float speed = 10f;
@@ -29,8 +29,12 @@ public class Player : MonoBehaviour{
     public TextMeshProUGUI coinsTxt;
     private HealthManager playerHealthManager;
 
-
     public Bounds spawningBounds;
+
+    public AudioClip stepSound;
+    public float timeBetweenSteps = 0.2f;
+    private float tempTime;
+    private AudioSource audioSource;
 
     void Awake(){
         isImmune = false;
@@ -38,11 +42,13 @@ public class Player : MonoBehaviour{
         originalSpeed = speed;
         setSpeed = speed;
         playerHealthManager = GetComponent<HealthManager>();
+        tempTime = 0;
+        audioSource = GetComponent<AudioSource>();
     }
 
 
-    //this update will track directio of player, and check for space bar
-    private void Update(){
+//this update will track directio of player, and check for space bar
+private void Update(){
         float moveX = 0f;
         float moveY = 0f;
         if (Input.GetKey(KeyCode.W)) { moveY = +1f; }
@@ -53,6 +59,20 @@ public class Player : MonoBehaviour{
 
         if (Input.GetKeyDown(KeyCode.Space)){
             isDashButtonDown = true;
+        }
+
+        if (moveDir != new Vector3(0, 0, 0) && tempTime <= 0)
+        {
+            audioSource.PlayOneShot(stepSound);
+            tempTime = timeBetweenSteps;
+        }
+        else if (moveDir != new Vector3(0, 0, 0))
+        {
+            tempTime -= Time.deltaTime;
+        }
+        else
+        {
+            tempTime = 0f;
         }
     }
 
@@ -115,7 +135,7 @@ public class Player : MonoBehaviour{
     }
     private void OnTriggerEnter2D(Collider2D collision){
         //this collision check will update upon entering a new area with the ground tag. and will update the players currnet bounding area
-        if (collision.CompareTag("Ground") && CompareTag("Player")){
+        if ((collision.CompareTag("Ground") || collision.CompareTag("BossGround")) && CompareTag("Player")){
             Bounds spawnarea = collision.bounds;
             spawningBounds = spawnarea;
 

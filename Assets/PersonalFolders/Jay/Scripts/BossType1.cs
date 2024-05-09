@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MinotaurState
 {
@@ -9,7 +10,8 @@ public enum MinotaurState
     WINDUP,
     CHARGING,
     DAZED,
-    DEFEATED
+    DEFEATED,
+    IDLE
 }
 
 public class BossType1 : MonoBehaviour
@@ -40,11 +42,24 @@ public class BossType1 : MonoBehaviour
     public AudioClip growl;
     public AudioClip crash;
 
+    public Image healthBar;
+
+    private MusicManager musicManager;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        state = MinotaurState.WALKING;
+        state = MinotaurState.IDLE;
+        musicManager = FindAnyObjectByType<MusicManager>();
+    }
+
+    public void StartBattle()
+    {
+        if (state == MinotaurState.IDLE)
+        {
+            state = MinotaurState.WALKING;
+        }
     }
 
     // Update is called once per frame
@@ -57,6 +72,13 @@ public class BossType1 : MonoBehaviour
         if (state == MinotaurState.CHARGING)
         {
             Charging();
+        }
+        if (state == MinotaurState.DEFEATED)
+        {
+            endTrigger.SetActive(true);
+            healthBar.enabled = false;
+            musicManager.PlayOutsideBattle();
+            Destroy(gameObject, 1f);
         }
     }
     
@@ -176,8 +198,13 @@ public class BossType1 : MonoBehaviour
         state = MinotaurState.WALKING;
     }
 
-    private void OnDestroy()
+    public void SetHealthBar(float amount)
     {
-        endTrigger.SetActive(true);
+        healthBar.fillAmount = amount;
+    }
+
+    public void ChangeState(MinotaurState state)
+    {
+        this.state = state;
     }
 }

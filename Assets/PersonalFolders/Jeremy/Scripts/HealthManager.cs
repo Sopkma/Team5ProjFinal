@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
 
@@ -19,6 +20,7 @@ public class HealthManager : MonoBehaviour
     private Player player;
     public AudioClip damageSound;
     private AudioSource audioSource;
+    private float maxHealth;
 
     // allows for checking if the enemy is defeated once they are hit
     public float Health
@@ -34,6 +36,11 @@ public class HealthManager : MonoBehaviour
                 audioSource.PlayOneShot(damageSound);
             }
             health = value;
+            if (this.gameObject.CompareTag("Boss"))
+            {
+                BossType1 boss = GetComponent<BossType1>();
+                boss.SetHealthBar(health/maxHealth);
+            }
 
             if (health <= 0)
             {
@@ -48,6 +55,7 @@ public class HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = health;
         audioSource = GetComponent<AudioSource>();
         //groundLayer = LayerMask.GetMask("Ground");
         scoreManager = FindAnyObjectByType<ScoreManager>();
@@ -78,7 +86,14 @@ public class HealthManager : MonoBehaviour
                 Enemy enemy = gameObject.GetComponent<Enemy>();
                 enemy.ChangeState(EnemyState.DEAD);
             }
-            // Destroy(gameObject, 1f); // REMOVE THIS LINE AFTER WE GET FADING TO WORK
+
+            if (gameObject.CompareTag("Boss"))
+            {
+                Collider2D eColl = gameObject.GetComponent<Collider2D>();
+                eColl.enabled = false;
+                BossType1 boss = gameObject.GetComponent<BossType1>();
+                boss.ChangeState(MinotaurState.DEFEATED);
+            }
 
             int CoinCount = Random.Range(1, 3);
             for (int i = 0; i < CoinCount; i++) {
