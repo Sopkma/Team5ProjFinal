@@ -19,11 +19,14 @@ public class RangedEnemy : Enemy
     // fire timer tracks the time in between shots (based on fireRate)
     private float fireTimer;
 
+    private bool firstShot = true;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         fireTimer = 0;
+        firstShot = true;
     }
 
     // Update is called once per frame
@@ -83,6 +86,14 @@ public class RangedEnemy : Enemy
 
     private void Shoot()
     {
+        // gives fireTimer a random delay when trying to shoot for the first time.
+        // makes it so the player is not instantly hit when a ranged enemy spawns in.
+        if (firstShot)
+        {
+            fireTimer = Random.Range(0.75f,1.75f);
+            firstShot = false;
+        }
+
         if (fireTimer > 0)
         {
             // not ready to shoot yet, timer tick down

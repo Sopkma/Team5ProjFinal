@@ -15,11 +15,13 @@ public class Enemy : MonoBehaviour
     private float fade;
     public float fadeRate = 1f;
     public Material vanishMaterial;
+    private Material newVanish;
     private SpriteRenderer[] spriteRenderers;
 
     // Start is called before the first frame update
     void Awake()
     {
+        newVanish = new Material(vanishMaterial);
         fade = 1;
         state = EnemyState.NORMAL;
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
@@ -35,14 +37,14 @@ public class Enemy : MonoBehaviour
                 // spriteRenderer.material = vanishMaterial;
                 foreach (SpriteRenderer item in spriteRenderers)
                 {
-                    item.material = vanishMaterial;
+                    item.material = newVanish;
                 }
             }
             if (fade > 0.1)
             {
                 // print("FADE: " + fade);
                 // change fade value on shader material
-                vanishMaterial.SetFloat("_Fade", fade);
+                newVanish.SetFloat("_Fade", fade);
                 fade -= fadeRate * Time.deltaTime;
             }
             else
