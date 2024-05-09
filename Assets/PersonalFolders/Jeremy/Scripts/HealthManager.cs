@@ -95,21 +95,18 @@ public class HealthManager : MonoBehaviour
                 boss.ChangeState(MinotaurState.DEFEATED);
             }
 
+            //the below code is responsible for spawning the coins
+            //each enemy defeated has a change to spawn 1-3 coins that are then shot out from their location on death
+            //this ensures the coins will no longer go out of bounds
             int CoinCount = Random.Range(1, 3);
             for (int i = 0; i < CoinCount; i++) {
-                //new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
                 Vector3 spawnPosition = transform.position;
-                
-                //picks random range around object
-                spawnPosition.x += Random.Range(-1, 1);
-                spawnPosition.y += Random.Range(-1, 1);
+                float ranX = Random.Range(-.5f, .5f);
+                float ranY = Random.Range(-.5f, .5f);
+                Vector2 force = new Vector2(ranX,ranY);
+                var instance = Instantiate(coinPrefab, spawnPosition, transform.rotation);
+                instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 
-                //clamps the spawns by the rooms bounds
-                spawnPosition.x = Mathf.Clamp(spawnPosition.x, player.spawningBounds.min.x, player.spawningBounds.max.x);
-                spawnPosition.y = Mathf.Clamp(spawnPosition.y, player.spawningBounds.min.y, player.spawningBounds.max.y);
-
-                //spawns object
-                Instantiate(coinPrefab, spawnPosition, transform.rotation);
                 //this line is not neccicary becasue we are spawning in coins with the player already assinged to the prefabs, will keep here tho
                 //coinPrefab.GetComponent<coinCounter>().player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             }

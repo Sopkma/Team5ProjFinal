@@ -19,11 +19,11 @@ public class coinCounter : MonoBehaviour
         coinSound = GetComponent<AudioSource>();
         circleCollider = GetComponent<CircleCollider2D>();
     }
-    private void OnTriggerEnter2D(Collider2D collision){
-        if (collision.CompareTag("Player")){
+    private void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.CompareTag("Player")){
             
             // player.coinCounter += 1;
-            Player tempPlayer = collision.GetComponent<Player>();
+            Player tempPlayer = collision.gameObject.GetComponent<Player>();
             // tempPlayer.coinCounter += 1;
             tempPlayer.AddToCoins(1);
             coinSound.Play();
@@ -34,4 +34,6 @@ public class coinCounter : MonoBehaviour
             
         }
     }
+
+    
 }

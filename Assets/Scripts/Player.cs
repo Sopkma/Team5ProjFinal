@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour{
 
-    public float speed = 10f;
+    public float speed = 8f;
     public int coinCounter = 0;
     public float dashCooldown;
 
@@ -57,7 +57,7 @@ private void Update(){
         if (Input.GetKey(KeyCode.D)) { moveX = +1f; }
         moveDir = new Vector3(moveX, moveY).normalized;
 
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
         }
 
@@ -133,6 +133,9 @@ private void Update(){
     {
         playerHealthManager.Health -= amount;
     }
+
+    //this snipet of code as well as the field is no longer used
+    //im leaving this code in here if anyone wants to know what room location the player is currnelty in.
     private void OnTriggerEnter2D(Collider2D collision){
         //this collision check will update upon entering a new area with the ground tag. and will update the players currnet bounding area
         if ((collision.CompareTag("Ground") || collision.CompareTag("BossGround")) && CompareTag("Player")){
