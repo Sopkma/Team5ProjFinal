@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject menu;
+    //  to add the pause screen to a scene, add this script to the game manager and connect the Pause Screen (not the pause menu) to its PauseScreen member
+    public GameObject PauseScreen;
     public static bool isPaused;
     // Start is called before the first frame update
     void Start()
     {
-        menu.SetActive(false);
+        PauseScreen.SetActive(false);
         isPaused = false;
     }
 
@@ -28,12 +29,12 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Pause(){
-        menu.SetActive(true);
+        PauseScreen.SetActive(true);
         Time.timeScale = 0.0f;
         isPaused = !isPaused;
     }
     public void Resume(){
-        menu.SetActive(false);
+        PauseScreen.SetActive(false);
         Time.timeScale = 1.0f;
         isPaused = !isPaused;
         
