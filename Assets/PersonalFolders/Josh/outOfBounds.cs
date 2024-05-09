@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent (typeof(AudioSource))]
 public class outOfBounds : MonoBehaviour
 {
    
     private Player player;
     public float damageTime = 0.7f;
     private bool playerInBounds;
+    public AudioClip damageSound;
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource> ();
         player = FindAnyObjectByType(typeof(Player)) as Player;
         playerInBounds = false;
     }
@@ -45,8 +49,12 @@ public class outOfBounds : MonoBehaviour
     {
         while (true && playerInBounds)
         {
+            if (playerInBounds)
+            {
+                audioSource.PlayOneShot(damageSound);
+                player.Damage(1);
+            }
             yield return new WaitForSeconds(damageTime);
-            player.Damage(1);
         }
     }
 }

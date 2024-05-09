@@ -25,11 +25,14 @@ public class DoorUnlockV2 : MonoBehaviour
 
     private bool hasRun = false;
 
+    private MusicManager musicManager;
+
 
     private State state;
     // Start is called before the first frame update
     void Start()
     {
+        musicManager = FindObjectOfType<MusicManager>();
         triggerCollider = GetComponentsInChildren<BoxCollider2D>();
         doorCollision = GetComponentsInChildren<CapsuleCollider2D>();
         sprite = GetComponentsInChildren<SpriteRenderer>();
@@ -107,7 +110,7 @@ public class DoorUnlockV2 : MonoBehaviour
 
             case State.Finished:
                 //print("current state is finished");
-
+                musicManager.PlayOutsideBattle();
                 // disables the door colliders and sprites to allow player to go through doorways again
                 foreach (var doorSprite in sprite)
                 {
@@ -118,6 +121,7 @@ public class DoorUnlockV2 : MonoBehaviour
                 {
                     door.enabled = false;
                 }
+                Destroy(this.gameObject);
                 break;
         }
     }
@@ -128,6 +132,7 @@ public class DoorUnlockV2 : MonoBehaviour
         {
             state = State.Entered;
             Debug.Log("collided");
+            musicManager.PlayBattleMusic();
         }
     }
 }
