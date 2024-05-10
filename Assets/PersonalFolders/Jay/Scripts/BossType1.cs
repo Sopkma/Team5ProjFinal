@@ -46,12 +46,17 @@ public class BossType1 : MonoBehaviour
 
     private MusicManager musicManager;
 
+    private bool enraged;
+    private HealthManager healthManager;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
+        healthManager = GetComponent<HealthManager>();
         state = MinotaurState.IDLE;
         musicManager = FindAnyObjectByType<MusicManager>();
+        enraged = false;
     }
 
     public void StartBattle()
@@ -69,16 +74,22 @@ public class BossType1 : MonoBehaviour
         {
             Walking();
         }
-        if (state == MinotaurState.CHARGING)
+        else if (state == MinotaurState.CHARGING)
         {
             Charging();
         }
-        if (state == MinotaurState.DEFEATED)
+        else if(state == MinotaurState.DEFEATED)
         {
             endTrigger.SetActive(true);
             healthBar.enabled = false;
             musicManager.PlayOutsideBattle();
             Destroy(gameObject, 1f);
+        }
+
+        if (!enraged && healthManager.GetHealthPercentage() <= 0.5)
+        {
+            enraged=true;
+            chargeUpTime /= 2;
         }
     }
     

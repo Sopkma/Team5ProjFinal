@@ -73,12 +73,12 @@ public class HealthManager : MonoBehaviour
     }
 
     // defeated enemy gameobject is deleted
-    public void Defeated(){
+    public void Defeated() {
         scoreManager.addToScore(points);
         print("defeated");
         if (!gameObject.CompareTag("Player"))
         {
-            
+
             if (gameObject.CompareTag("Enemy"))
             {
                 Collider2D eColl = gameObject.GetComponent<Collider2D>();
@@ -103,7 +103,7 @@ public class HealthManager : MonoBehaviour
                 Vector3 spawnPosition = transform.position;
                 float ranX = Random.Range(-.5f, .5f);
                 float ranY = Random.Range(-.5f, .5f);
-                Vector2 force = new Vector2(ranX,ranY);
+                Vector2 force = new Vector2(ranX, ranY);
                 var instance = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
                 instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 
@@ -117,6 +117,11 @@ public class HealthManager : MonoBehaviour
             temp.speed = 0;
             game.EndGame();
         }
-        
-    } 
+
+    }
+
+    public float GetHealthPercentage()
+    {
+        return health/maxHealth;
+    }
 }
