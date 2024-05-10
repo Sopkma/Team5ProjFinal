@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTracking: 0
   lifeTimer: 5
-  projectileSpeed: 7
+  projectileSpeed: 12
   damage: 0
 --- !u!114 &8033050292734629050
 MonoBehaviour:

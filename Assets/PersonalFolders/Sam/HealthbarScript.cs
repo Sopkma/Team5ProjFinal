@@ -10,6 +10,8 @@ public class HealthbarScript : MonoBehaviour
     public Sprite halfHeart;
     public Sprite emptyHeart;
 
+    
+    
 
     public void updateHealth(int currentHealth, int funcMaxhealth){
         for (int i = 0; i < hearts.Length; i++) //goes through each heart NOT each hp, i = heart sprite

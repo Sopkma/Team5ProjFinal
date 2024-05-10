@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour{
@@ -30,7 +31,9 @@ public class Player : MonoBehaviour{
     private HealthManager playerHealthManager;
 
     public Bounds spawningBounds;
+    public Image DashCDIcon;
 
+    public float maxdashcd = 1f;
     public AudioClip stepSound;
     public float timeBetweenSteps = 0.2f;
     private float tempTime;
@@ -80,6 +83,7 @@ private void Update(){
     //if we want immunity frames we put it here, probably disable the rb/collider and then count down a certain number of seconds.
     //also need to add a cd for the dash that also dose some sort of count down.
     private void FixedUpdate(){
+        DashCDIcon.fillAmount = dashCooldown/maxdashcd;
         rb.velocity = moveDir * speed;
         if (isDashButtonDown && dashCooldown <= 0.1f){
             float dashAmmount = 2.5f;
