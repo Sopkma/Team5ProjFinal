@@ -90,6 +90,8 @@ public class BossType1 : MonoBehaviour
         {
             enraged=true;
             chargeUpTime /= 2;
+            maxDist *= 2;
+            agroDist *= 2;
         }
     }
     

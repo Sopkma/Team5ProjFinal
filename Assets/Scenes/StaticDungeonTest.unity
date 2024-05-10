@@ -19576,6 +19576,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Buy
       objectReference: {fileID: 0}
+    - target: {fileID: 5076685427417747594, guid: c67ed09e9c7264440a8bf9f162522138, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 520876073}
     - target: {fileID: 5198412554584423751, guid: c67ed09e9c7264440a8bf9f162522138, type: 3}
       propertyPath: shopManage
       value: 
@@ -27291,6 +27295,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
+--- !u!114 &520876073 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4133285800094000834, guid: ff1a4e25ff5d36f4693f26db22302ac0, type: 3}
+  m_PrefabInstance: {fileID: 1873178177801602552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799a59bbceff51e4e9a5f9016bb1ea0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &527183173 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4714126202450850671, guid: c67ed09e9c7264440a8bf9f162522138, type: 3}
@@ -31597,7 +31612,7 @@ PrefabInstance:
     - target: {fileID: 6460079377612716076, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1711909066}
     - target: {fileID: 8075867388640687820, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
       propertyPath: health
       value: 40
@@ -57608,6 +57623,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1711909066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9109293301991933519, guid: c67ed09e9c7264440a8bf9f162522138, type: 3}
+  m_PrefabInstance: {fileID: 262530549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1730604094
 GameObject:
   m_ObjectHideFlags: 0
