@@ -46,12 +46,17 @@ public class BossType1 : MonoBehaviour
 
     private MusicManager musicManager;
 
+    private bool enraged;
+    private HealthManager healthManager;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
+        healthManager = GetComponent<HealthManager>();
         state = MinotaurState.IDLE;
         musicManager = FindAnyObjectByType<MusicManager>();
+        enraged = false;
     }
 
     public void StartBattle()
@@ -69,16 +74,24 @@ public class BossType1 : MonoBehaviour
         {
             Walking();
         }
-        if (state == MinotaurState.CHARGING)
+        else if (state == MinotaurState.CHARGING)
         {
             Charging();
         }
-        if (state == MinotaurState.DEFEATED)
+        else if(state == MinotaurState.DEFEATED)
         {
             endTrigger.SetActive(true);
             healthBar.enabled = false;
             musicManager.PlayOutsideBattle();
-            Destroy(gameObject, 1f);
+            // Destroy(gameObject, 1f);
+        }
+
+        if (!enraged && healthManager.GetHealthPercentage() <= 0.5)
+        {
+            enraged=true;
+            chargeUpTime /= 2;
+            maxDist *= 2;
+            agroDist *= 3;
         }
     }
     
@@ -141,18 +154,21 @@ public class BossType1 : MonoBehaviour
     {
         audioSource.PlayOneShot(growl);
         yield return new WaitForSeconds(chargeUpTime);
-        state = MinotaurState.CHARGING;
-        // savedPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
-        chargeDirection = (player.transform.position - this.transform.position).normalized;
-        print(chargeDirection);
-        StartCoroutine(ChargeStop());
+        if (state != MinotaurState.DEFEATED && state != MinotaurState.DAZED)
+        {
+            state = MinotaurState.CHARGING;
+            // savedPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
+            chargeDirection = (player.transform.position - this.transform.position).normalized;
+            print(chargeDirection);
+            StartCoroutine(ChargeStop());
+        }
     }
 
     private IEnumerator ChargeStop()
     {
         yield return new WaitForSeconds(chargeTime);
         hitEnemies = new();
-        if (state != MinotaurState.DAZED)
+        if (state != MinotaurState.DAZED && state != MinotaurState.DEFEATED)
         {
             print("<color=red>Times Up</color>");
             state = MinotaurState.WALKING;
@@ -195,7 +211,10 @@ public class BossType1 : MonoBehaviour
     private IEnumerator DazeStop()
     {
         yield return new WaitForSeconds(chargeTime);
-        state = MinotaurState.WALKING;
+        if (state != MinotaurState.DEFEATED)
+        {
+            state = MinotaurState.WALKING;
+        }
     }
 
     public void SetHealthBar(float amount)
