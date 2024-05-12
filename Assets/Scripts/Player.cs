@@ -30,14 +30,28 @@ public class Player : MonoBehaviour{
     public TextMeshProUGUI coinsTxt;
     private HealthManager playerHealthManager;
 
+    [HideInInspector]
     public Bounds spawningBounds;
+
+    public SpriteRenderer Spear;
     public Image DashCDIcon;
+    public Animator animator;
+    public SpriteRenderer playerimage;
 
     public float maxdashcd = 1f;
     public AudioClip stepSound;
     public float timeBetweenSteps = 0.2f;
     private float tempTime;
     private AudioSource audioSource;
+
+
+    [Header("Player Idle Sprites(NOT IN USE)")]
+    public Sprite upIdle;
+    public Sprite leftIdle;
+    public Sprite DownIdle;
+    public Sprite rightIdle;
+
+
 
     void Awake(){
         isImmune = false;
@@ -54,12 +68,17 @@ public class Player : MonoBehaviour{
 private void Update(){
         float moveX = 0f;
         float moveY = 0f;
-        if (Input.GetKey(KeyCode.W)) { moveY = +1f; }
-        if (Input.GetKey(KeyCode.S)) { moveY = -1f; }
-        if (Input.GetKey(KeyCode.A)) { moveX = -1f; }
-        if (Input.GetKey(KeyCode.D)) { moveX = +1f; }
-        moveDir = new Vector3(moveX, moveY).normalized;
+        
 
+        if (Input.GetKey(KeyCode.W)) { moveY = +1f; animator.SetBool("WalkingUp", true); Spear.sortingOrder = 2;}
+        else { animator.SetBool("WalkingUp", false);}
+        if (Input.GetKey(KeyCode.S)) { moveY = -1f; animator.SetBool("WalkingDown", true); Spear.sortingOrder = 4;}
+        else { animator.SetBool("WalkingDown", false); }
+        if (Input.GetKey(KeyCode.A)) { moveX = -1f; animator.SetBool("WalkingLeft", true);playerimage.flipX = true;}
+        else { animator.SetBool("WalkingLeft", false); }
+        if (Input.GetKey(KeyCode.D)) { moveX = +1f; animator.SetBool("WalkingRight", true); playerimage.flipX = false;}
+        else { animator.SetBool("WalkingRight", false); }
+        moveDir = new Vector3(moveX, moveY).normalized;
         if (Input.GetKeyDown(KeyCode.Space) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
         }
@@ -77,6 +96,7 @@ private void Update(){
         {
             tempTime = 0f;
         }
+        
     }
 
     //this update will calculate moving and if the dash button is clicked it will teleport the player a set distance

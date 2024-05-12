@@ -30,7 +30,7 @@ public class HealthManager : MonoBehaviour
         {
             //immidiatly returns health if immunity is turned on for the player. might make enemrys immune for the duration as well?
             if (player.isImmune) { return; }
-            print(value);
+            //print(value);
             if (health > value)
             {
                 audioSource.PlayOneShot(damageSound);
