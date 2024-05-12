@@ -21961,7 +21961,7 @@ Transform:
   m_GameObject: {fileID: 366786654}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.003048, y: 81.57624, z: -1.9158957}
+  m_LocalPosition: {x: 8.996952, y: 4.5762377, z: -1.9158957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27220,11 +27220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1281263230090126491, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1281263230090126491, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1281263230090126491, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27269,7 +27269,7 @@ PrefabInstance:
     - target: {fileID: 3662514106450358329, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5872997705497913190, guid: 010e98e49204e5041ae56ebab4ebc1f0, type: 2}
     - target: {fileID: 5946397902688186133, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: game
       value: 
@@ -31601,6 +31601,10 @@ PrefabInstance:
       propertyPath: gameM
       value: 
       objectReference: {fileID: 789956201}
+    - target: {fileID: 5382698145900192499, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -6581864931055974260, guid: 010e98e49204e5041ae56ebab4ebc1f0, type: 2}
     - target: {fileID: 5652253579904060139, guid: d626cf0aed28bbe439d36c57b8c3667f, type: 3}
       propertyPath: m_Name
       value: '[[ Boss ]]'
@@ -49703,7 +49707,7 @@ Transform:
   m_GameObject: {fileID: 1310123474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.003048, y: 81.57624, z: -1.9158957}
+  m_LocalPosition: {x: 8.996952, y: 4.5762377, z: -1.9158957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73844,6 +73848,10 @@ PrefabInstance:
       propertyPath: PauseScreen
       value: 
       objectReference: {fileID: 527183173}
+    - target: {fileID: 2008677461710191743, guid: ff1a4e25ff5d36f4693f26db22302ac0, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -4198587658707158383, guid: 010e98e49204e5041ae56ebab4ebc1f0, type: 2}
     - target: {fileID: 4133285800094000834, guid: ff1a4e25ff5d36f4693f26db22302ac0, type: 3}
       propertyPath: player
       value: 
