@@ -28,6 +28,7 @@ public class Game : MonoBehaviour
         }
         if (controls.Player.ResetLevel.WasPerformedThisFrame())
         {
+            Time.timeScale = 1.0f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         if (controls.Player.Interact.WasPerformedThisFrame())
