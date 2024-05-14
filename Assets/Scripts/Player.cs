@@ -124,8 +124,16 @@ private void Update(){
     public void AddToCoins(int amount){
         coinCounter += amount;
         coinsTxt.text = "Coins: " + coinCounter;
-        coinsUITxt.text = "Coins: " + coinCounter;
+        coinsUITxt.text = ""+coinCounter;
     }
+
+    public void SubtractFromCoins(int ammount)
+    {
+        coinCounter -= ammount;
+        coinsTxt.text = "Coins: " + coinCounter;
+        coinsUITxt.text = "" + coinCounter;
+    }
+
 
     public void IncreaseSpeed(float amount){
         setSpeed += amount;

@@ -20,7 +20,9 @@ public class HealthManager : MonoBehaviour
     private Player player;
     public AudioClip damageSound;
     private AudioSource audioSource;
-    private float maxHealth;
+
+    [HideInInspector]
+    public float maxHealth;
 
     // allows for checking if the enemy is defeated once they are hit
     public float Health

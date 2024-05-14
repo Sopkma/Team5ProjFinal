@@ -19,6 +19,7 @@ public class shopManagerScript : MonoBehaviour{
     public RotateSword rotateSword;
 
     void Start(){
+
         //gets the info of the coin counter an sets its initial value
         coinUI.GetComponent<TextMeshProUGUI>();
         coinUI.text = "Coins:"+player.coinCounter.ToString();
@@ -42,41 +43,43 @@ public class shopManagerScript : MonoBehaviour{
     }
 
     //will ask the even system for the information on the button you just clicked and will find the information attached to it and reduce the coins you have for the ammount it cost
-    public void Buy()
-    {
+    public void Buy(){
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
-        if (player.coinCounter >= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID])
-        {
-            player.coinCounter -= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID];
-            coinUI.text = "Coins:" + player.coinCounter.ToString();
+        if (player.coinCounter >= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]){
+    
+            //coinUI.text = "Coins:" + player.coinCounter.ToString();
 
 
             //buys health
-            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 1)
-            {
-                print("added health");
-                player.GetComponent<HealthManager>().health += 1;
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 1){
+                if (player.GetComponent<HealthManager>().maxHealth != player.GetComponent<HealthManager>().health){
+                    player.GetComponent<HealthManager>().health += 1;
+
+                    player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
+                }
             }
 
             //buy speed up
-            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 2)
-            {
-                // player.speed += (player.speed * .10f);
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 2){
                 player.IncreaseSpeed(player.speed * .10f);
 
-                print("speed increase");
+                player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
             }
 
             //buy attack up
-            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 3)
-            {
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 3){
                 player.GetComponentInChildren<SwordAttack>().damage += 1;
-                print("incrase attack");
+
+                player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
             }
 
             //buy spear
-            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 4)
-            {
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 4){
+
+
+                player.coinCounter -= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID];
+
+
                 //player.GetComponentInChildren<SwordAttack>().damage += 1;
                 //print("incrase attack");
                 sword.gameObject.SetActive(false);

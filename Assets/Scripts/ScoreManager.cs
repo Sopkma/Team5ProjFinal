@@ -43,25 +43,25 @@ public class ScoreManager : MonoBehaviour
             score += points * multiplier;
         }
         // print("SCORE: " + score);
-        scoreTxt.text = "SCORE: " + score;
+        scoreTxt.text = "" + score;
     }
 
     public void addStylePoints(int points)
     {
         score += points * multiplier;
         // print("SCORE: " + score);
-        scoreTxt.text = "SCORE: " + score;
+        scoreTxt.text = "" + score;
     }
 
     public IEnumerator DecramentScore()
     {
         // print("Multiplier: " + multiplier);
-        scoreMultiplierTxt.text = "Multiplier: " + multiplier;
+        scoreMultiplierTxt.text = multiplier + "x";
         while (multiplier > minMultiplier)
         {
             yield return new WaitForSeconds(timeToDecrament);
             multiplier--;
-            scoreMultiplierTxt.text = "Multiplier: " + multiplier;
+            scoreMultiplierTxt.text = multiplier + "x";
         }
     }
 
