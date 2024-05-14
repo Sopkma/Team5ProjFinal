@@ -8,50 +8,45 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour{
-
+    [Header("Player Stats")]
     public float speed = 8f;
     public int coinCounter = 0;
-    public float dashCooldown;
-
-
-    public float imunityframeLength;
-
+    private float dashCooldown;
+    private float imunityframeLength;
     public bool isImmune;
-
+    private float originalSpeed;
     private Rigidbody2D rb;
     private Vector3 moveDir;
-    private bool isDashButtonDown;
-    private float originalSpeed;
     private float setSpeed;
+    private float maxdashcd = 1f;
+    private bool isDashButtonDown;
 
-    [Header("drag the SwordHitbox object with the SwordAttack script")]
+    [Header("Weapon")]
     public SwordAttack swordAttack;
+    public SpriteRenderer Spear;
 
+    [Header("Coin")]
     public TextMeshProUGUI coinsTxt;
     public TextMeshProUGUI coinsUITxt;
-    private HealthManager playerHealthManager;
 
-    [HideInInspector]
-    public Bounds spawningBounds;
 
-    public SpriteRenderer Spear;
+    [Header("Animation")]
     public Image DashCDIcon;
     public Animator animator;
     public SpriteRenderer playerimage;
 
-    public float maxdashcd = 1f;
+    [Header("Audio")]
     public AudioClip stepSound;
     public float timeBetweenSteps = 0.2f;
+
+
+    //misc private fields
+    private HealthManager playerHealthManager;
     private float tempTime;
     private AudioSource audioSource;
 
-
-    [Header("Player Idle Sprites(NOT IN USE)")]
-    public Sprite upIdle;
-    public Sprite leftIdle;
-    public Sprite DownIdle;
-    public Sprite rightIdle;
-
+    [HideInInspector]
+    public Bounds spawningBounds;
 
 
     void Awake(){
@@ -69,8 +64,6 @@ public class Player : MonoBehaviour{
 private void Update(){
         float moveX = 0f;
         float moveY = 0f;
-        
-
         if (Input.GetKey(KeyCode.W)) { moveY = +1f; animator.SetBool("WalkingUp", true); Spear.sortingOrder = 2;}
         else { animator.SetBool("WalkingUp", false);}
         if (Input.GetKey(KeyCode.S)) { moveY = -1f; animator.SetBool("WalkingDown", true); Spear.sortingOrder = 4;}
@@ -84,20 +77,16 @@ private void Update(){
             isDashButtonDown = true;
         }
 
-        if (moveDir != new Vector3(0, 0, 0) && tempTime <= 0)
-        {
+        if (moveDir != new Vector3(0, 0, 0) && tempTime <= 0){
             audioSource.PlayOneShot(stepSound);
             tempTime = timeBetweenSteps;
         }
-        else if (moveDir != new Vector3(0, 0, 0))
-        {
+        else if (moveDir != new Vector3(0, 0, 0)){
             tempTime -= Time.deltaTime;
         }
-        else
-        {
+        else{
             tempTime = 0f;
         }
-        
     }
 
     //this update will calculate moving and if the dash button is clicked it will teleport the player a set distance
@@ -132,30 +121,25 @@ private void Update(){
         swordAttack.Attack(); //print("Swing");
     }
 
-    public void AddToCoins(int amount)
-    {
+    public void AddToCoins(int amount){
         coinCounter += amount;
         coinsTxt.text = "Coins: " + coinCounter;
         coinsUITxt.text = "Coins: " + coinCounter;
     }
 
-    public void IncreaseSpeed(float amount)
-    {
+    public void IncreaseSpeed(float amount){
         setSpeed += amount;
     }
 
-    public void FreezePlayer()
-    {
+    public void FreezePlayer(){
         speed = 0;
     }
 
-    public void UnfreezePlayer()
-    {
+    public void UnfreezePlayer(){
         speed = setSpeed;
     }
 
-    public void Damage(int amount)
-    {
+    public void Damage(int amount){
         playerHealthManager.Health -= amount;
     }
 
