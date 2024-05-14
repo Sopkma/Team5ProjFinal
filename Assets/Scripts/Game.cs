@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
         UI.SetActive(true);
         controls = new Controls();
         controls.Enable();
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame

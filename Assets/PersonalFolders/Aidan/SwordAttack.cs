@@ -215,5 +215,23 @@ public class SwordAttack : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         sprite.color = spriteColor;
     }
+
+    public void ShowComponents()
+    {
+        SpriteRenderer[] rens = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer item in rens)
+        {
+            item.enabled = true;
+        }
+    }
+
+    public void HideComponents()
+    {
+        SpriteRenderer[] rens = GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer item in rens)
+        {
+            item.enabled = false;
+        }
+    }
 }
 

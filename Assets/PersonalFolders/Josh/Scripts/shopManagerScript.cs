@@ -84,6 +84,7 @@ public class shopManagerScript : MonoBehaviour{
                 //print("incrase attack");
                 sword.gameObject.SetActive(false);
                 spear.gameObject.SetActive(true);
+                spear.ShowComponents();
                 player.swordAttack = spear;
                 rotateSword.UpdateWeaponType();
             }
