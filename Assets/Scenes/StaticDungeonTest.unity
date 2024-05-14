@@ -30161,7 +30161,7 @@ PrefabInstance:
       objectReference: {fileID: 1835153263}
     - target: {fileID: 6759155658483515676, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: coinCounter
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6759155658483515676, guid: 73ded2a21252c7a4aacbcec9314dd01e, type: 3}
       propertyPath: swordAttack
