@@ -23,7 +23,7 @@ public class Player : MonoBehaviour{
 
     [Header("Weapon")]
     public SwordAttack swordAttack;
-    public SpriteRenderer Spear;
+    public SpriteRenderer spearSpriteShaft;
 
     [Header("Coin")]
     public TextMeshProUGUI coinsTxt;
@@ -31,9 +31,9 @@ public class Player : MonoBehaviour{
 
 
     [Header("Animation")]
-    public Image DashCDIcon;
-    public Animator animator;
-    public SpriteRenderer playerimage;
+    public Image DashCDIconGray;
+    public Animator playerImageAnimator;
+    public SpriteRenderer playerImageSprite;
 
     [Header("Audio")]
     public AudioClip stepSound;
@@ -64,14 +64,14 @@ public class Player : MonoBehaviour{
 private void Update(){
         float moveX = 0f;
         float moveY = 0f;
-        if (Input.GetKey(KeyCode.W)) { moveY = +1f; animator.SetBool("WalkingUp", true); Spear.sortingOrder = 2;}
-        else { animator.SetBool("WalkingUp", false);}
-        if (Input.GetKey(KeyCode.S)) { moveY = -1f; animator.SetBool("WalkingDown", true); Spear.sortingOrder = 4;}
-        else { animator.SetBool("WalkingDown", false); }
-        if (Input.GetKey(KeyCode.A)) { moveX = -1f; animator.SetBool("WalkingLeft", true);playerimage.flipX = true;}
-        else { animator.SetBool("WalkingLeft", false); }
-        if (Input.GetKey(KeyCode.D)) { moveX = +1f; animator.SetBool("WalkingRight", true); playerimage.flipX = false;}
-        else { animator.SetBool("WalkingRight", false); }
+        if (Input.GetKey(KeyCode.W)) { moveY = +1f; playerImageAnimator.SetBool("WalkingUp", true); spearSpriteShaft.sortingOrder = 2;}
+        else { playerImageAnimator.SetBool("WalkingUp", false);}
+        if (Input.GetKey(KeyCode.S)) { moveY = -1f; playerImageAnimator.SetBool("WalkingDown", true); spearSpriteShaft.sortingOrder = 4;}
+        else { playerImageAnimator.SetBool("WalkingDown", false); }
+        if (Input.GetKey(KeyCode.A)) { moveX = -1f; playerImageAnimator.SetBool("WalkingLeft", true);playerImageSprite.flipX = true;}
+        else { playerImageAnimator.SetBool("WalkingLeft", false); }
+        if (Input.GetKey(KeyCode.D)) { moveX = +1f; playerImageAnimator.SetBool("WalkingRight", true); playerImageSprite.flipX = false;}
+        else { playerImageAnimator.SetBool("WalkingRight", false); }
         moveDir = new Vector3(moveX, moveY).normalized;
         if (Input.GetKeyDown(KeyCode.Space) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
@@ -93,7 +93,7 @@ private void Update(){
     //if we want immunity frames we put it here, probably disable the rb/collider and then count down a certain number of seconds.
     //also need to add a cd for the dash that also dose some sort of count down.
     private void FixedUpdate(){
-        DashCDIcon.fillAmount = dashCooldown/maxdashcd;
+        DashCDIconGray.fillAmount = dashCooldown/maxdashcd;
         rb.velocity = moveDir * speed;
         if (isDashButtonDown && dashCooldown <= 0.1f){
             float dashAmmount = 2.5f;

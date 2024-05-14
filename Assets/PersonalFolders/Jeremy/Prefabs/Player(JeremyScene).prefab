@@ -1020,25 +1020,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   coinCounter: 0
-  dashCooldown: 0
-  imunityframeLength: 0
   isImmune: 0
   swordAttack: {fileID: 7365295597721039729}
+  spearSpriteShaft: {fileID: 6593272431141918986}
   coinsTxt: {fileID: 0}
+  coinsUITxt: {fileID: 0}
+  DashCDIconGray: {fileID: 0}
+  playerImageAnimator: {fileID: 392530263101440883}
+  playerImageSprite: {fileID: 2257146949607355838}
+  stepSound: {fileID: 8300000, guid: 234a9ea7c2f4d494fafd7c482a6fbec9, type: 3}
+  timeBetweenSteps: 0.25
   spawningBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  Spear: {fileID: 6593272431141918986}
-  DashCDIcon: {fileID: 0}
-  animator: {fileID: 392530263101440883}
-  playerimage: {fileID: 2257146949607355838}
-  maxdashcd: 1
-  stepSound: {fileID: 8300000, guid: 234a9ea7c2f4d494fafd7c482a6fbec9, type: 3}
-  timeBetweenSteps: 0.25
-  upIdle: {fileID: 21300000, guid: 0136c1472fee78a48a7bfa33865749bb, type: 2}
-  leftIdle: {fileID: 21300000, guid: 2461eff5674bd5041b45d82dde4d7900, type: 2}
-  DownIdle: {fileID: 21300000, guid: d941bb430b136a649a439381f7b03d2a, type: 2}
-  rightIdle: {fileID: 21300000, guid: 2461eff5674bd5041b45d82dde4d7900, type: 2}
 --- !u!50 &881880087371369100
 Rigidbody2D:
   serializedVersion: 4
