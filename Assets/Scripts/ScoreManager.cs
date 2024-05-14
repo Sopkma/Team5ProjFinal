@@ -42,14 +42,14 @@ public class ScoreManager : MonoBehaviour
         {
             score += points * multiplier;
         }
-        print("SCORE: " + score);
+        // print("SCORE: " + score);
         scoreTxt.text = "SCORE: " + score;
     }
 
     public void addStylePoints(int points)
     {
         score += points * multiplier;
-        print("SCORE: " + score);
+        // print("SCORE: " + score);
         scoreTxt.text = "SCORE: " + score;
     }
 
