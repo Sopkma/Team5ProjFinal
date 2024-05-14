@@ -14,6 +14,9 @@ public class shopManagerScript : MonoBehaviour{
     public int[,] shopItem = new int[5, 5];
     public Player player;
     public TextMeshProUGUI coinUI;
+    public SwordAttack sword;
+    public SwordAttack spear;
+    public RotateSword rotateSword;
 
     void Start(){
         //gets the info of the coin counter an sets its initial value
@@ -24,11 +27,13 @@ public class shopManagerScript : MonoBehaviour{
         shopItem[1, 1] = 1;
         shopItem[1, 2] = 2;
         shopItem[1, 3] = 3;
-        
+        shopItem[1, 4] = 4;
+
         //price
         shopItem[2, 1] = 1;
         shopItem[2, 2] = 2;
         shopItem[2, 3] = 5;
+        shopItem[2, 4] = 10;
     }
 
     
@@ -67,6 +72,17 @@ public class shopManagerScript : MonoBehaviour{
             {
                 player.GetComponentInChildren<SwordAttack>().damage += 1;
                 print("incrase attack");
+            }
+
+            //buy spear
+            if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 4)
+            {
+                //player.GetComponentInChildren<SwordAttack>().damage += 1;
+                //print("incrase attack");
+                sword.gameObject.SetActive(false);
+                spear.gameObject.SetActive(true);
+                player.swordAttack = spear;
+                rotateSword.UpdateWeaponType();
             }
         }
     }

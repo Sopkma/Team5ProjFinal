@@ -110,4 +110,9 @@ public class RotateSword : MonoBehaviour
             }
         }
     }
+    
+    public void UpdateWeaponType()
+    {
+        sword = GetComponentInChildren<SwordAttack>(false);
+    }
 }
