@@ -49,6 +49,9 @@ public class BossType1 : MonoBehaviour
     private bool enraged;
     private HealthManager healthManager;
 
+    public GameObject crachParticleEffect;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -57,6 +60,7 @@ public class BossType1 : MonoBehaviour
         state = MinotaurState.IDLE;
         musicManager = FindAnyObjectByType<MusicManager>();
         enraged = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void StartBattle()
@@ -92,6 +96,10 @@ public class BossType1 : MonoBehaviour
             chargeUpTime /= 2;
             maxDist *= 2;
             agroDist *= 3;
+        }
+        if(enraged)
+        {
+            spriteRenderer.color = Color.red;
         }
     }
     
@@ -179,6 +187,7 @@ public class BossType1 : MonoBehaviour
     {
         if (state == MinotaurState.CHARGING && !collision.gameObject.CompareTag("Player"))
         {
+            Instantiate(crachParticleEffect, transform.position, Quaternion.identity);
             audioSource.PlayOneShot(crash);
             state = MinotaurState.DAZED;
             StartCoroutine(DazeStop());
