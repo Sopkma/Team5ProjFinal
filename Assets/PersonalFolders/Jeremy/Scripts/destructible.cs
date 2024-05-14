@@ -26,15 +26,21 @@ public class destructible : MonoBehaviour{
 
     private void spawnCoins(int min, int max)
     {
-        int CoinCount = Random.Range(1, 3);
-        for (int i = 0; i < CoinCount; i++)
+
+        int spawnChance = Random.Range(0,5);
+
+        if (spawnChance > 3)
         {
-            Vector3 spawnPosition = transform.position;
-            float ranX = Random.Range(-.5f, .5f);
-            float ranY = Random.Range(-.5f, .5f);
-            Vector2 force = new Vector2(ranX, ranY);
-            var instance = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
-            instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+            int CoinCount = Random.Range(min, max);
+            for (int i = 0; i < CoinCount; i++)
+            {
+                Vector3 spawnPosition = transform.position;
+                float ranX = Random.Range(-.5f, .5f);
+                float ranY = Random.Range(-.5f, .5f);
+                Vector2 force = new Vector2(ranX, ranY);
+                var instance = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+                instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+            }
         }
     }
 
@@ -45,7 +51,7 @@ public class destructible : MonoBehaviour{
                 Potbreak.Play();
                 sr.enabled = false;
                 bc.enabled = false;
-                spawnCoins(0,5);
+                spawnCoins(0,3);
                 Destroy(this, .7f);
             }
         }

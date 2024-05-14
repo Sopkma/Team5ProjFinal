@@ -95,6 +95,11 @@ public class HealthManager : MonoBehaviour
                 eColl.enabled = false;
                 BossType1 boss = gameObject.GetComponent<BossType1>();
                 boss.ChangeState(MinotaurState.DEFEATED);
+
+                spawnCoins(25);
+
+
+
             }
 
             //the below code is responsible for spawning the coins
@@ -120,6 +125,23 @@ public class HealthManager : MonoBehaviour
             game.GameOver();
         }
 
+    }
+
+
+    public void spawnCoins(int ammount){
+
+        for (int i = 0; i < ammount; i++){
+            Vector3 spawnPosition = transform.position;
+            float ranX = Random.Range(-1f, 1f);
+            float ranY = Random.Range(-1f, 1f);
+            Vector2 force = new Vector2(ranX, ranY);
+            var instance = Instantiate(coinPrefab, spawnPosition, Quaternion.identity);
+            instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+        }
+
+
+
+      
     }
 
     public float GetHealthPercentage()
