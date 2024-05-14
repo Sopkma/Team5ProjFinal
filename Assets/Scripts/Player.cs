@@ -17,7 +17,8 @@ public class Player : MonoBehaviour{
     private float originalSpeed;
     private Rigidbody2D rb;
     private Vector3 moveDir;
-    private float setSpeed;
+    [HideInInspector]
+    public float setSpeed;
     private float maxdashcd = 1f;
     private bool isDashButtonDown;
 
