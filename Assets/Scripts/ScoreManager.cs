@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public float timeToDecrament = 20f;
     private float timeSinceLastKill;
     public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI scoreMultiplierTxt;
     public GameObject txtPrefab;
     public Player player;
 
@@ -54,12 +55,13 @@ public class ScoreManager : MonoBehaviour
 
     public IEnumerator DecramentScore()
     {
-        print("Multiplier: " + multiplier);
+        // print("Multiplier: " + multiplier);
+        scoreMultiplierTxt.text = "Multiplier: " + multiplier;
         while (multiplier > minMultiplier)
         {
             yield return new WaitForSeconds(timeToDecrament);
             multiplier--;
-            print("Multiplier: " + multiplier);
+            scoreMultiplierTxt.text = "Multiplier: " + multiplier;
         }
     }
 

@@ -27,7 +27,6 @@ public class DoorUnlockV2 : MonoBehaviour
 
     private MusicManager musicManager;
 
-
     private State state;
     // Start is called before the first frame update
     void Start()
@@ -128,12 +127,20 @@ public class DoorUnlockV2 : MonoBehaviour
 
     public void HandleDoorTriggerExit(Collider2D other)
     {
+        /*
         if (other.CompareTag("Player"))
         {
             state = State.Entered;
             Debug.Log("collided");
             musicManager.PlayBattleMusic();
         }
+        */
+    }
+
+    public void StartBattle()
+    {
+        state = State.Entered;
+        musicManager.PlayBattleMusic();
     }
 }
 

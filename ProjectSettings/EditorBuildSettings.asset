@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a006d3818967c8241a0bf8aae735922c
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 003a2d8c6ce03054ba45839fc1f19247
+    path: Assets/Scenes/StaticDungeonTest.unity
+    guid: 0e43bc19a46379b4681ccde229d1b2b1
   m_configObjects: {}

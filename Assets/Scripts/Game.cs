@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     public ScoreManager scoreManager;
     public GameObject UI;
     public GameObject FinalScoreUI;
+    public GameObject GameOverUI;
 
     // Start is called before the first frame update
     void Start(){
@@ -43,5 +44,13 @@ public class Game : MonoBehaviour
     {
         // scoreManager.SendScore("Jay");
         FinalScoreUI.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void GameOver()
+    {
+        // scoreManager.SendScore("Jay");
+        GameOverUI.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 }

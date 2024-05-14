@@ -115,7 +115,7 @@ public class HealthManager : MonoBehaviour
         {
             Player temp = this.GetComponent<Player>();
             temp.speed = 0;
-            game.EndGame();
+            game.GameOver();
         }
 
     }

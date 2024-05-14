@@ -28,6 +28,7 @@ public class Player : MonoBehaviour{
     public SwordAttack swordAttack;
 
     public TextMeshProUGUI coinsTxt;
+    public TextMeshProUGUI coinsUITxt;
     private HealthManager playerHealthManager;
 
     [HideInInspector]
@@ -135,12 +136,12 @@ private void Update(){
     {
         coinCounter += amount;
         coinsTxt.text = "Coins: " + coinCounter;
+        coinsUITxt.text = "Coins: " + coinCounter;
     }
 
     public void IncreaseSpeed(float amount)
     {
-        speed += amount;
-        setSpeed = speed;
+        setSpeed += amount;
     }
 
     public void FreezePlayer()
