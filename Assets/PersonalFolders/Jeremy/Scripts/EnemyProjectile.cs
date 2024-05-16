@@ -65,18 +65,14 @@ public class EnemyProjectile : MonoBehaviour
                 enemy.Damage(damage);
             }
         }
-        else if (collision.CompareTag("Enemy"))
+        else if (collision.CompareTag("Wall"))
         {
-            // do nothing
-        }
-        else if (collision.CompareTag("Ground")) 
-        {
-            // do nothing
+            Destroy(gameObject);
         }
         else
         {
-            // hit somthing that is not an enemy or the ground.
-            Destroy(projectile);
+            // hit somthing that is not an enemy or a wall.
+            
         }
         
     }
