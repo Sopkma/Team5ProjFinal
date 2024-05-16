@@ -155,11 +155,11 @@ private void Update(){
 
     public void Damage(int amount){
 
-        print("TOP OF DMG FUNCTION");
+       
         
         playerHealthManager.Health -= amount;
 
-        print("before function call");
+       
         if (!immuityFromDamage){
             damageIFrames();
         }
@@ -168,7 +168,7 @@ private void Update(){
     }
 
     public void damageIFrames(){
-        print("IFRAMES======================");
+        
 
 
         immuityFromDamage = true;

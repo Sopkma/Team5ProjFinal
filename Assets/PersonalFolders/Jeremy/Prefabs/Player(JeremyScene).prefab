@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 2354097492826881174}
   - component: {fileID: 5999450234804506355}
   - component: {fileID: 5044370900500185345}
-  - component: {fileID: 6234033063217692607}
   - component: {fileID: 7262938047853436861}
   m_Layer: 0
   m_Name: PlayerSword
@@ -361,18 +360,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6234033063217692607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850244339609531218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef81ae5f15b0cc54daa0d3834f9c68e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7262938047853436861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,9 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c04578913165e4cb3e891b21b117dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 6
   swingSpeed: 2
-  swordAnim: {fileID: 6234033063217692607}
   parent: {fileID: 8101486208000203159}
   swordCollider: {fileID: 5999450234804506355}
   knockbackDist: 0.5
@@ -595,7 +581,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   swingSpeed: 0.8
-  swordAnim: {fileID: 657110808380202533}
   parent: {fileID: 8101486208000203159}
   swordCollider: {fileID: 6422103414103711599}
   knockbackDist: 1
@@ -1240,7 +1225,7 @@ MonoBehaviour:
   - {x: -0.105199814, y: -1.3919477, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 233084
+  m_InstanceId: -2948
   m_LocalBounds:
     m_Center: {x: -0.65554905, y: -0.8375149, z: 0}
     m_Extent: {x: 0.55034924, y: 0.55443287, z: 0}
