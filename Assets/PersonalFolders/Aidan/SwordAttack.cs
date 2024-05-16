@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 public class SwordAttack : MonoBehaviour
 {
     // adjust damage here
-    public float damage = 3;
+    public int damage = 1;
     public float swingSpeed = .3f;
 
     [HideInInspector] public bool isAttacking { get; private set; }
@@ -107,7 +107,7 @@ public class SwordAttack : MonoBehaviour
             {
                 // get access to enemy Health 
                 HealthManager enemy = other.GetComponent<HealthManager>();
-
+                Player player = other.GetComponent<Player>();
                 if (enemy != null)
                 {
 
@@ -119,7 +119,10 @@ public class SwordAttack : MonoBehaviour
                     else
                     {
                         // enemy is being hit for the first time this attack, do damage and add to list
-                        enemy.Health -= damage;
+                        
+                        //if hitting melee enemys is buggy swap this back
+                        //enemy.Health -= damage;
+                        player.Damage(damage);
                         hitEnemies.Add(enemy);
                     }
                 }

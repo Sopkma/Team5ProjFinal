@@ -20,9 +20,9 @@ public class ShakeIfPlayerHit : MonoBehaviour
 
     private void Start() {
         healthManager = player.GetComponent<HealthManager>();
-        print(healthManager);
+        //print(healthManager);
         health = healthManager.health;
-        print(health);
+        //print(health);
 
 
         vcam = GetComponent<CinemachineVirtualCamera>();
@@ -30,7 +30,7 @@ public class ShakeIfPlayerHit : MonoBehaviour
     }
 
     public void StartShake() {
-        print("player hit do shake");
+        //print("player hit do shake");
         noisePerlin.m_AmplitudeGain = hitAmplitudeGain;
         noisePerlin.m_FrequencyGain = hitFrequencyGain;
         isShaking = true;

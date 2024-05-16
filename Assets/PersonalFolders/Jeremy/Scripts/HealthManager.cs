@@ -31,7 +31,7 @@ public class HealthManager : MonoBehaviour
         set
         {
             //immidiatly returns health if immunity is turned on for the player. might make enemrys immune for the duration as well?
-            if (player.isImmune) { return; }
+            if (player.isImmune || player.immuityFromDamage) { return; }
             //print(value);
             if (health > value)
             {

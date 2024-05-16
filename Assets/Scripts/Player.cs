@@ -22,6 +22,9 @@ public class Player : MonoBehaviour{
     private float maxdashcd = 1f;
     private bool isDashButtonDown;
 
+    public bool immuityFromDamage;
+    public float immunityFromDamageLength;
+
     [Header("Weapon")]
     public SwordAttack swordAttack;
     public SpriteRenderer spearSpriteShaft;
@@ -108,11 +111,13 @@ private void Update(){
             dashCooldown = 1f;
         }
         //checks if the imunity frame length is over and sets it to false
-        if (imunityframeLength <=.01f){isImmune = false;}
-
+        if (imunityframeLength <=.01f){ isImmune = false; }
+        if (immunityFromDamageLength <= .01f) { immuityFromDamage = false; }
+        
         //constantly reducing interal cooldowns;
         imunityframeLength -= Time.deltaTime;
         dashCooldown -= Time.deltaTime;
+        immunityFromDamageLength -= Time.deltaTime;
     }
 
 
@@ -149,7 +154,25 @@ private void Update(){
     }
 
     public void Damage(int amount){
+
+        print("TOP OF DMG FUNCTION");
+        
         playerHealthManager.Health -= amount;
+
+        print("before function call");
+        if (!immuityFromDamage){
+            damageIFrames();
+        }
+
+        
+    }
+
+    public void damageIFrames(){
+        print("IFRAMES======================");
+
+
+        immuityFromDamage = true;
+        immunityFromDamageLength = 1f;
     }
 
     //this snipet of code as well as the field is no longer used

@@ -9,7 +9,7 @@ public class RangedEnemy : Enemy
     public GameObject projectile;
     public Rigidbody2D player;
     public float enemySpeed = .2f;
-    public float damage = 2f;
+    public int damage = 1;
 
     // distances where enemy movement begins or stops
     public float minDist = 6f;

@@ -21,10 +21,10 @@ public class EnemyGround : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("ENTERED");
+        //print("ENTERED");
         if (collision.gameObject.CompareTag("Player") && !entered)
         {
-            print("ENTERED2");
+            //print("ENTERED2");
             entered = true;
             door.StartBattle();
         }
