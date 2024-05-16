@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 50009341}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85706,7 +85706,7 @@ MonoBehaviour:
   enemy: {fileID: 7854140046419412158, guid: 576d6a69ef48e934daa59dbb396f88c5, type: 3}
   player: {fileID: 259920612}
   totalSpawned: 0
-  spawnLimit: 15
+  spawnLimit: 3
   spawnTimer: 5
 --- !u!212 &1250859302
 SpriteRenderer:
@@ -86984,7 +86984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1719312621
 Transform:
   m_ObjectHideFlags: 0
@@ -87016,7 +87016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1722992276
 Transform:
   m_ObjectHideFlags: 0

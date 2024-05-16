@@ -48,6 +48,8 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print("Collided with: " + collision.name);
+
         // do damage to player (for now, just despawn and say in console it hit the player
         if (collision.CompareTag("Player"))
         {
@@ -63,5 +65,19 @@ public class EnemyProjectile : MonoBehaviour
                 enemy.Damage(damage);
             }
         }
+        else if (collision.CompareTag("Enemy"))
+        {
+            // do nothing
+        }
+        else if (collision.CompareTag("Ground")) 
+        {
+            // do nothing
+        }
+        else
+        {
+            // hit somthing that is not an enemy or the ground.
+            Destroy(projectile);
+        }
+        
     }
 }
