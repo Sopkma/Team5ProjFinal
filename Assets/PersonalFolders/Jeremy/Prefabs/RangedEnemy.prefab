@@ -250,7 +250,7 @@ MonoBehaviour:
   projectile: {fileID: 7994856631924149056, guid: e0dd80a366fdc9d4e8ed8793b0b27a0a, type: 3}
   player: {fileID: 0}
   enemySpeed: 3
-  damage: 2
+  damage: 1
   minDist: 8
   maxDist: 15
   fireRate: 1.5

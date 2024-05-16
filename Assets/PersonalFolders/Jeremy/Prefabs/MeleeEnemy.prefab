@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c04578913165e4cb3e891b21b117dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 1
   swingSpeed: 1
   swordAnim: {fileID: 6455134068279556420}
   parent: {fileID: 2607440144935212571}

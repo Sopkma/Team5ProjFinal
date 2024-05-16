@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New_Piskel_25_11_35
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 2083127395, guid: ad0ddc2821891bf4c9525fc130ea79d6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   m_Transform:
     e00: 1
     e01: 0
