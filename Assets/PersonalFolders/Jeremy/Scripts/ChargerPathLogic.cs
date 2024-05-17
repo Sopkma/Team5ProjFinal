@@ -41,26 +41,25 @@ public class ChargerPathLogic : MonoBehaviour
         staticDamageTimer = 0;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collider) 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (dashing)
-        {   
+        {
             // if it hits a wall or other enemy/object reset the dash
-            if (!collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag("Wall"))
             {
                 dashing = false;
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
                 rb.position += (distance.normalized * -1) * dashSpeed * Time.deltaTime;
             }
-            else if (collider.gameObject.CompareTag("Enemy"))
+            else if (collision.gameObject.CompareTag("Enemy"))
             {
                 // do nothing, just pass through enemies muhahaha
             }
-            else if (collider.gameObject.CompareTag("Player"))
+            else if (collision.gameObject.CompareTag("Player"))
             {
-                collider.gameObject.GetComponent<HealthManager>().Health -= damage;
+                collision.gameObject.GetComponent<HealthManager>().Health -= damage;
                 dashing = false;
                 timeBeforeNextAttack = timeBetweenAttacks;
                 dashDist = 0;
@@ -68,19 +67,33 @@ public class ChargerPathLogic : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         // if player touches the enemy, it will damage the player even if enemy is not charging.
         if (!dashing && staticDamageTimer <= 0)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.gameObject.CompareTag("Player"))
             {
                 staticDamageTimer = timeBetweenAttacks / 2;
                 collision.gameObject.GetComponent<HealthManager>().Health -= damage;
             }
         }
         if (staticDamageTimer > 0) staticDamageTimer -= Time.deltaTime;
+
+        if (dashing)
+        {
+            // if it hits a wall or other enemy/object reset the dash
+            if (collision.gameObject.CompareTag("Wall"))
+            {
+                dashing = false;
+                timeBeforeNextAttack = timeBetweenAttacks;
+                dashDist = 0;
+                rb.position += (distance.normalized * -1) * dashSpeed * Time.deltaTime;
+            }
+        }
+        
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -88,7 +101,7 @@ public class ChargerPathLogic : MonoBehaviour
         if (dashing)
         {
             // (playerPos.x > transform.position.x + 0.1f || playerPos.x < transform.position.x - 0.1f) && (playerPos.y > transform.position.y + 0.1f || playerPos.y < transform.position.y - 0.1f)
-            if (dashDist < hitboxLength + 1.5f)
+            if (dashDist < hitboxLength + 0.5f)
             {
                 rb.position += (distance.normalized * dashSpeed * Time.deltaTime);
                 dashDist = Mathf.Abs(Vector3.Distance(transform.position, initialPos));
