@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class RangedEnemy : Enemy
 {
@@ -8,6 +9,7 @@ public class RangedEnemy : Enemy
 
     public GameObject projectile;
     public Rigidbody2D player;
+    public Light2D staffGlow;
     public float enemySpeed = .2f;
     public int damage = 1;
 
@@ -96,6 +98,8 @@ public class RangedEnemy : Enemy
 
         if (fireTimer > 0)
         {
+            staffGlow.pointLightOuterRadius = 1;
+            staffGlow.intensity += (fireTimer / fireRate) / 5;
             // not ready to shoot yet, timer tick down
             fireTimer -= Time.deltaTime;
         }
@@ -105,6 +109,8 @@ public class RangedEnemy : Enemy
             theProjectile.GetComponent<EnemyProjectile>().damage = damage;
             theProjectile.transform.position = transform.position;
             fireTimer = fireRate;
+            staffGlow.intensity = 0;
+            staffGlow.pointLightOuterRadius = 2;
         }
         
 

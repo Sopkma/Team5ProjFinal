@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 7854140046419412158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.39978, y: 4.6096406, z: 0}
+  m_LocalPosition: {x: 31.949139, y: 1.5230484, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -249,6 +249,7 @@ MonoBehaviour:
   vanishMaterial: {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
   projectile: {fileID: 7994856631924149056, guid: e0dd80a366fdc9d4e8ed8793b0b27a0a, type: 3}
   player: {fileID: 0}
+  staffGlow: {fileID: 0}
   enemySpeed: 3
   damage: 1
   minDist: 8
