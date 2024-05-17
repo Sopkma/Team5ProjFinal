@@ -51,7 +51,7 @@ public class destructible : MonoBehaviour{
                 Potbreak.Play();
                 sr.enabled = false;
                 bc.enabled = false;
-                spawnCoins(0,3);
+                spawnCoins(1,3);
                 Destroy(this, .7f);
             }
         }

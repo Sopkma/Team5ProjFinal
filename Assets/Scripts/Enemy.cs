@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public Material vanishMaterial;
     private Material newVanish;
     private SpriteRenderer[] spriteRenderers;
+    private Collider2D[] colliders;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
         fade = 1;
         state = EnemyState.NORMAL;
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        colliders = GetComponentsInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,10 @@ public class Enemy : MonoBehaviour
     {
         if (state == EnemyState.DEAD)
         {
+            foreach (Collider2D item in colliders)
+            {
+                item.enabled = false;
+            }
             if (fade == 1)
             {
                 // spriteRenderer.material = vanishMaterial;

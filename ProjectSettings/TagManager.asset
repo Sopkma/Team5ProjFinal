@@ -17,6 +17,7 @@ TagManager:
   - BossGround
   - Weapon
   - Pot
+  - Wall
   layers:
   - Default
   - TransparentFX

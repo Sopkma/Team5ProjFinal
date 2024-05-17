@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public enum MinotaurState
 {
     WALKING,
     WINDUP,
+    ABOUTTOCHARGE,
     CHARGING,
     DAZED,
     DEFEATED,
@@ -52,6 +54,11 @@ public class BossType1 : MonoBehaviour
     public GameObject crachParticleEffect;
     private SpriteRenderer spriteRenderer;
 
+    [Header("Everything for the red line")]
+    public Animator hitPathAnimator;
+    public Transform hitTransform;
+    public SpriteRenderer hitSR;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -89,6 +96,10 @@ public class BossType1 : MonoBehaviour
             musicManager.PlayOutsideBattle();
             // Destroy(gameObject, 1f);
         }
+        else if(state == MinotaurState.WINDUP)
+        {
+            RotateLine();
+        }
 
         if (!enraged && healthManager.GetHealthPercentage() <= 0.5)
         {
@@ -96,10 +107,11 @@ public class BossType1 : MonoBehaviour
             chargeUpTime /= 2;
             maxDist *= 2;
             agroDist *= 3;
+            hitPathAnimator.speed = 2;
         }
         if(enraged)
         {
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = UnityEngine.Color.red;
         }
     }
     
@@ -158,16 +170,52 @@ public class BossType1 : MonoBehaviour
         rb.MovePosition(transform.position + new Vector3(chargeDirection.x, chargeDirection.y, 0) * enemyChargeSpeed);
     }
 
+    // https://forum.unity.com/threads/quaternion-lookrotation-in-2d.292572/
+    float AngleBetweenPoints(Vector2 a, Vector2 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
+    private void RotateLine()
+    {
+        Vector2 chargeMiddlePoint = (player.transform.position + this.transform.position)/2;
+        hitTransform.position = new Vector3(chargeMiddlePoint.x, chargeMiddlePoint.y, 0);
+
+        float angle = AngleBetweenPoints(transform.position, player.position);
+        var targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
+        transform.rotation = Quaternion.Slerp(hitTransform.rotation, targetRotation, 1);
+
+        Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
+        float euclideanDistance = Vector3.Distance(rb.position, player.position);
+        float absEuclideanDistance = Mathf.Abs(euclideanDistance);
+        hitTransform.localScale = new Vector3(1, absEuclideanDistance/4, 1);
+    }
+
     private IEnumerator Windup()
     {
+        hitPathAnimator.Play("BossLine");
         audioSource.PlayOneShot(growl);
+        hitSR.enabled = true;
         yield return new WaitForSeconds(chargeUpTime);
         if (state != MinotaurState.DEFEATED && state != MinotaurState.DAZED)
         {
+            state = MinotaurState.ABOUTTOCHARGE;
+            chargeDirection = (player.transform.position - this.transform.position).normalized;
+            StartCoroutine(StartCharge());
+        }
+    }
+
+    private IEnumerator StartCharge()
+    {
+        // audioSource.PlayOneShot(growl);
+        hitSR.enabled = true;
+        yield return new WaitForSeconds(0.4f);
+        if (state != MinotaurState.DEFEATED && state != MinotaurState.DAZED)
+        {
+            hitSR.enabled = false;
             state = MinotaurState.CHARGING;
             // savedPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
-            chargeDirection = (player.transform.position - this.transform.position).normalized;
-            print(chargeDirection);
+            // chargeDirection = (player.transform.position - this.transform.position).normalized;
             StartCoroutine(ChargeStop());
         }
     }
