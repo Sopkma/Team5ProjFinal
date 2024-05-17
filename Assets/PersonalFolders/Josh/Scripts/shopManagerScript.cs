@@ -81,7 +81,7 @@ public class shopManagerScript : MonoBehaviour{
 
             //buy spear
             if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 4){
-                var trans = .5f;
+                
                 player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
 
                 spearImage.GetComponentInChildren<UnityEngine.UI.Button>().gameObject.SetActive(false);
