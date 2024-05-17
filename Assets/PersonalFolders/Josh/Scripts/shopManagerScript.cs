@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+
 public class shopManagerScript : MonoBehaviour{
 
 
@@ -17,6 +20,9 @@ public class shopManagerScript : MonoBehaviour{
     public SwordAttack sword;
     public SwordAttack spear;
     public RotateSword rotateSword;
+
+    public UnityEngine.UI.Image spearImage;
+    public UnityEngine.UI.Image SpearImage2;
 
     void Start(){
 
@@ -75,14 +81,16 @@ public class shopManagerScript : MonoBehaviour{
 
             //buy spear
             if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 4){
+                
+                player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
 
+                spearImage.GetComponentInChildren<UnityEngine.UI.Button>().gameObject.SetActive(false);
+                spearImage.color = Color.gray;
+                SpearImage2.color = Color.gray;
+                               
+                
+                
 
-                player.coinCounter -= shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID];
-
-
-                //player.GetComponentInChildren<SwordAttack>().damage += 1;
-                //print("incrase attack");
-                sword.gameObject.SetActive(false);
                 spear.gameObject.SetActive(true);
                 spear.ShowComponents();
                 player.swordAttack = spear;

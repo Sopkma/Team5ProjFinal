@@ -22,8 +22,13 @@ public class Player : MonoBehaviour{
     private float maxdashcd = 1f;
     private bool isDashButtonDown;
 
+    [Header("ImmunityFrame")]
     public bool immuityFromDamage;
     public float immunityFromDamageLength;
+    public Color flashColor;
+    public Color defaultColor;
+    public int numberOfFlashes;
+    public float flashduration;
 
     [Header("Weapon")]
     public SwordAttack swordAttack;
@@ -154,12 +159,7 @@ private void Update(){
     }
 
     public void Damage(int amount){
-
-       
-        
         playerHealthManager.Health -= amount;
-
-       
         if (!immuityFromDamage){
             damageIFrames();
         }
@@ -168,11 +168,21 @@ private void Update(){
     }
 
     public void damageIFrames(){
-        
-
-
         immuityFromDamage = true;
         immunityFromDamageLength = 1f;
+        StartCoroutine(Flash());
+        
+    }
+    private IEnumerator Flash(){
+        int temp = 0;
+        while(temp < numberOfFlashes)
+        {
+            playerImageSprite.color = flashColor;
+            yield return new WaitForSeconds(flashduration);
+            playerImageSprite.color = defaultColor;
+            yield return new WaitForSeconds(flashduration);
+            temp++;
+        }
     }
 
     //this snipet of code as well as the field is no longer used
