@@ -97,6 +97,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   coinUI: {fileID: 0}
+  sword: {fileID: 0}
+  spear: {fileID: 0}
+  rotateSword: {fileID: 0}
+  spearImage: {fileID: 0}
+  SpearImage2: {fileID: 0}
 --- !u!1 &3160991464571101428
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +400,7 @@ MonoBehaviour:
   player: {fileID: 0}
   shop: {fileID: 0}
   scoreManager: {fileID: 4133285800094000834}
-  UI: {fileID: 0}
+  UI: {fileID: 9013910821985079474, guid: c67ed09e9c7264440a8bf9f162522138, type: 3}
   FinalScoreUI: {fileID: 0}
   GameOverUI: {fileID: 0}
 --- !u!114 &1831170945648201357
