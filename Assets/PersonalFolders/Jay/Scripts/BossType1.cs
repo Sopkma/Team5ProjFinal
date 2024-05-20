@@ -41,6 +41,10 @@ public class BossType1 : MonoBehaviour
     public AudioClip growl;
     public AudioClip crash;
     public GameObject crachParticleEffect;
+    public Material vanishMaterial;
+    private Material newVanish;
+    private float fade;
+    public float fadeRate = 1f;
 
     [Header("Boss Health Bar")]
     public Image healthBar;
@@ -65,6 +69,9 @@ public class BossType1 : MonoBehaviour
 
     void Start()
     {
+        newVanish = new Material(vanishMaterial);
+        fade = 1;
+
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         healthManager = GetComponent<HealthManager>();
@@ -106,6 +113,18 @@ public class BossType1 : MonoBehaviour
             healthBar.enabled = false;
             musicManager.PlayOutsideBattle();
             hitSR.enabled = false;
+            if (fade == 1) {
+                spriteRenderer.material = vanishMaterial;
+            }
+            if (fade > 0.1) {
+                // print("FADE: " + fade);
+                // change fade value on shader material
+                newVanish.SetFloat("_Fade", fade);
+                fade -= fadeRate * Time.deltaTime;
+            }
+            else {
+                Destroy(this.gameObject);
+            }
             // Destroy(gameObject, 1f);
         }
         else if(state == MinotaurState.WINDUP)
