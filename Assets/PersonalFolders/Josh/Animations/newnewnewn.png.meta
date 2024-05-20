@@ -1,0 +1,439 @@
+fileFormatVersion: 2
+guid: 8100be2e13cac5742857af995af38e7d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: New_Piskel_25_15_13
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ace1d5524747fc4eafd9715c69ec370
+      internalID: 1007181318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DownIdle
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e591e4fad53c40d4b9fe87c223922fc2
+      internalID: 2133945542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ff4190445b596429924d3eefc4cf9d
+      internalID: -1239680598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_16
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41542b77c64273745ab7d9c250f08f4f
+      internalID: -1483715956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11461b0fd467bd74fb9d1a12d22a2d68
+      internalID: -424328434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpIdle
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5cb1564fbceda7448e015972095733e
+      internalID: -770410816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c887c5c0c8fb34ba93b8d73638c01a
+      internalID: -189533732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 608fe2e0e88db4f48b9c92a2af5b0e22
+      internalID: 1754734818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_21
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1bff81b04a776e4a8e7c9aedaf1b643
+      internalID: 1789651277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightIdle
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c83b5f059fe2da74b853eafc98302e33
+      internalID: 40464427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: New_Piskel_25_15_23
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9141af3926e6224892d5a0b034d020d
+      internalID: 1942347919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DownIdle: 2133945542
+      Floor: -836398288
+      Floor Torch: 732112906
+      Floor corner: -302387382
+      New_Piskel_25_15_10: 235282234
+      New_Piskel_25_15_11: 666229138
+      New_Piskel_25_15_12: 1585769141
+      New_Piskel_25_15_13: 1007181318
+      New_Piskel_25_15_15: -1239680598
+      New_Piskel_25_15_16: -1483715956
+      New_Piskel_25_15_17: -424328434
+      New_Piskel_25_15_19: -189533732
+      New_Piskel_25_15_20: 1754734818
+      New_Piskel_25_15_21: 1789651277
+      New_Piskel_25_15_23: 1942347919
+      New_Piskel_25_15_24: -1626864971
+      New_Piskel_25_15_25: 1862722672
+      New_Piskel_25_15_26: 1045223920
+      New_Piskel_25_15_27: 1742575425
+      New_Piskel_25_15_28: -1587150018
+      New_Piskel_25_15_29: -341329258
+      New_Piskel_25_15_3: -788765505
+      New_Piskel_25_15_30: -1857965847
+      New_Piskel_25_15_31: -344612261
+      New_Piskel_25_15_32: 802111682
+      New_Piskel_25_15_33: 398279265
+      New_Piskel_25_15_34: -971321254
+      New_Piskel_25_15_35: 1680809077
+      New_Piskel_25_15_36: -1703620078
+      New_Piskel_25_15_37: 1185542252
+      New_Piskel_25_15_38: 242354004
+      New_Piskel_25_15_39: 148406738
+      New_Piskel_25_15_4: 166427588
+      New_Piskel_25_15_40: 437260965
+      New_Piskel_25_15_41: 582594742
+      New_Piskel_25_15_42: -1543340750
+      New_Piskel_25_15_43: 944056906
+      New_Piskel_25_15_44: -979117526
+      New_Piskel_25_15_45: -531144561
+      New_Piskel_25_15_46: -296551077
+      New_Piskel_25_15_47: 835509458
+      New_Piskel_25_15_48: 979279805
+      New_Piskel_25_15_49: -662976358
+      New_Piskel_25_15_5: -352865675
+      New_Piskel_25_15_50: -1553392078
+      New_Piskel_25_15_51: -882555552
+      New_Piskel_25_15_52: 594007929
+      New_Piskel_25_15_53: 1171070776
+      New_Piskel_25_15_54: 397413772
+      New_Piskel_25_15_55: 42665803
+      New_Piskel_25_15_56: 1589308886
+      New_Piskel_25_15_57: -909338431
+      New_Piskel_25_15_58: 1097889174
+      New_Piskel_25_15_59: 888830266
+      New_Piskel_25_15_6: -951053472
+      New_Piskel_25_15_60: -1622256749
+      New_Piskel_25_15_61: 836607754
+      New_Piskel_25_15_62: -82340289
+      New_Piskel_25_15_63: -1982793193
+      New_Piskel_25_15_64: 90356811
+      New_Piskel_25_15_65: 1038832876
+      New_Piskel_25_15_66: 2082704005
+      New_Piskel_25_15_67: -794989640
+      New_Piskel_25_15_68: -1978562696
+      New_Piskel_25_15_69: 114754868
+      New_Piskel_25_15_7: 371155939
+      New_Piskel_25_15_70: -1158695486
+      New_Piskel_25_15_71: -648289433
+      New_Piskel_25_15_72: -917013269
+      New_Piskel_25_15_73: -669052104
+      New_Piskel_25_15_74: 1300785907
+      New_Piskel_25_15_75: 1366709197
+      New_Piskel_25_15_76: -255794828
+      New_Piskel_25_15_77: 1853240194
+      New_Piskel_25_15_78: 714661471
+      New_Piskel_25_15_79: -1545434694
+      New_Piskel_25_15_8: -973029473
+      New_Piskel_25_15_9: -1254048460
+      RightIdle: 40464427
+      UpIdle: -770410816
+      newnewnewn_0: -728380795
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
