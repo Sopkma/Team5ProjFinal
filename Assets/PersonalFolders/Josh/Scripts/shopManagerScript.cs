@@ -87,11 +87,9 @@ public class shopManagerScript : MonoBehaviour{
                 spearImage.GetComponentInChildren<UnityEngine.UI.Button>().gameObject.SetActive(false);
                 spearImage.color = Color.gray;
                 SpearImage2.color = Color.gray;
-                               
                 
-                
-
-                spear.gameObject.SetActive(true);
+                sword.gameObject.SetActive(false);
+                // spear.gameObject.SetActive(true);
                 spear.ShowComponents();
                 player.swordAttack = spear;
                 rotateSword.UpdateWeaponType();

@@ -57,13 +57,15 @@ public class BossType1 : MonoBehaviour
     [Header("Angry Sprite")]
     public Sprite angrySprite;
 
+    [Header("Set true to be angy from start")]
+    public bool enraged = false;
+
     private MinotaurState state;
     private Vector2 savedPlayerPos;
     private Vector2 chargeDirection;
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private MusicManager musicManager;
-    private bool enraged;
     private HealthManager healthManager;
     private Animator anim;
 
@@ -77,9 +79,13 @@ public class BossType1 : MonoBehaviour
         healthManager = GetComponent<HealthManager>();
         state = MinotaurState.IDLE;
         musicManager = FindAnyObjectByType<MusicManager>();
-        enraged = false;
+        // enraged = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        if (enraged)
+        {
+            SetEnragedStats();
+        }
     }
 
     public void StartBattle()
@@ -134,13 +140,18 @@ public class BossType1 : MonoBehaviour
 
         if (!enraged && IsEnraged())
         {
-            spriteRenderer.sprite = angrySprite;
-            enraged=true;
-            chargeUpTime /= 2;
-            maxDist *= 2;
-            agroDist *= 3;
-            hitPathAnimator.speed = 2;
+            SetEnragedStats();
         }
+    }
+
+    private void SetEnragedStats()
+    {
+        spriteRenderer.sprite = angrySprite;
+        enraged = true;
+        chargeUpTime /= 2;
+        maxDist *= 2;
+        agroDist *= 3;
+        hitPathAnimator.speed = 2;
     }
 
     public void FacePlayer(Vector2 distance)

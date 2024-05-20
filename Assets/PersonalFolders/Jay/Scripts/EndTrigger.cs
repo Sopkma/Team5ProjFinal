@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndTrigger : MonoBehaviour
 {
     public Game gameM;
+    public int goTo = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +23,17 @@ public class EndTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            print("<color=green>GAME WIN</color>");
-            gameM.EndGame();
+            if(goTo == 0)
+            {
+                print("<color=green>GAME WIN</color>");
+                gameM.EndGame();
+            }
+            else
+            {
+                ScoreManager sm = FindObjectOfType<ScoreManager>();
+                sm.StoreScore();
+                SceneManager.LoadScene(goTo);
+            }
         }
     }
 }
