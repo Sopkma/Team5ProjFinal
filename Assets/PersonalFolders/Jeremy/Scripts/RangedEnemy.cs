@@ -19,7 +19,8 @@ public class RangedEnemy : Enemy
 
     public float fireRate = 4f;
     // fire timer tracks the time in between shots (based on fireRate)
-    private float fireTimer;
+    // light timer determines size of light effect from staff
+    private float fireTimer, lightTimer;
 
     private bool firstShot = true;
 
@@ -31,6 +32,7 @@ public class RangedEnemy : Enemy
     {
         rb = GetComponent<Rigidbody2D>();
         fireTimer = 0;
+        lightTimer = fireRate;
         firstShot = true;
     }
 
@@ -99,15 +101,18 @@ public class RangedEnemy : Enemy
         if (firstShot)
         {
             fireTimer = Random.Range(0.75f,1.75f);
+            lightTimer = fireRate - fireTimer;
             firstShot = false;
         }
 
         if (fireTimer > 0)
         {
-            staffGlow.pointLightOuterRadius = 1;
-            staffGlow.intensity += (fireTimer / fireRate) / 5;
+            staffGlow.color = Color.blue;
+            staffGlow.pointLightOuterRadius = (lightTimer / fireRate) * 1.5f;
+            staffGlow.intensity = (lightTimer / fireRate) * 6;
             // not ready to shoot yet, timer tick down
             fireTimer -= Time.deltaTime;
+            lightTimer += Time.deltaTime;
         }
         else
         {
@@ -115,8 +120,8 @@ public class RangedEnemy : Enemy
             theProjectile.GetComponent<EnemyProjectile>().damage = damage;
             theProjectile.transform.position = transform.position;
             fireTimer = fireRate;
+            lightTimer = 0;
             staffGlow.intensity = 0;
-            staffGlow.pointLightOuterRadius = 2;
         }
         
 
