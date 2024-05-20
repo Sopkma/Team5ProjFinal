@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
         state = EnemyState.SPAWNING;
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         colliders = GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D item in colliders)
+        {
+            item.enabled = false;
+        }
         StartCoroutine(SpawnIn());
     }
 
@@ -115,6 +119,10 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(spawnEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(spawnTime);
+        foreach (Collider2D item in colliders)
+        {
+            item.enabled = true;
+        }
         state = EnemyState.NORMAL;
     }
 }
