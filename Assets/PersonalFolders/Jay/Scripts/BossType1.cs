@@ -69,6 +69,8 @@ public class BossType1 : MonoBehaviour
     private HealthManager healthManager;
     private Animator anim;
 
+    private FlashEffect flashEffect;
+
     void Start()
     {
         newVanish = new Material(vanishMaterial);
@@ -86,6 +88,8 @@ public class BossType1 : MonoBehaviour
         {
             SetEnragedStats();
         }
+
+        flashEffect = GetComponent<FlashEffect>();
     }
 
     public void StartBattle()
@@ -146,6 +150,7 @@ public class BossType1 : MonoBehaviour
 
     private void SetEnragedStats()
     {
+        flashEffect.StartFlashing();
         spriteRenderer.sprite = angrySprite;
         enraged = true;
         chargeUpTime /= 2;
