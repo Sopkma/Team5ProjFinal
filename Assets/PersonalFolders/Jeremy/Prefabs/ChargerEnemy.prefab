@@ -182,7 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeRate: 0.4
+  spawnTime: 1.7
   vanishMaterial: {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
+  spawnEffect: {fileID: 2227257999631580190, guid: d7d2c56542ab3d549af0f9abee11aebb, type: 3}
   player: {fileID: 0}
   enemySpeed: 6
   timeBetweenAttacks: 1.25

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum EnemyState
 {
+    SPAWNING,
     NORMAL,
     FREEZE,
     DEAD
@@ -14,19 +15,24 @@ public class Enemy : MonoBehaviour
     protected EnemyState state; // Change to protected to allow access in subclasses
     private float fade;
     public float fadeRate = 1f;
+    public float spawnTime = 1.7f;
     public Material vanishMaterial;
     private Material newVanish;
     private SpriteRenderer[] spriteRenderers;
     private Collider2D[] colliders;
+    [Header("Gameobject with particle system for spawning")]
+    public GameObject spawnEffect;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
         newVanish = new Material(vanishMaterial);
         fade = 1;
-        state = EnemyState.NORMAL;
+        state = EnemyState.SPAWNING;
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         colliders = GetComponentsInChildren<Collider2D>();
+        StartCoroutine(SpawnIn());
     }
 
     // Update is called once per frame
@@ -103,5 +109,12 @@ public class Enemy : MonoBehaviour
                 sprite.transform.localScale = new Vector2(-sprite.transform.localScale.x, sprite.transform.localScale.y);
             }
         }
+    }
+
+    private IEnumerator SpawnIn()
+    {
+        Instantiate(spawnEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(spawnTime);
+        state = EnemyState.NORMAL;
     }
 }
