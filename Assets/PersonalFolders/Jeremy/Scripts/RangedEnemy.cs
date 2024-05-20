@@ -23,6 +23,9 @@ public class RangedEnemy : Enemy
 
     private bool firstShot = true;
 
+    [Header("Animator In Sprite Child")]
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +41,7 @@ public class RangedEnemy : Enemy
         {
             Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
             float euclideanDistance = Vector3.Distance(rb.position, player.position);
+            FacePlayer(distance);
 
             // if further than max distance, do nothing
             if (Mathf.Abs(euclideanDistance) > maxDist)
@@ -52,12 +56,14 @@ public class RangedEnemy : Enemy
                 if (Mathf.Abs(euclideanDistance) < minDist)
                 {
                     Shoot();
+                    animator.speed = 0.3f;
                 }
                 // in between max and min distance, move to and attack the player
                 else
                 {
                     Shoot();
                     rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    animator.speed = 1;
                 }
             }
 

@@ -19,6 +19,9 @@ public class MeleeEnemy : Enemy
     public float minDist = 2f;
     public float maxDist = 5f;
 
+    [Header("Animator In Sprite Child")]
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +36,14 @@ public class MeleeEnemy : Enemy
         {
             Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
             float euclideanDistance = Vector3.Distance(rb.position, player.position);
+            FacePlayer(distance, animator.gameObject);
 
             // if further than max distance, do nothing
             // this can be used for ranged enemies(?)
             if (Mathf.Abs(euclideanDistance) > maxDist)
             {
                 // print("<color=green>Out of aggro range.</color>");
+                animator.SetBool("IsWalking", false);
             }
             // if within maximum distance
             else if (Mathf.Abs(euclideanDistance) < maxDist)
@@ -46,9 +51,6 @@ public class MeleeEnemy : Enemy
                 // if closer than minimum distance, stop moving and melee
                 if (Mathf.Abs(euclideanDistance) < minDist)
                 {
-
-
-
                     if (timeBeforeNextAttack <= 0)
                     {
                         // attack script here
@@ -61,6 +63,8 @@ public class MeleeEnemy : Enemy
                 {
                     //print("<color=red>Moving to player.</color>");
                     rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    // play animation
+                    animator.SetBool("IsWalking", true);
                 }
             }
 

@@ -64,4 +64,44 @@ public class Enemy : MonoBehaviour
     {
         this.state = state;
     }
+
+    public void FacePlayer(Vector2 distance)
+    {
+        if (distance.x < 0)
+        {
+            // if sprite facing Right
+            if (transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
+        }
+        else
+        {
+            // if sprite facing Left
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
+        }
+    }
+
+    public void FacePlayer(Vector2 distance, GameObject sprite)
+    {
+        if (distance.x < 0)
+        {
+            // if sprite facing Right
+            if (sprite.transform.localScale.x > 0)
+            {
+                sprite.transform.localScale = new Vector2(-sprite.transform.localScale.x, sprite.transform.localScale.y);
+            }
+        }
+        else
+        {
+            // if sprite facing Left
+            if (sprite.transform.localScale.x < 0)
+            {
+                sprite.transform.localScale = new Vector2(-sprite.transform.localScale.x, sprite.transform.localScale.y);
+            }
+        }
+    }
 }
