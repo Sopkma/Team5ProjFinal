@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StaticDungeonTest.unity
     guid: 0e43bc19a46379b4681ccde229d1b2b1
+  - enabled: 1
+    path: Assets/Scenes/Level 2 WIP.unity
+    guid: 3f8b25e25741a37439bcd67c5ac5bdf0
   m_configObjects: {}

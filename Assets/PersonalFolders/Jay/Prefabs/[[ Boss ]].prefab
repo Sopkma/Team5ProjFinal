@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameM: {fileID: 0}
+  goTo: 0
 --- !u!114 &1062416132783782554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +407,8 @@ MonoBehaviour:
   growl: {fileID: 8300000, guid: 94516e351459f7047a531c709c2ababd, type: 3}
   crash: {fileID: 8300000, guid: 937a52379dd819e46b95051286e3450e, type: 3}
   crachParticleEffect: {fileID: 5551838572278587362, guid: e1595b9ccb2b475419e40891e9c51912, type: 3}
+  vanishMaterial: {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
+  fadeRate: 1
   healthBar: {fileID: 0}
   hitPathAnimator: {fileID: 2069402687688937178}
   hitTransform: {fileID: 6645040383608250483}
