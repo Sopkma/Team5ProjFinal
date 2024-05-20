@@ -269,3 +269,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
+  heartPrefab: {fileID: 8201674164618129824, guid: b78a9ea0342907c4f8fef69d6c844aab, type: 3}
