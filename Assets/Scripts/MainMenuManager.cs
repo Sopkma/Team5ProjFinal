@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void StartGame()
     {
         PlayerPrefs.SetInt("score", 0);
