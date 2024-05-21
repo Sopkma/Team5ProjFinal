@@ -71,7 +71,11 @@ public class MusicManager : MonoBehaviour
     {
         musicSource.Play();
         yield return new WaitForSecondsRealtime(musicSource.clip.length);
-        musicSource.clip = songs[2];
-        musicSource.Play();
+        if (musicState.Equals(MusicState.BOSS))
+        {
+            musicSource.clip = songs[2];
+            musicSource.Play();
+        }
+        
     }
 }
