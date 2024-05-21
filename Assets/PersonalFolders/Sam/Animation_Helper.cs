@@ -21,7 +21,7 @@ public class Animation_Helper : MonoBehaviour
         
     }
     public void Help(){
-        Debug.Log("helping");
+        //Debug.Log("helping");
         game.GameOver();
     }
     public void PlayDeathSound(){
