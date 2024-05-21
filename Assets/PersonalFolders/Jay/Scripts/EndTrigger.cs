@@ -27,7 +27,9 @@ public class EndTrigger : MonoBehaviour
             if(goTo == 0)
             {
                 print("<color=green>GAME WIN</color>");
-                gameM.EndGame();
+                //gameM.EndGame();
+                ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
+                scoreManager.CallCountCoins();
             }
             else
             {

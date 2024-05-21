@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _FlashAmount: 0.0019302368
+    - _FlashAmount: 0.00016736984
     - _FlashCount: 3
     - _FlashSpeed: 1
     - _TimeElapsed: 1.0015582

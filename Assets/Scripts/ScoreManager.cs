@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ScoreManager : MonoBehaviour
 {
     int score;
@@ -16,10 +17,13 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI scoreMultiplierTxt;
     public GameObject txtPrefab;
     public Player player;
+    private AudioSource audioSource;
+    public AudioClip coinAudioClip;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         HighScore.HS.Init(this, "blade diver");
         multiplier = startMultiplier;
         //score = 0;
@@ -80,8 +84,32 @@ public class ScoreManager : MonoBehaviour
         HS.SubmitHighScore(this, playerName, score);
     }
 
+    public void CallCountCoins()
+    {
+        StartCoroutine(CountCoin());
+    }
+
     public int GetScore()
     {
         return score;
+    }
+
+    private IEnumerator CountCoin()
+    {
+        player.speed = 0;
+        while(player.coinCounter > 0)
+        {
+            score += 10;
+            player.coinCounter--;
+            player.coinsTxt.text = "Coins: " + player.coinCounter;
+            player.coinsUITxt.text = "" + player.coinCounter;
+            audioSource.PlayOneShot(coinAudioClip);
+            scoreTxt.text = "" + score;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        Game gameManager = FindAnyObjectByType<Game>();
+        gameManager.EndGame();
     }
 }
