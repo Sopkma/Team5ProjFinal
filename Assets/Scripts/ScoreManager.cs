@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HighScore.HS.Init(this, "sword attack");
+        HighScore.HS.Init(this, "blade diver");
         multiplier = startMultiplier;
         //score = 0;
         score = PlayerPrefs.GetInt("score");
