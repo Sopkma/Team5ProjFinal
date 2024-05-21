@@ -58,13 +58,17 @@ public class Player : MonoBehaviour{
     [HideInInspector]
     public Bounds spawningBounds;
 
+    private float carrySpeed;
+
 
     void Awake(){
         coinCounter = PlayerPrefs.GetInt("coins");
+        carrySpeed = PlayerPrefs.GetFloat("speed");
         coinsTxt.text = "Coins: " + coinCounter;
         coinsUITxt.text = "" + coinCounter;
         isImmune = false;
         rb = GetComponent<Rigidbody2D>();
+        speed += carrySpeed;
         originalSpeed = speed;
         setSpeed = speed;
         playerHealthManager = GetComponent<HealthManager>();
@@ -157,6 +161,8 @@ private void Update(){
 
 
     public void IncreaseSpeed(float amount){
+        carrySpeed += amount;
+        PlayerPrefs.SetFloat("speed", carrySpeed);
         setSpeed += amount;
     }
 

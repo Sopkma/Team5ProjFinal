@@ -24,6 +24,8 @@ public class shopManagerScript : MonoBehaviour{
     public UnityEngine.UI.Image spearImage;
     public UnityEngine.UI.Image SpearImage2;
 
+    private int tempDamage;
+
     void Start(){
 
         //gets the info of the coin counter an sets its initial value
@@ -41,6 +43,17 @@ public class shopManagerScript : MonoBehaviour{
         shopItem[2, 2] = 2;
         shopItem[2, 3] = 5;
         shopItem[2, 4] = 10;
+
+        tempDamage = PlayerPrefs.GetInt("damage");
+        if (tempDamage != 0)
+        {
+            var x = player.GetComponentsInChildren<SwordAttack>();
+
+            foreach (SwordAttack item in x)
+            {
+                item.damage += tempDamage;
+            }
+        }
     }
 
     
@@ -74,7 +87,11 @@ public class shopManagerScript : MonoBehaviour{
 
             //buy attack up
             if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 3){
+                tempDamage += 1;
+                PlayerPrefs.SetInt("damage", tempDamage);
+
                 var x = player.GetComponentsInChildren<SwordAttack>();
+                
                 foreach (SwordAttack item in x)
                 {
                     item.damage += 1;
