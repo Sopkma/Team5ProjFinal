@@ -29,7 +29,7 @@ public class MeleeEnemy : Enemy
     {
         rb = GetComponent<BoxCollider2D>();
         velocityHandler = GetComponent<Rigidbody2D>();
-        timeBeforeNextAttack = 0f;
+        timeBeforeNextAttack = .1f;
     }
 
     // Update is called once per frame

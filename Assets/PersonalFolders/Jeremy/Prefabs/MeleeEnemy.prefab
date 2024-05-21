@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c61f8dde28121543a316b2b8f19895d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 6
   points: 5
   coinPrefab: {fileID: 7025857219311511051, guid: 648f7e96ecfe7214cabe7793e1cd22a9, type: 3}
   game: {fileID: 0}

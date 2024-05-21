@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c04578913165e4cb3e891b21b117dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
+  damage: 3
   swingSpeed: 2
   parent: {fileID: 8101486208000203159}
   swordCollider: {fileID: 5999450234804506355}
@@ -1017,8 +1017,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.65649825, y: -0.860605}
-  m_Size: {x: 0.91524124, y: 1.0545194}
+  m_Offset: {x: -0.65649825, y: -0.6895276}
+  m_Size: {x: 0.91524124, y: 1.3966743}
   m_Direction: 0
 --- !u!114 &5946397902688186133
 MonoBehaviour:
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   - {x: -0.105199814, y: -1.3919477, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -993010
+  m_InstanceId: -1448562
   m_LocalBounds:
     m_Center: {x: -0.65554905, y: -0.8375149, z: 0}
     m_Extent: {x: 0.55034924, y: 0.55443287, z: 0}

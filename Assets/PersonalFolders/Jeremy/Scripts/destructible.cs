@@ -28,12 +28,12 @@ public class destructible : MonoBehaviour{
     private void spawnCoins(int min, int max)
     {
 
-        int spawnChance = Random.Range(0,5);
+        int spawnChance = Random.Range(0,101);
 
-        int spawnHeart = Random.Range(0,11);
+        int spawnHeart = Random.Range(0,16);
         Vector3 spawnPosition = transform.position;
 
-        if (spawnChance > 3)
+        if (spawnChance > 90)
         {
             int CoinCount = Random.Range(min, max);
             for (int i = 0; i < CoinCount; i++)
@@ -46,7 +46,7 @@ public class destructible : MonoBehaviour{
             }
         }
 
-        if (spawnHeart > 9){
+        if (spawnHeart > 13){
             float ranX = Random.Range(-.5f, .5f);
             float ranY = Random.Range(-.5f, .5f);
             Vector2 force = new Vector2(ranX, ranY);
