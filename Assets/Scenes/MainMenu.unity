@@ -2393,7 +2393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SWORD ATTACK
+  m_text: BLADE DIVER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b11bd1e624da5e40aa94679cb5dde44, type: 2}
   m_sharedMaterial: {fileID: -4544001040054999743, guid: 0b11bd1e624da5e40aa94679cb5dde44, type: 2}
