@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,26 @@ public class RotateSword : MonoBehaviour
 
     public GameObject parentObject;
 
+    private int hasSpear;
+
+    public SwordAttack spear;
+
     // Start is called before the first frame update
     void Start()
     {
         // gets active weapon
         sword = GetComponentInChildren<SwordAttack>(false);
         player = GameObject.FindWithTag("Player");
+        hasSpear = PlayerPrefs.GetInt("hasSpear");
+        if (this.parentObject.gameObject.CompareTag("Player") && hasSpear == 1)
+        {
+            sword.gameObject.SetActive(false);
+            // spear.gameObject.SetActive(true);
+            spear.ShowComponents();
+            FindAnyObjectByType<Player>().swordAttack = spear;
+            this.UpdateWeaponType();
+            PlayerPrefs.SetInt("hasSpear", 1);
+        }
     }
 
     // Update is called once per frame

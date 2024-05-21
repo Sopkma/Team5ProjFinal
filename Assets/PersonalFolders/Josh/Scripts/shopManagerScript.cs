@@ -75,8 +75,10 @@ public class shopManagerScript : MonoBehaviour{
             //buy attack up
             if (shopItem[1, ButtonRef.GetComponent<buttonInfo>().ItemID] == 3){
                 var x = player.GetComponentsInChildren<SwordAttack>();
-                x[0].damage += 1;
-                x[1].damage += 1;
+                foreach (SwordAttack item in x)
+                {
+                    item.damage += 1;
+                }
 
 
                 player.SubtractFromCoins(shopItem[2, ButtonRef.GetComponent<buttonInfo>().ItemID]);
@@ -96,6 +98,7 @@ public class shopManagerScript : MonoBehaviour{
                 spear.ShowComponents();
                 player.swordAttack = spear;
                 rotateSword.UpdateWeaponType();
+                PlayerPrefs.SetInt("hasSpear", 1);
             }
         }
     }

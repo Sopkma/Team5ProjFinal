@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("score", 0);
         PlayerPrefs.SetInt("coins", 0);
+        PlayerPrefs.SetInt("hasSpear", 0);
         PlayerPrefs.Save();
         SceneManager.LoadScene(1);
     }
