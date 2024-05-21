@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,7 @@ public enum MinotaurState
 {
     WALKING,
     WINDUP,
+    ABOUTTOCHARGE,
     CHARGING,
     DAZED,
     DEFEATED,
@@ -30,37 +33,63 @@ public class BossType1 : MonoBehaviour
     public float minDist = 2f;
     public float maxDist = 20f;
     public float agroDist = 15f;
-    private MinotaurState state;
     public float chargeUpTime = 3f;
     public float chargeTime = 5f;
-    private Vector2 savedPlayerPos;
-    private Vector2 chargeDirection;
-
+    
     public GameObject endTrigger;
 
-    private AudioSource audioSource;
     public AudioClip growl;
     public AudioClip crash;
+    public GameObject crachParticleEffect;
+    public Material vanishMaterial;
+    private Material newVanish;
+    private float fade;
+    public float fadeRate = 1f;
 
+    [Header("Boss Health Bar")]
     public Image healthBar;
 
-    private MusicManager musicManager;
+    [Header("Everything for the red line")]
+    public Animator hitPathAnimator;
+    public Transform hitTransform;
+    public SpriteRenderer hitSR;
 
-    private bool enraged;
-    private HealthManager healthManager;
+    [Header("Angry Sprite")]
+    public Sprite angrySprite;
 
-    public GameObject crachParticleEffect;
+    [Header("Set true to be angy from start")]
+    public bool enraged = false;
+
+    private MinotaurState state;
+    private Vector2 savedPlayerPos;
+    private Vector2 chargeDirection;
+    private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
+    private MusicManager musicManager;
+    private HealthManager healthManager;
+    private Animator anim;
+
+    private FlashEffect flashEffect;
 
     void Start()
     {
+        newVanish = new Material(vanishMaterial);
+        fade = 1;
+
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         healthManager = GetComponent<HealthManager>();
         state = MinotaurState.IDLE;
         musicManager = FindAnyObjectByType<MusicManager>();
-        enraged = false;
+        // enraged = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        if (enraged)
+        {
+            SetEnragedStats();
+        }
+
+        flashEffect = GetComponent<FlashEffect>();
     }
 
     public void StartBattle()
@@ -69,6 +98,11 @@ public class BossType1 : MonoBehaviour
         {
             state = MinotaurState.WALKING;
         }
+    }
+
+    public bool IsEnraged()
+    {
+        return (healthManager.GetHealthPercentage() <= 0.5);
     }
 
     // Update is called once per frame
@@ -84,22 +118,64 @@ public class BossType1 : MonoBehaviour
         }
         else if(state == MinotaurState.DEFEATED)
         {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             endTrigger.SetActive(true);
             healthBar.enabled = false;
             musicManager.PlayOutsideBattle();
+            hitSR.enabled = false;
+            if (fade == 1) {
+                spriteRenderer.material = vanishMaterial;
+            }
+            if (fade > 0.1) {
+                // print("FADE: " + fade);
+                // change fade value on shader material
+                newVanish.SetFloat("_Fade", fade);
+                fade -= fadeRate * Time.deltaTime;
+            }
+            else {
+                Destroy(this.gameObject);
+            }
             // Destroy(gameObject, 1f);
         }
-
-        if (!enraged && healthManager.GetHealthPercentage() <= 0.5)
+        else if(state == MinotaurState.WINDUP)
         {
-            enraged=true;
-            chargeUpTime /= 2;
-            maxDist *= 2;
-            agroDist *= 3;
+            RotateLine();
         }
-        if(enraged)
+
+        if (!enraged && IsEnraged())
         {
-            spriteRenderer.color = Color.red;
+            SetEnragedStats();
+        }
+    }
+
+    private void SetEnragedStats()
+    {
+        flashEffect.StartFlashing();
+        spriteRenderer.sprite = angrySprite;
+        enraged = true;
+        chargeUpTime /= 2;
+        maxDist *= 2;
+        agroDist *= 3;
+        hitPathAnimator.speed = 2;
+    }
+
+    public void FacePlayer(Vector2 distance)
+    {
+        if (distance.x < 0)
+        {
+            // if sprite facing Right
+            if (transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
+        }
+        else
+        {
+            // if sprite facing Left
+            if (transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            }
         }
     }
     
@@ -118,8 +194,18 @@ public class BossType1 : MonoBehaviour
         // if within maximum distance
         else if (absEuclideanDistance < maxDist)
         {
+            if (enraged)
+            {
+                anim.SetBool("IsAngry", true);
+            }
+            else
+            {
+                anim.SetBool("IsWalking", true);
+            }
             if (absEuclideanDistance < agroDist)
             {
+                anim.SetBool("IsWalking", false);
+                anim.SetBool("IsAngry", false);
                 state = MinotaurState.WINDUP;
                 StartCoroutine(Windup());
             }
@@ -135,22 +221,7 @@ public class BossType1 : MonoBehaviour
         rb.velocity = Vector2.zero;
 
         // if moving left
-        if (distance.x < 0)
-        {
-            // if sprite facing Right
-            if (transform.localScale.x > 0)
-            {
-                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-            }
-        }
-        else
-        {
-            // if sprite facing Left
-            if (transform.localScale.x < 0)
-            {
-                transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-            }
-        }
+        FacePlayer(distance);
     }
 
     private void Charging()
@@ -158,16 +229,67 @@ public class BossType1 : MonoBehaviour
         rb.MovePosition(transform.position + new Vector3(chargeDirection.x, chargeDirection.y, 0) * enemyChargeSpeed);
     }
 
+    // https://forum.unity.com/threads/quaternion-lookrotation-in-2d.292572/
+    float AngleBetweenPoints(Vector2 a, Vector2 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
+    private void RotateLine()
+    {
+        Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
+        //Vector2 chargeMiddlePoint = (player.transform.position + this.transform.position)/2;
+        //hitTransform.position = new Vector3(chargeMiddlePoint.x, chargeMiddlePoint.y, 0);
+        hitTransform.position = new Vector3(player.transform.position.x, player.transform.position.y, 0);
+
+        float angle = AngleBetweenPoints(transform.position, player.position);
+        var targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle+90));
+        hitTransform.rotation = Quaternion.Slerp(hitTransform.rotation, targetRotation, 1);
+
+        float euclideanDistance = Vector3.Distance(rb.position, player.position);
+        float absEuclideanDistance = Mathf.Abs(euclideanDistance);
+        // hitTransform.localScale = new Vector3(1, absEuclideanDistance/4, 1);
+        hitTransform.localScale = new Vector3(1, absEuclideanDistance, 1);
+
+        FacePlayer(distance);
+    }
+
     private IEnumerator Windup()
     {
+        hitPathAnimator.Play("BossLine");
         audioSource.PlayOneShot(growl);
+        hitSR.enabled = true;
         yield return new WaitForSeconds(chargeUpTime);
         if (state != MinotaurState.DEFEATED && state != MinotaurState.DAZED)
         {
+            state = MinotaurState.ABOUTTOCHARGE;
+            chargeDirection = (player.transform.position - this.transform.position).normalized;
+            StartCoroutine(StartCharge());
+        }
+    }
+
+    private IEnumerator StartCharge()
+    {
+        // audioSource.PlayOneShot(growl);
+        if (enraged)
+        {
+            anim.SetBool("IsAngry", true);
+        }
+        else
+        {
+            anim.SetBool("IsWalking", true);
+        }
+        anim.speed = 5;
+        hitSR.enabled = true;
+        yield return new WaitForSeconds(0.4f);
+        if (state != MinotaurState.DEFEATED && state != MinotaurState.DAZED)
+        {
+            hitSR.enabled = false;
+            //anim.SetBool("IsWalking", true);
+            anim.speed = 2;
             state = MinotaurState.CHARGING;
             // savedPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
-            chargeDirection = (player.transform.position - this.transform.position).normalized;
-            print(chargeDirection);
+            // chargeDirection = (player.transform.position - this.transform.position).normalized;
             StartCoroutine(ChargeStop());
         }
     }
@@ -175,6 +297,9 @@ public class BossType1 : MonoBehaviour
     private IEnumerator ChargeStop()
     {
         yield return new WaitForSeconds(chargeTime);
+        anim.SetBool("IsWalking", false);
+        anim.SetBool("IsAngry", false);
+        anim.speed = 1;
         hitEnemies = new();
         if (state != MinotaurState.DAZED && state != MinotaurState.DEFEATED)
         {
@@ -191,6 +316,9 @@ public class BossType1 : MonoBehaviour
             audioSource.PlayOneShot(crash);
             state = MinotaurState.DAZED;
             StartCoroutine(DazeStop());
+            anim.SetBool("IsWalking", false);
+            anim.SetBool("IsAngry", false);
+            anim.speed = 1;
         }
         if (state == MinotaurState.CHARGING && collision.gameObject.CompareTag("Player"))
         {

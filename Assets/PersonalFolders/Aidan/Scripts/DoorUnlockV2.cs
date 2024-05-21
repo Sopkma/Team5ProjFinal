@@ -28,6 +28,8 @@ public class DoorUnlockV2 : MonoBehaviour
     private MusicManager musicManager;
 
     private State state;
+
+    public GameObject enemies;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +78,9 @@ public class DoorUnlockV2 : MonoBehaviour
                 {
                     door.enabled = true;
                 }
-                   
+
+                enemies.SetActive(true);
+
                 // activates each of the enemies in the children of the doors
                 if (hasRun == false)
                 {

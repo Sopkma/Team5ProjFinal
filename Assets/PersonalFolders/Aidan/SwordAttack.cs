@@ -10,9 +10,16 @@ public class SwordAttack : MonoBehaviour
     // adjust damage here
     public int damage = 1;
     public float swingSpeed = .3f;
+    private float swingcd = .3f;
 
     [HideInInspector] public bool isAttacking { get; private set; }
-    public PlaySwordSwing swordAnim;
+
+    //new values to ensure that you can not attack when already attacking
+    private bool attackOnCD;
+    private float attackCDlength;
+
+
+
     public GameObject parent;
     // drag collider 2D from the sword collider into here
     public Collider2D swordCollider;
@@ -25,29 +32,33 @@ public class SwordAttack : MonoBehaviour
 
     private List<HealthManager> hitEnemies = new ();
 
-    private void Start()
-    {
+    Animator sword;
+
+    private void Start(){
+        attackOnCD = false;
+        if (CompareTag("Player")) { damage = 3; }
+        sword = GetComponent<Animator>();
+        sword.speed = swingSpeed;
+
         currentKnockbackDist = 0;
     }
 
     // enables collider of spear on attack
     public void Attack()
     {
-        // not currently doing an attack
-        if (!isAttacking)
+        // not currently doing an attack and the attack is not on cooldown
+        if (!isAttacking && !attackOnCD)
         {
+            attackCDlength = swingcd;
             //gameObject.SetActive(true);
             gameObject.GetComponent<Collider2D>().enabled = true;
             //print("attacking.");
             //Invoke("StopAttack", swingSpeed);
             isAttacking = true;
+            sword.SetBool("Attacking", true);
 
-            if (!swordAnim.IsUnityNull())
-            {
-                swordAnim.SwingSword(swingSpeed);
-            }
             
-            StartCoroutine(ForceStop());
+            //StartCoroutine(ForceStop());
         }
         
     }
@@ -57,7 +68,7 @@ public class SwordAttack : MonoBehaviour
     {
         //print("attack stop");
         isAttacking = false;
-
+        sword.SetBool("Attacking", false);
         //gameObject.SetActive(false);
         gameObject.GetComponent<Collider2D>().enabled = false;
         hitEnemies = new();
@@ -130,8 +141,15 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
+    private void Update(){
+
+        //constatnly reduing the attack cooldown and checks if it is 
+        attackCDlength -= Time.deltaTime;
+
+        // ensures that the cooldown bool is proprly set with the cooldown timer
+        if (attackCDlength > 0) { attackOnCD = true; }
+        else { attackOnCD = false; }
+
         if (knockbackTarget.IsUnityNull())
         {
 
@@ -207,6 +225,7 @@ public class SwordAttack : MonoBehaviour
 
         if (isAttacking)
         {
+            sword.SetBool("Attacking", false);
             isAttacking = false;
         }
     }

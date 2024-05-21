@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 0.74213827, g: 0, b: 0.68547726, a: 1}
   m_FlipX: 0
@@ -147,7 +147,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -182,13 +182,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeRate: 0.4
+  spawnTime: 1.7
   vanishMaterial: {fileID: 2100000, guid: f6654c09786ec364896b3394297ac0eb, type: 2}
+  spawnEffect: {fileID: 2227257999631580190, guid: d7d2c56542ab3d549af0f9abee11aebb, type: 3}
   player: {fileID: 0}
-  enemySpeed: 7.5
-  timeBetweenAttacks: 1
-  damage: 3
-  minDist: 9
-  maxDist: 17.5
+  enemySpeed: 6
+  timeBetweenAttacks: 1.25
+  damage: 1
+  minDist: 5
+  maxDist: 12.5
 --- !u!114 &8543752153142646090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chargePath: {fileID: 7941536590616330757}
   rotatePoint: {fileID: 5388435986884705388}
-  hitboxLength: 9
-  chargeTime: 0.5
+  hitboxLength: 6
+  chargeTime: 0.75
 --- !u!114 &3694867312951039415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +225,7 @@ MonoBehaviour:
   game: {fileID: 0}
   healtUi: {fileID: 0}
   damageSound: {fileID: 8300000, guid: e4a4c77e99dc91d438f79b3b54fe7eb0, type: 3}
+  maxHealth: 0
 --- !u!82 &472873496434727854
 AudioSource:
   m_ObjectHideFlags: 0
@@ -423,7 +426,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0.007954121, a: 0.654902}
   m_FlipX: 0

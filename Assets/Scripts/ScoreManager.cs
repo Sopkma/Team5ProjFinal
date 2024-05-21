@@ -22,7 +22,9 @@ public class ScoreManager : MonoBehaviour
     {
         HighScore.HS.Init(this, "sword attack");
         multiplier = startMultiplier;
-        score = 0;
+        //score = 0;
+        score = PlayerPrefs.GetInt("score");
+        scoreTxt.text = "" + score;
         StartCoroutine(DecramentScore());
         timeSinceLastKill = Time.time - 10;
     }
@@ -63,6 +65,12 @@ public class ScoreManager : MonoBehaviour
             multiplier--;
             scoreMultiplierTxt.text = multiplier + "x";
         }
+    }
+
+    public void StoreScore()
+    {
+        PlayerPrefs.SetInt("score", score);
+        PlayerPrefs.Save();
     }
 
     public void SendScore(string playerName)

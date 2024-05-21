@@ -22,8 +22,13 @@ public class Player : MonoBehaviour{
     private float maxdashcd = 1f;
     private bool isDashButtonDown;
 
+    [Header("ImmunityFrame")]
     public bool immuityFromDamage;
     public float immunityFromDamageLength;
+    public Color flashColor;
+    public Color defaultColor;
+    public int numberOfFlashes;
+    public float flashduration;
 
     [Header("Weapon")]
     public SwordAttack swordAttack;
@@ -36,7 +41,7 @@ public class Player : MonoBehaviour{
 
     [Header("Animation")]
     public Image DashCDIconGray;
-    public Animator playerImageAnimator;
+    public Animator animator;
     public SpriteRenderer playerImageSprite;
 
     [Header("Audio")]
@@ -54,6 +59,7 @@ public class Player : MonoBehaviour{
 
 
     void Awake(){
+        
         isImmune = false;
         rb = GetComponent<Rigidbody2D>();
         originalSpeed = speed;
@@ -66,16 +72,21 @@ public class Player : MonoBehaviour{
 
 //this update will track directio of player, and check for space bar
 private void Update(){
+        //getting player velocity
+        animator.SetFloat("MoveX", rb.velocity.x);
+        animator.SetFloat("MoveY", rb.velocity.y);
+
+        if(Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1){
+            animator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
+            animator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
+        }
+
         float moveX = 0f;
         float moveY = 0f;
-        if (Input.GetKey(KeyCode.W)) { moveY = +1f; playerImageAnimator.SetBool("WalkingUp", true); spearSpriteShaft.sortingOrder = 2;}
-        else { playerImageAnimator.SetBool("WalkingUp", false);}
-        if (Input.GetKey(KeyCode.S)) { moveY = -1f; playerImageAnimator.SetBool("WalkingDown", true); spearSpriteShaft.sortingOrder = 4;}
-        else { playerImageAnimator.SetBool("WalkingDown", false); }
-        if (Input.GetKey(KeyCode.A)) { moveX = -1f; playerImageAnimator.SetBool("WalkingLeft", true);playerImageSprite.flipX = true;}
-        else { playerImageAnimator.SetBool("WalkingLeft", false); }
-        if (Input.GetKey(KeyCode.D)) { moveX = +1f; playerImageAnimator.SetBool("WalkingRight", true); playerImageSprite.flipX = false;}
-        else { playerImageAnimator.SetBool("WalkingRight", false); }
+        if (Input.GetKey(KeyCode.W)) { moveY = +1f; spearSpriteShaft.sortingOrder = 2;}
+        if (Input.GetKey(KeyCode.S)) { moveY = -1f; spearSpriteShaft.sortingOrder = 4;}
+        if (Input.GetKey(KeyCode.A)) { moveX = -1f;playerImageSprite.flipX = true;} 
+        if (Input.GetKey(KeyCode.D)) { moveX = +1f; playerImageSprite.flipX = false;}
         moveDir = new Vector3(moveX, moveY).normalized;
         if (Input.GetKeyDown(KeyCode.Space) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
@@ -154,12 +165,7 @@ private void Update(){
     }
 
     public void Damage(int amount){
-
-        print("TOP OF DMG FUNCTION");
-        
         playerHealthManager.Health -= amount;
-
-        print("before function call");
         if (!immuityFromDamage){
             damageIFrames();
         }
@@ -168,11 +174,21 @@ private void Update(){
     }
 
     public void damageIFrames(){
-        print("IFRAMES======================");
-
-
         immuityFromDamage = true;
         immunityFromDamageLength = 1f;
+        StartCoroutine(Flash());
+        
+    }
+    private IEnumerator Flash(){
+        int temp = 0;
+        while(temp < numberOfFlashes)
+        {
+            playerImageSprite.color = flashColor;
+            yield return new WaitForSeconds(flashduration);
+            playerImageSprite.color = defaultColor;
+            yield return new WaitForSeconds(flashduration);
+            temp++;
+        }
     }
 
     //this snipet of code as well as the field is no longer used

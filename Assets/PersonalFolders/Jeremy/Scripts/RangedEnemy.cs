@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class RangedEnemy : Enemy
 {
@@ -8,6 +9,7 @@ public class RangedEnemy : Enemy
 
     public GameObject projectile;
     public Rigidbody2D player;
+    public Light2D staffGlow;
     public float enemySpeed = .2f;
     public int damage = 1;
 
@@ -17,15 +19,20 @@ public class RangedEnemy : Enemy
 
     public float fireRate = 4f;
     // fire timer tracks the time in between shots (based on fireRate)
-    private float fireTimer;
+    // light timer determines size of light effect from staff
+    private float fireTimer, lightTimer;
 
     private bool firstShot = true;
+
+    [Header("Animator In Sprite Child")]
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         fireTimer = 0;
+        lightTimer = fireRate;
         firstShot = true;
     }
 
@@ -36,6 +43,7 @@ public class RangedEnemy : Enemy
         {
             Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
             float euclideanDistance = Vector3.Distance(rb.position, player.position);
+            FacePlayer(distance);
 
             // if further than max distance, do nothing
             if (Mathf.Abs(euclideanDistance) > maxDist)
@@ -50,12 +58,14 @@ public class RangedEnemy : Enemy
                 if (Mathf.Abs(euclideanDistance) < minDist)
                 {
                     Shoot();
+                    animator.speed = 0.3f;
                 }
                 // in between max and min distance, move to and attack the player
                 else
                 {
                     Shoot();
                     rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    animator.speed = 1;
                 }
             }
 
@@ -91,13 +101,18 @@ public class RangedEnemy : Enemy
         if (firstShot)
         {
             fireTimer = Random.Range(0.75f,1.75f);
+            lightTimer = fireRate - fireTimer;
             firstShot = false;
         }
 
         if (fireTimer > 0)
         {
+            staffGlow.color = Color.blue;
+            staffGlow.pointLightOuterRadius = (lightTimer / fireRate) * 1.5f;
+            staffGlow.intensity = (lightTimer / fireRate) * 6;
             // not ready to shoot yet, timer tick down
             fireTimer -= Time.deltaTime;
+            lightTimer += Time.deltaTime;
         }
         else
         {
@@ -105,6 +120,8 @@ public class RangedEnemy : Enemy
             theProjectile.GetComponent<EnemyProjectile>().damage = damage;
             theProjectile.transform.position = transform.position;
             fireTimer = fireRate;
+            lightTimer = 0;
+            staffGlow.intensity = 0;
         }
         
 

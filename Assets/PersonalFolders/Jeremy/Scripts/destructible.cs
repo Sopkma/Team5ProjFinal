@@ -9,6 +9,7 @@ public class destructible : MonoBehaviour{
     SpriteRenderer sr;
     BoxCollider2D bc;
     public GameObject coinPrefab;
+    public GameObject heartPrefab;
 
     void Start(){
        Potbreak = GetComponent<AudioSource>();
@@ -29,12 +30,14 @@ public class destructible : MonoBehaviour{
 
         int spawnChance = Random.Range(0,5);
 
+        int spawnHeart = Random.Range(0,11);
+        Vector3 spawnPosition = transform.position;
+
         if (spawnChance > 3)
         {
             int CoinCount = Random.Range(min, max);
             for (int i = 0; i < CoinCount; i++)
             {
-                Vector3 spawnPosition = transform.position;
                 float ranX = Random.Range(-.5f, .5f);
                 float ranY = Random.Range(-.5f, .5f);
                 Vector2 force = new Vector2(ranX, ranY);
@@ -42,6 +45,17 @@ public class destructible : MonoBehaviour{
                 instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
             }
         }
+
+        if (spawnHeart > 9){
+            float ranX = Random.Range(-.5f, .5f);
+            float ranY = Random.Range(-.5f, .5f);
+            Vector2 force = new Vector2(ranX, ranY);
+            var instance = Instantiate(heartPrefab, spawnPosition, Quaternion.identity);
+            instance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
+        }
+
+
+
     }
 
     private void Destroyed(){
@@ -51,7 +65,7 @@ public class destructible : MonoBehaviour{
                 Potbreak.Play();
                 sr.enabled = false;
                 bc.enabled = false;
-                spawnCoins(0,3);
+                spawnCoins(1,3);
                 Destroy(this, .7f);
             }
         }
