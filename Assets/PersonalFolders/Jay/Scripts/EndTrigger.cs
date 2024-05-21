@@ -7,10 +7,11 @@ public class EndTrigger : MonoBehaviour
 {
     public Game gameM;
     public int goTo = 0;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = FindAnyObjectByType<Player>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class EndTrigger : MonoBehaviour
             {
                 ScoreManager sm = FindObjectOfType<ScoreManager>();
                 sm.StoreScore();
+                player.SaveComponents();
                 SceneManager.LoadScene(goTo);
             }
         }

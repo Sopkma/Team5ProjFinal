@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements.Experimental;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.UI;
+using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(AudioSource))]
 public class Player : MonoBehaviour{
@@ -59,7 +60,9 @@ public class Player : MonoBehaviour{
 
 
     void Awake(){
-        
+        coinCounter = PlayerPrefs.GetInt("coins");
+        coinsTxt.text = "Coins: " + coinCounter;
+        coinsUITxt.text = "" + coinCounter;
         isImmune = false;
         rb = GetComponent<Rigidbody2D>();
         originalSpeed = speed;
@@ -189,6 +192,12 @@ private void Update(){
             yield return new WaitForSeconds(flashduration);
             temp++;
         }
+    }
+
+    public void SaveComponents()
+    {
+        PlayerPrefs.SetInt("coins", coinCounter);
+        PlayerPrefs.Save();
     }
 
     //this snipet of code as well as the field is no longer used
