@@ -98,8 +98,8 @@ private void Update(){
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1)) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
         }
-
-        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && tempTime <= 0){
+        
+        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && tempTime <= 0 && moveDir != new Vector3(0,0,0)){
             audioSource.PlayOneShot(stepSound);
             tempTime = timeBetweenSteps;
         }
