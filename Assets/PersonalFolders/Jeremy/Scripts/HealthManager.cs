@@ -122,7 +122,7 @@ public class HealthManager : MonoBehaviour
             Player temp = this.GetComponent<Player>();
             temp.speed = 0;
             Time.timeScale = 0.0f;
-            player.playerImageAnimator.SetTrigger("Death"); // game.GameOver() is called by an animation event in the deathAnimation
+            player.animator.SetTrigger("Death"); // game.GameOver() is called by an animation event in the deathAnimation
             // swordAndSpear.SetActive(false);
             // Debug.Log("Disabling " +player.transform.GetChild(0).gameObject.name);
             player.transform.GetChild(0).gameObject.SetActive(false); //get sword ans spear pivot
