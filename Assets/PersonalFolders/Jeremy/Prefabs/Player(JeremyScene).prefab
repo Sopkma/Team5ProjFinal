@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentObject: {fileID: 8101486208000203159}
+  spear: {fileID: 0}
 --- !u!1 &2850244339609531218
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +168,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00040375607, y: 0.053614616}
-  m_Size: {x: 0.14259958, y: 0.21219327}
+  m_Offset: {x: 0.00040373107, y: 0.12046311}
+  m_Size: {x: 0.14259957, y: 0.34588915}
   m_Direction: 0
 --- !u!95 &5044370900500185345
 Animator:

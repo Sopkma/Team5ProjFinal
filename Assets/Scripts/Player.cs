@@ -90,12 +90,12 @@ private void Update(){
 
         float moveX = 0f;
         float moveY = 0f;
-        if (Input.GetKey(KeyCode.W)) { moveY = +1f; spearSpriteShaft.sortingOrder = 2;}
-        if (Input.GetKey(KeyCode.S)) { moveY = -1f; spearSpriteShaft.sortingOrder = 4;}
-        if (Input.GetKey(KeyCode.A)) { moveX = -1f;playerImageSprite.flipX = true;} 
-        if (Input.GetKey(KeyCode.D)) { moveX = +1f; playerImageSprite.flipX = false;}
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) { moveY = +1f; spearSpriteShaft.sortingOrder = 2;}
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) { moveY = -1f; spearSpriteShaft.sortingOrder = 4;}
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) { moveX = -1f;playerImageSprite.flipX = true;} 
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) { moveX = +1f; playerImageSprite.flipX = false;}
         moveDir = new Vector3(moveX, moveY).normalized;
-        if (Input.GetKeyDown(KeyCode.Space) && dashCooldown <= 0.1f){
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1)) && dashCooldown <= 0.1f){
             isDashButtonDown = true;
         }
 
