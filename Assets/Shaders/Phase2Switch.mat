@@ -44,7 +44,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _FlashCount: 3
     - _FlashSpeed: 1
-    - _TimeElapsed: 1.0174525
+    - _TimeElapsed: 1.0088767
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _FlashColor: {r: 1, g: 0, b: 0, a: 1}
