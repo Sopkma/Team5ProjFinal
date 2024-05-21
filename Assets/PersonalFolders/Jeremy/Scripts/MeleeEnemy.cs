@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class MeleeEnemy : Enemy
 {
-    private Rigidbody2D rb;
+    private BoxCollider2D rb;
+    private Rigidbody2D velocityHandler;
 
     public Rigidbody2D player;
 
@@ -25,7 +27,8 @@ public class MeleeEnemy : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<BoxCollider2D>();
+        velocityHandler = GetComponent<Rigidbody2D>();
         timeBeforeNextAttack = 0f;
     }
 
@@ -34,8 +37,8 @@ public class MeleeEnemy : Enemy
     {
         if(state == EnemyState.NORMAL)
         {
-            Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
-            float euclideanDistance = Vector3.Distance(rb.position, player.position);
+            Vector3 distance = new Vector3(player.position.x - rb.transform.position.x, player.position.y - rb.transform.position.y);
+            float euclideanDistance = Vector3.Distance(rb.transform.position, player.position);
             FacePlayer(distance, animator.gameObject);
 
             // if further than max distance, do nothing
@@ -61,8 +64,9 @@ public class MeleeEnemy : Enemy
                 }
                 else
                 {
+
                     //print("<color=red>Moving to player.</color>");
-                    rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
+                    rb.transform.position += (distance.normalized * enemySpeed * Time.deltaTime);
                     // play animation
                     animator.SetBool("IsWalking", true);
                 }
@@ -70,7 +74,7 @@ public class MeleeEnemy : Enemy
 
             // rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
             // enemy still moves, this just prevents rigidbody shenanigans
-            rb.velocity = Vector2.zero;
+            velocityHandler.velocity = Vector3.zero;
 
             if (timeBeforeNextAttack > 0)
             {
