@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 8075867388640687820}
   - component: {fileID: 5382698145900192499}
   - component: {fileID: 852007422409024695}
+  - component: {fileID: 8937130484842685495}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -414,6 +415,7 @@ MonoBehaviour:
   hitTransform: {fileID: 6645040383608250483}
   hitSR: {fileID: 918758966342413286}
   angrySprite: {fileID: -1933716762, guid: 2aba1d0f534244741b292c4c3242a27e, type: 3}
+  enraged: 0
 --- !u!114 &8075867388640687820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +552,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8937130484842685495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078602924423915681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79ba1e93c2c75d4895f9cb6168752bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 9cc6f680744fb3f478af9a7676270f74, type: 2}
+  flashDuration: 1
 --- !u!1 &6591324093110963267
 GameObject:
   m_ObjectHideFlags: 0
