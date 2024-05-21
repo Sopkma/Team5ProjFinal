@@ -34,7 +34,7 @@ public class ChargerEnemy : Enemy
         {
             Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
             float euclideanDistance = Vector3.Distance(rb.position, player.position);
-            FacePlayer(distance);
+            FacePlayer(distance, animator.gameObject);
 
             // if further than max distance, do nothing
             if (Mathf.Abs(euclideanDistance) > maxDist)
