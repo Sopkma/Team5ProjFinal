@@ -18,6 +18,8 @@ public class ChargerEnemy : Enemy
     public float minDist = 2f;
     public float maxDist = 5f;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class ChargerEnemy : Enemy
         {
             Vector2 distance = new Vector2(player.position.x - rb.position.x, player.position.y - rb.position.y);
             float euclideanDistance = Vector3.Distance(rb.position, player.position);
+            FacePlayer(distance);
 
             // if further than max distance, do nothing
             if (Mathf.Abs(euclideanDistance) > maxDist)
@@ -44,6 +47,7 @@ public class ChargerEnemy : Enemy
                 // if closer than minimum distance, stop moving and melee
                 if (Mathf.Abs(euclideanDistance) < minDist)
                 {
+                    animator.SetBool("IsWalking", false);
                     if (timeBeforeNextAttack <= 0)
                     {
                         // attack script here
@@ -56,10 +60,11 @@ public class ChargerEnemy : Enemy
                     // if enemy is dashing or charging, don't move in this script
                     if (GetComponent<ChargerPathLogic>().IsDashing() || GetComponent<ChargerPathLogic>().IsCharging())
                     {
-
+                        animator.SetBool("IsWalking", false);
                     }
                     else
                     {
+                        animator.SetBool("IsWalking", true);
                         rb.position += (distance.normalized * enemySpeed * Time.deltaTime);
                     }
                 }
