@@ -95,7 +95,7 @@ private void Update(){
             isDashButtonDown = true;
         }
 
-        if (moveDir != new Vector3(0, 0, 0) && tempTime <= 0){
+        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && tempTime <= 0){
             audioSource.PlayOneShot(stepSound);
             tempTime = timeBetweenSteps;
         }
