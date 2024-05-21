@@ -3,24 +3,26 @@ Shader "MyShaderCategory/Phase2Switch"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _FlashColor("Flash Color", Color) = (1,0,0,1)
-        _FlashSpeed("Flash Speed", Float) = 1.0
-        _FlashCount("Flash Count", Float) = 3
-        _TimeElapsed("Time Elapsed", Float) = 0.0
+        _FlashColor ("Flash Color", Color) = (1, 0, 0, 1)
+        _FlashAmount ("Flash Amount", Range(0, 1)) = 0
     }
     SubShader
     {
-        Tags { "Queue" = "Transparent" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
 
         Pass
         {
+            Blend SrcAlpha OneMinusSrcAlpha
+            Cull Off
+            ZWrite Off
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
 
-            struct appdata
+            struct appdata_t
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
@@ -33,26 +35,22 @@ Shader "MyShaderCategory/Phase2Switch"
             };
 
             sampler2D _MainTex;
-            float4 _FlashColor;
-            float _FlashSpeed;
-            float _FlashCount;
-            float _TimeElapsed;
+            float4 _MainTex_ST;
+            fixed4 _FlashColor;
+            float _FlashAmount;
 
-            v2f vert (appdata v)
+            v2f vert (appdata_t v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
-                float flashPhase = fmod(_TimeElapsed * _FlashSpeed, 1.0);
-                float flashFactor = abs(sin(flashPhase * 3.14159 * 2.0 * _FlashCount));
-                half4 texColor = tex2D(_MainTex, i.uv);
-                half4 color = lerp(texColor, _FlashColor, flashFactor * 0.5);
-                return color;
+                fixed4 texColor = tex2D(_MainTex, i.uv);
+                return lerp(texColor, _FlashColor, _FlashAmount) * texColor.a;
             }
             ENDCG
         }

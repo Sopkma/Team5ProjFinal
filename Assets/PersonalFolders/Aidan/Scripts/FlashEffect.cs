@@ -4,42 +4,34 @@ using UnityEngine;
 
 public class FlashEffect : MonoBehaviour {
     public Material flashMaterial;
-    public float flashDuration = 1.0f; // Duration of the flashing effect in seconds
-
-    private float timeElapsed;
-    private bool isFlashing;
     private Material originalMaterial;
-    private SpriteRenderer sprenderer;
+    private SpriteRenderer spriteRenderer;
+    private float flashDuration = 1.0f;
+    private float timer = 0.0f;
+    private bool isFlashing = false;
 
     void Start() {
-        sprenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = sprenderer.material;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
     }
 
     void Update() {
         if (isFlashing) {
-            timeElapsed += Time.deltaTime;
+            timer += Time.deltaTime;
+            float flashAmount = Mathf.PingPong(timer, flashDuration) / flashDuration;
+            flashMaterial.SetFloat("_FlashAmount", flashAmount);
 
-            // Update the shader's _TimeElapsed property
-            flashMaterial.SetFloat("_TimeElapsed", timeElapsed);
-
-            // Stop flashing after the duration is over
-            if (timeElapsed >= flashDuration) {
-                StopFlashing();
+            if (timer >= flashDuration * 2) {
+                isFlashing = false;
+                timer = 0;
+                spriteRenderer.material = originalMaterial;
             }
         }
     }
 
     public void StartFlashing() {
-        timeElapsed = 0.0f;
         isFlashing = true;
-        // Apply the flash material to the object
-        sprenderer.material = flashMaterial;
-    }
-
-    private void StopFlashing() {
-        isFlashing = false;
-        // Reset the object's material to the original material
-        sprenderer.material = originalMaterial;
+        timer = 0;
+        spriteRenderer.material = flashMaterial;
     }
 }

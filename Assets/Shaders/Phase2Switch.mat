@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: baf789272d942c141bf6c4d0949392fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -42,6 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _FlashAmount: 0.0003068447
     - _FlashCount: 3
     - _FlashSpeed: 1
     - _TimeElapsed: 1.0015582
