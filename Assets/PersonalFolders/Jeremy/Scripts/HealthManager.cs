@@ -20,6 +20,7 @@ public class HealthManager : MonoBehaviour
     private Player player;
     public AudioClip damageSound;
     private AudioSource audioSource;
+    public GameObject swordAndSpear;
 
     [HideInInspector]
     public float maxHealth;
@@ -60,7 +61,7 @@ public class HealthManager : MonoBehaviour
         //groundLayer = LayerMask.GetMask("Ground");
         scoreManager = FindAnyObjectByType<ScoreManager>();
         player = FindAnyObjectByType<Player>();
-
+        player.transform.GetChild(1).GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime; // TODO make death changes on main player model
     }
 
     // Update is called once per frame
@@ -120,7 +121,13 @@ public class HealthManager : MonoBehaviour
         {
             Player temp = this.GetComponent<Player>();
             temp.speed = 0;
-            game.GameOver();
+            Time.timeScale = 0.0f;
+            player.playerImageAnimator.SetTrigger("Death"); // game.GameOver() is called by an animation event in the deathAnimation
+            // swordAndSpear.SetActive(false);
+            // Debug.Log("Disabling " +player.transform.GetChild(0).gameObject.name);
+            player.transform.GetChild(0).gameObject.SetActive(false); //get sword ans spear pivot
+            // player.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false; //get sword ans spear pivot
+            // player.transform.GetChild(0).GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false; //get sword ans spear pivot
         }
 
     }
