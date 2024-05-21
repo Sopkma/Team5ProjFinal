@@ -607,7 +607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Designer: \n\tReginald Adams\nDevelopers:\n\tAiden Schardien\n\tJeremy
+  m_text: "Designer: \n\tReginald Adams\nDevelopers:\n\tAidan Schardien\n\tJeremy
     Wood\n\tJosh Wilson\n\tJay Reich\n\tSam Vandiver\n\t"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b11bd1e624da5e40aa94679cb5dde44, type: 2}
