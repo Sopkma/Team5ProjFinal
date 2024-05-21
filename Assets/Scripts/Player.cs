@@ -99,7 +99,8 @@ private void Update(){
             audioSource.PlayOneShot(stepSound);
             tempTime = timeBetweenSteps;
         }
-        else if (moveDir != new Vector3(0, 0, 0)){
+        else if ((rb.velocity.x != 0 || rb.velocity.y != 0))
+        {
             tempTime -= Time.deltaTime;
         }
         else{
