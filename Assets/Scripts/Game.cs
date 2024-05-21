@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class Game : MonoBehaviour
     public GameObject UI;
     public GameObject FinalScoreUI;
     public GameObject GameOverUI;
+    public GameObject musicManager;
 
     // Start is called before the first frame update
     void Start(){
@@ -52,7 +54,8 @@ public class Game : MonoBehaviour
     public void GameOver()
     {
         // scoreManager.SendScore("Jay");
+        Debug.Log("gaming over");
         GameOverUI.SetActive(true);
-        Time.timeScale = 0.0f;
+        // musicManager.GetComponent<MusicManager>().DeathMusic(); // right now the gameOver music is combined with the death noise
     }
 }

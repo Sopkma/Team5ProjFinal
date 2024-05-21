@@ -26,10 +26,10 @@ public class DungeonMaker : MonoBehaviour
             {
                 if (!node.newConnectionMade)
                 {
-                    if (node.parentCoords != node.relativeCoords(Node.direction.north))
-                    {
-                        potentialCells.Add(node.reserveCell(Node.direction.north));
-                    }
+                    potentialCells.Add(node.reserveCell(Node.direction.north));
+                    potentialCells.Add(node.reserveCell(Node.direction.east));
+                    potentialCells.Add(node.reserveCell(Node.direction.south));
+                    potentialCells.Add(node.reserveCell(Node.direction.west));
                     //TODO make this work for all directions
                 }
             }
@@ -167,17 +167,17 @@ public class Node{
         }
     }
     
-    public List<potentialCell> deleteOverlaps(List<Node> nodes, List<potentialCell> checkList){
-        List<potentialCell> result = new List<potentialCell>();
-        foreach (Node node in nodes)
-        {
-            if (node.coords == this.coords)
-            {
-                //remove potential somehow
-            }
-        }
-        return result;
-    }
+    // public List<potentialCell> deleteOverlaps(List<Node> nodes, List<potentialCell> checkList){
+    //     List<potentialCell> result = new List<potentialCell>();
+    //     foreach (Node node in nodes)
+    //     {
+    //         if (node.coords == this.coords)
+    //         {
+    //             //remove potential somehow
+    //         }
+    //     }
+    //     return result;
+    // }
 }
 
 public class potentialCell{
@@ -186,7 +186,7 @@ public class potentialCell{
     public Node becomeNode(){
         Node tempNode = new Node(this.coords);
 
-        //TODO
+            //TODO
         return tempNode;
     }
 }

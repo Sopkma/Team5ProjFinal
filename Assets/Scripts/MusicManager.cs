@@ -14,7 +14,7 @@ public enum MusicState
 public class MusicManager : MonoBehaviour
 {
     private MusicState musicState;
-    [Header("First song is the normal, non battle music\nSecond is the boss intro\nThird is the boss song loop\nForth is the normal battle music")]
+    [Header("First song is the normal, non battle music\nSecond is the boss intro\nThird is the boss song loop\nForth is the normal battle music\n5th is the death music")]
     public AudioClip[] songs;
     private AudioSource musicSource;
     // Start is called before the first frame update
@@ -57,6 +57,14 @@ public class MusicManager : MonoBehaviour
             musicSource.clip = songs[1];
             StartCoroutine(BossIntro());
         }
+    }
+
+    public void DeathMusic(){
+        musicSource.clip = songs[4];
+        musicSource.Play();
+    }
+    public void DeathStop(){
+        musicSource.Stop();
     }
 
     private IEnumerator BossIntro()
